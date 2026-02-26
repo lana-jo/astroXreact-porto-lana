@@ -1,0 +1,12 @@
+<svg width="480" height="480" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bg" x1="60" y1="40" x2="420" y2="440" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#4F46E5"/>
+            <stop offset="1" stop-color="#06B6D4"/>
+        </linearGradient>
+    </defs>
+    <rect width="480" height="480" rx="42" fill="url(#bg)"/>
+    <circle cx="240" cy="184" r="86" fill="white" fill-opacity="0.92"/>
+    <path d="M104 382C104 306.889 164.889 246 240 246C315.111 246 376 306.889 376 382V396H104V382Z" fill="white" fill-opacity="0.92"/>
+    <text x="240" y="448" text-anchor="middle" fill="#E2E8F0" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">Lana Jauhar</text>
+</svg>
