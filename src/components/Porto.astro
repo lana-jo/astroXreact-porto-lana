@@ -1,30 +1,20 @@
 ---
 import '../components/porto.css'
 import Navbar from '../components/Navbar.jsx'
-import { Image } from 'astro:assets'
-
-import {
-    certificates,
-    profile,
-    techStacks,
-    experiences,
-    portfolios
-} from '../data/portopoliosData'
+import {Image} from 'astro:assets'
+import {profile} from '../data/Profile';
+import {experiences} from '../data/Experiences';
+import {portfolios} from '../data/Portopolio';
+import {techStacks} from '../data/TechStacks';
+import {certificates} from '../data/Certificates'
 ---
 
 <div class="bg-blur bg-blur-one"></div>
 <div class="bg-blur bg-blur-two"></div>
 
 <main class="portofolio">
-    <!--<Navbar client:load class="menu card reveal">-->
-    <Navbar client:load >
-       <!-- <a href="#home">home</a>
-        <a href="#aboutme">About Me</a>
-        <a href="#experience">Experience</a>
-        <a href="#techstack">Tech Stack</a>
-        <a href="#porto">Porto</a>
-        <a href="#certif">Certificate</a>-->
-    </Navbar>
+
+    <Navbar client:load/>
 
     <header id="home" class="hero card reveal delay-1">
         <div>
@@ -32,7 +22,7 @@ import {
             <!--<h1>{profile.name} | {profile.title}</h1>-->
             <p class="description">{profile.description}</p>
         </div>
-        <Image class="profile-photo" src={profile.photo} alt={profile.name} />
+        <Image class="profile-photo" src={profile.photo} alt={profile.name}/>
         <!--<img class="profile-photo" src={profile.photo} alt={`Foto profil ${profile.name}`} loading="eager"/>-->
     </header>
 
@@ -117,10 +107,10 @@ import {
 
                             {Array.isArray(item.photo) ? (
                                 item.photo.map((img) => (
-                                        <Image src={img} alt={item.name}  />
+                                        <Image src={img} alt={item.name}/>
                                 ))
                             ) : (
-                                    <Image src={item.photo} alt={item.name} />
+                                    <Image src={item.photo} alt={item.name}/>
                             )}
 
                         </div>

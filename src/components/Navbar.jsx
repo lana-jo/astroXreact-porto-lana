@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useLanguage } from "../data/LanguangeContext.jsx";
+
 
 export default function Navbar() {
     const [lastScroll, setLastScroll] = useState(0);
