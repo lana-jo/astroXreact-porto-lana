@@ -31,9 +31,11 @@ export default function Navbar() {
         >
             <a href="#home">Home</a>
             <a href="#aboutme">About Me</a>
+            <a href="#experience">Experience</a>
             <a href="#techstack">Tech Stack</a>
             <a href="#porto">Porto</a>
             <a href="#certif">Certificate</a>
+
         </nav>
     );
 }

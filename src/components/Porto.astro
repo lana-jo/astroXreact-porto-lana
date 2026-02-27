@@ -2,102 +2,37 @@
 import '../components/porto.css'
 import Navbar from '../components/Navbar.jsx'
 import { Image } from 'astro:assets'
-import ciscoImg from '../assets/certificates/cisco.png'
-import bejs from '../assets/certificates/bejs.png'
-import bejs1 from '../assets/certificates/bejs1.png'
-import js from '../assets/certificates/js.png'
-import js1 from '../assets/certificates/js1.png'
-import js2 from '../assets/certificates/js2.png'
-import aws from '../assets/certificates/aws restart.png'
-import lana from '../assets/profile.png'
 
-const certificates = [
-    {
-        name: 'cisco cyber security',
-        photo: ciscoImg
-    },
-    {
-        name : 'Dicoding Back-End JavaScript',
-        photo: [bejs, bejs1]
-
-    },
-    {
-        name: 'Dicoding JavaScript',
-        photo: [js,js1,js2]
-    },
-    {
-        name: 'AWS Re/Start',
-        photo: aws
-    }
-]
-const profile = {
-    name: 'Lana Jauhar',
-    title: 'Software Engineering',
-    description:
-        'Saya membantu membangun produk digital modern dengan pendekatan engineering yang rapi, terstruktur, dan fokus pada kebutuhan bisnis.',
-    // photo: '/profile-lana.svg'
-    photo : lana
-};
-const techStacks = [
-    'Kotlin',
-    'Java',
-    'JavaScript',
-    'PHP',
-    'CSS',
-    'Laravel',
-    'Jetpack Compose',
-    'Kotlin Multi Platform',
-    'astro',
-    'Express.js',
-    'Flutter',
-    'Spring Boot',
-    'firebase',
-    'supabase',
-    'PostgreSQL',
-    'MySQL',
-];
-
-const portfolios = [
-    {
-        title: 'Aplikasi Inventory Mini',
-        detail: 'Pengembangan aplikasi pencatatatan barang dengan performa ringan.',
-        stack: 'Kotlin, Jetpack Compose, Supabase',
-        github: 'https:github.com/lana-jo'
-    },
-    {
-        title: 'Sistem Administrasi Sekolah',
-        detail: 'Dashboard manajemen data guru dan siswa untuk meningkatkan efisiensi.',
-        stack: 'Laravel, PHP, MySQL',
-        github: 'https:github.com/lana-jo'
-    },
-    {
-        title: 'API Backend Bisnis',
-        detail: 'Membangun REST API modular untuk kebutuhan aplikasi multi-platform.',
-        stack: 'Express.js, PostgreSQL',
-        github: 'https:github.com/lana-jo'
-    }
-];
+import {
+    certificates,
+    profile,
+    techStacks,
+    experiences,
+    portfolios
+} from '../data/portopoliosData'
 ---
 
 <div class="bg-blur bg-blur-one"></div>
 <div class="bg-blur bg-blur-two"></div>
 
-<main class="portfolio">
+<main class="portofolio">
     <!--<Navbar client:load class="menu card reveal">-->
     <Navbar client:load >
-        <a href="#home">home</a>
+       <!-- <a href="#home">home</a>
         <a href="#aboutme">About Me</a>
+        <a href="#experience">Experience</a>
         <a href="#techstack">Tech Stack</a>
         <a href="#porto">Porto</a>
-        <a href="#certif">Certificate</a>
+        <a href="#certif">Certificate</a>-->
     </Navbar>
 
     <header id="home" class="hero card reveal delay-1">
         <div>
             <h1>{profile.title} | {profile.name}</h1>
+            <!--<h1>{profile.name} | {profile.title}</h1>-->
             <p class="description">{profile.description}</p>
         </div>
-        <Image src={profile.photo} alt={profile.name} />
+        <Image class="profile-photo" src={profile.photo} alt={profile.name} />
         <!--<img class="profile-photo" src={profile.photo} alt={`Foto profil ${profile.name}`} loading="eager"/>-->
     </header>
 
@@ -108,6 +43,31 @@ const portfolios = [
             sebagai guru</strong>, sehingga saya bisa memadukan keduanya untuk mewujudkan keinginan
             Anda secara teknis sekaligus komunikatif.
         </p>
+    </section>
+
+
+    <section id="experience" class="card reveal">
+        <h2>Experience</h2>
+
+        <div class="timeline">
+            {
+                experiences.map((item) => (
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>{item.role}</h3>
+                                <small>{item.period}</small>
+                                <h4>{item.company}</h4>
+
+                                <ul>
+                                    {item.descriptions.map((desc) => (
+                                            <li>{desc}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                ))
+            }
+        </div>
     </section>
 
     <section id="techstack" class="card reveal delay-3">
@@ -122,7 +82,13 @@ const portfolios = [
     </section>
 
     <section id="porto" class="card reveal delay-4">
-        <h2>Porto</h2>
+        <div class="porto-header">
+            <h2>Porto</h2>
+            <a href="https://github.com/lana-jo" target="_blank" class="view-all-btn">
+                View All
+            </a>
+        </div>
+
         <div class="projects">
             {
                 portfolios.map((item) => (
@@ -130,9 +96,9 @@ const portfolios = [
                             <h3>{item.title}</h3>
                             <p>{item.detail}</p>
                             <small>{item.stack}</small>
-
+                            <br/>
                             <a href={item.github} target="_blank">
-                                <button>Click me</button>
+                                <button class="porto-btn">View Project</button>
                             </a>
                         </article>
                 ))
