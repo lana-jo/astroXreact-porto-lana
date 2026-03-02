@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLanguage } from "../data/LanguangeContext.jsx";
-
+import { motion } from "framer-motion";
 
 export default function Navbar() {
     const [lastScroll, setLastScroll] = useState(0);
@@ -23,6 +22,15 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScroll]);
 
+    const navLinks = [
+        { label: "Home", href: "#home" },
+        { label: "About Me", href: "#aboutme" },
+        { label: "Experience", href: "#experience" },
+        { label: "Tech Stack", href: "#techstack" },
+        { label: "Porto", href: "#porto" },
+        { label: "Certificate", href: "#certif" },
+    ];
+
     return (
         <nav
             className="menu card"
@@ -31,13 +39,18 @@ export default function Navbar() {
                 transition: "transform 0.3s ease",
             }}
         >
-            <a href="#home">Home</a>
-            <a href="#aboutme">About Me</a>
-            <a href="#experience">Experience</a>
-            <a href="#techstack">Tech Stack</a>
-            <a href="#porto">Porto</a>
-            <a href="#certif">Certificate</a>
-
+            {navLinks.map((item, index) => (
+                <motion.a
+                    key={index}
+                    href={item.href}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    style={{ display: "inline-block" }}
+                >
+                    {item.label}
+                </motion.a>
+            ))}
         </nav>
     );
 }

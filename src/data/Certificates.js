@@ -5,8 +5,16 @@ import js from '../assets/certificates/js.png'
 import js1 from '../assets/certificates/js1.png'
 import js2 from '../assets/certificates/js2.png'
 import aws from '../assets/certificates/aws restart.png'
+import ai from '../assets/certificates/Sertifikat-lana jauhar-AI Dicoding_page-0001.jpg'
+import ai1 from '../assets/certificates/Sertifikat-lana jauhar-AI Dicoding_page-0002.jpg'
+import ai2 from '../assets/certificates/Sertifikat-lana jauhar-AI Dicoding_page-0003.jpg'
 
 export const certificates = [
+
+    {
+        name : 'Dicoding Cloud and AI AWS ',
+        photo: [ai, ai1, ai2]
+    },
     {
         name: 'cisco cyber security',
         photo: ciscoImg

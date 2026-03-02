@@ -7,6 +7,8 @@ import {experiences} from '../data/Experiences';
 import {portfolios} from '../data/Portopolio';
 import {techStacks} from '../data/TechStacks';
 import {certificates} from '../data/Certificates'
+import Hero from "../components/Hero.jsx";
+import ExampleSection from "../components/ExampleSection.jsx";
 ---
 
 <div class="bg-blur bg-blur-one"></div>
@@ -14,6 +16,8 @@ import {certificates} from '../data/Certificates'
 
 <main class="portofolio">
 
+    <!--<Hero client:load/>
+    <ExampleSection client:visible />-->
     <Navbar client:load/>
 
     <header id="home" class="hero card reveal delay-1">
@@ -36,7 +40,7 @@ import {certificates} from '../data/Certificates'
     </section>
 
 
-    <section id="experience" class="card reveal">
+    <section id="experience" class="card reveal delay-2">
         <h2>Experience</h2>
 
         <div class="timeline">
@@ -60,7 +64,7 @@ import {certificates} from '../data/Certificates'
         </div>
     </section>
 
-    <section id="techstack" class="card reveal delay-3">
+    <section id="techstack" class="card reveal delay-2">
         <h2>Tech Stack</h2>
         <div class="chips">
             {
@@ -96,7 +100,7 @@ import {certificates} from '../data/Certificates'
         </div>
     </section>
 
-    <section id="certif" class="card reveral delay-4">
+    <section id="certif" class="card reveal delay-2">
         <h2>Certificate</h2>
 
         <div>
@@ -118,4 +122,19 @@ import {certificates} from '../data/Certificates'
             }
         </div>
     </section>
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        reveals.forEach((el) => observer.observe(el));
+    </script>
 </main>
