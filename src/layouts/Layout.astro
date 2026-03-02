@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 interface Props {
 	title?: string;
 	description?: string;
@@ -23,6 +24,7 @@ const {
 </head>
 <body>
 <slot />
+<ViewTransitions />
 </body>
 </html>
 
@@ -45,3 +47,18 @@ const {
 		color: #e8eeff;
 	}
 </style>
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+	// Register once
+	gsap.registerPlugin(ScrollTrigger);
+
+	// Fix ScrollTrigger after Astro View Transitions
+	const refreshScrollTrigger = () => {
+		ScrollTrigger.refresh();
+	};
+
+	document.addEventListener("astro:page-load", refreshScrollTrigger);
+	document.addEventListener("astro:after-swap", refreshScrollTrigger);
+</script>

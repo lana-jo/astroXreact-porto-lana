@@ -9,6 +9,9 @@ import {techStacks} from '../data/TechStacks';
 import {certificates} from '../data/Certificates'
 import Hero from "../components/Hero.jsx";
 import ExampleSection from "../components/ExampleSection.jsx";
+/*import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ProjectCard from"./ProjectCard";*/
 ---
 
 <div class="bg-blur bg-blur-one"></div>
@@ -18,29 +21,47 @@ import ExampleSection from "../components/ExampleSection.jsx";
 
     <!--<Hero client:load/>
     <ExampleSection client:visible />-->
+    <!--<ProjectCard client:load/>-->
     <Navbar client:load/>
 
-    <header id="home" class="hero card reveal delay-1">
+    <header id="home" class="fade-up hero card reveal delay-1">
         <div>
             <h1>{profile.title} | {profile.name}</h1>
             <!--<h1>{profile.name} | {profile.title}</h1>-->
             <p class="description">{profile.description}</p>
+            <div class="social-buttons">
+                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn"
+                   title="GitHub">
+                    <img src="/github.svg" alt="https://github.com/lana-jo"/>
+                </a>
+
+                <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener"
+                   class="social-icon-btn" title="LinkedIn">
+                    <!-- LinkedIn Icon -->
+                    <img src="/linkedin.svg" alt="https://www.linkedin.com/in/lana-jauhar-75604317a/"/>
+                </a>
+
+                <a href="mailto:lanajauhr06@gmail.com" class="social-icon-btn" title="Email Me">
+                    <img src="/mail.svg" alt="lanajauhr06@gmail.com"/>
+                </a>
+            </div>
+
         </div>
         <Image class="profile-photo" src={profile.photo} alt={profile.name}/>
         <!--<img class="profile-photo" src={profile.photo} alt={`Foto profil ${profile.name}`} loading="eager"/>-->
     </header>
 
-    <section id="aboutme" class="card reveal delay-2">
+    <!--<section id="aboutme" class="card reveal delay-2">
         <h2>About Me</h2>
         <p>
             Saya memiliki pengalaman <strong>1 tahun sebagai developer</strong> dan <strong>2 tahun
             sebagai guru</strong>, sehingga saya bisa memadukan keduanya untuk mewujudkan keinginan
             Anda secara teknis sekaligus komunikatif.
         </p>
-    </section>
+    </section>-->
 
 
-    <section id="experience" class="card reveal delay-2">
+    <section id="experience" class="fade-up card reveal delay-2">
         <h2>Experience</h2>
 
         <div class="timeline">
@@ -64,7 +85,7 @@ import ExampleSection from "../components/ExampleSection.jsx";
         </div>
     </section>
 
-    <section id="techstack" class="card reveal delay-2">
+    <section id="techstack" class="fade-up card reveal delay-2">
         <h2>Tech Stack</h2>
         <div class="chips">
             {
@@ -75,9 +96,9 @@ import ExampleSection from "../components/ExampleSection.jsx";
         </div>
     </section>
 
-    <section id="porto" class="card reveal delay-4">
+    <section id="project" class="fade-up card reveal delay-4">
         <div class="porto-header">
-            <h2>Porto</h2>
+            <h2>Project</h2>
             <a href="https://github.com/lana-jo" target="_blank" class="view-all-btn">
                 View All
             </a>
@@ -122,9 +143,14 @@ import ExampleSection from "../components/ExampleSection.jsx";
             }
         </div>
     </section>
-    <script>
-        const reveals = document.querySelectorAll('.reveal');
 
+    <script>
+        import {gsap} from "gsap";
+        import {ScrollTrigger} from "gsap/ScrollTrigger";
+
+        // Register the plugin (required!)
+        gsap.registerPlugin(ScrollTrigger);
+        const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -135,6 +161,31 @@ import ExampleSection from "../components/ExampleSection.jsx";
             threshold: 0.2
         });
 
-        reveals.forEach((el) => observer.observe(el));
+
+        reveals.forEach((eL) => observer.observe(eL));
+
+        document.addEventListener("astro:page-load", () => {
+            // Option 1: Use the generic (safest with strict TS)
+            gsap.utils.toArray<HTMLElement>(".fade-up").forEach((el) => {
+                gsap.fromTo(
+                    el,
+                    {opacity: 0, y: 100},
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse",
+                        },
+                    }
+                );
+            });
+
+            // Option 2: If you want to animate the existing "reveal" cards instead:
+            // gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => { ... });
+        });
     </script>
 </main>

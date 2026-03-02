@@ -24,10 +24,10 @@ export default function Navbar() {
 
     const navLinks = [
         { label: "Home", href: "#home" },
-        { label: "About Me", href: "#aboutme" },
+        // { label: "About Me", href: "#aboutme" },
         { label: "Experience", href: "#experience" },
         { label: "Tech Stack", href: "#techstack" },
-        { label: "Porto", href: "#porto" },
+        { label: "Project", href: "#project" },
         { label: "Certificate", href: "#certif" },
     ];
 
