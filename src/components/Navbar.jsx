@@ -29,6 +29,8 @@ export default function Navbar() {
         { label: "Tech Stack", href: "#techstack" },
         { label: "Project", href: "#project" },
         { label: "Certificate", href: "#certif" },
+        { label: "Contact", href: "#contact" },
+
     ];
 
     return (
