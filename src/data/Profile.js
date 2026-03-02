@@ -2,8 +2,8 @@ import lana from '../assets/profile.png'
 
 export const profile = {
     name: 'Lana Jauhar',
-    title: 'Software Engineering',
+    title: 'Software Developer',
     description:
-        'Saya membantu membangun produk digital modern dengan pendekatan engineering yang rapi, terstruktur, dan fokus pada kebutuhan bisnis.',
+        'I help build modern digital products using a clean, structured engineering approach, focused on business needs and real-world impact.',
     photo : lana
 };
