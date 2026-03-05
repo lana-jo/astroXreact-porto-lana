@@ -38,6 +38,22 @@ const {
 <slot />
 <ViewTransitions />
 </body>
+ <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-copyright">&copy; <span id="year"></span> Lana Jauhar. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub">
+                    <img src="/github.svg" alt="GitHub"/>
+                </a>
+                <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+                    <img src="/linkedin.svg" alt="LinkedIn"/>
+                </a>
+                <a href="mailto:lanajauhar06@gmail.com" class="social-icon-btn" title="Email Me">
+                    <img src="/mail.svg" alt="Email"/>
+                </a>
+            </div>
+        </div>
+    </footer>
 </html>
 
 <style>
@@ -62,6 +78,12 @@ const {
 <script>
 	import { gsap } from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear().toString();
+    }
+
 
 	// Register once
 	gsap.registerPlugin(ScrollTrigger);

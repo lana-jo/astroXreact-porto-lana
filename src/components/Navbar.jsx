@@ -4,7 +4,8 @@ export default function Navbar() {
     const [lastScroll, setLastScroll] = useState(0);
     const [hidden, setHidden] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-
+    
+    
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 768) {
@@ -53,16 +54,14 @@ export default function Navbar() {
                 <span />
             </button>
 
-            {/* Mobile Dropdown (only renders when open) */}
-            {isOpen && (
-                <div className="navbar__mobile">
-                    {navLinks.map((item, index) => (
-                        <a key={index} href={item.href} onClick={() => setIsOpen(false)}>
-                            {item.label}
-                        </a>
-                    ))}
-                </div>
-            )}
+            {/* Mobile Dropdown with animation */}
+            <div className={`navbar__mobile ${isOpen ? "open" : ""}`}>
+                {navLinks.map((item, index) => (
+                    <a key={index} href={item.href} onClick={() => setIsOpen(false)}>
+                        {item.label}
+                    </a>
+                ))}
+            </div>
 
             {/* Desktop Links (hidden on mobile) */}
             <ul className="navbar__links">
