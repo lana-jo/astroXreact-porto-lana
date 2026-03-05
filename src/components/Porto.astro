@@ -6,23 +6,14 @@ import {profile} from '../data/Profile';
 import {experiences} from '../data/Experiences';
 import {portfolios} from '../data/Portopolio';
 import {techStacks} from '../data/TechStacks';
-import {certificates} from '../data/Certificates'
-import Hero from "../components/Hero.jsx";
-import ExampleSection from "../components/ExampleSection.jsx";
-/*import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ProjectCard from"./ProjectCard";*/
+import {certificates} from '../data/Certificates';
+
 ---
 
-<div class="bg-blur bg-blur-one"></div>
-<div class="bg-blur bg-blur-two"></div>
 
 <main class="portofolio">
-
-    <!--<Hero client:load/>
-    <ExampleSection client:visible />-->
-    <!--<ProjectCard client:load/>-->
     <Navbar client:load/>
+
 
     <header id="home" class="fade-up hero card reveal delay-1">
         <div>
@@ -148,19 +139,19 @@ import ProjectCard from"./ProjectCard";*/
         <div class="flex flex-col space-y-2">
             <!--<h1>{profile.title} | {profile.name}</h1>-->
             <h1>Let Contact with me</h1>
-            <div class="social-buttons">
-                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn"
+            <div class="contact-buttons">
+                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="contact-icon-btn"
                    title="GitHub">
                     <img src="/github.svg" alt="https://github.com/lana-jo"/>
                 </a>
 
                 <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener"
-                   class="social-icon-btn" title="LinkedIn">
+                   class="contact-icon-btn" title="LinkedIn">
                     <!-- LinkedIn Icon -->
                     <img src="/linkedin.svg" alt="https://www.linkedin.com/in/lana-jauhar-75604317a/"/>
                 </a>
 
-                <a href="mailto:lanajauhar06@gmail.com" class="social-icon-btn" title="Email Me">
+                <a href="mailto:lanajauhar06@gmail.com" class="contact-icon-btn" title="Email Me">
                     <img src="/mail.svg" alt="lanajauhr06@gmail.com"/>
                 </a>
             </div>

@@ -1,4 +1,4 @@
-import lana from '../assets/profile.png'
+import lana from '../assets/lana.png'
 
 export const profile = {
     name: 'Lana Jauhar',

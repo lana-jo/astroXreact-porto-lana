@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+// import Navbar from "../components/Navbar";
 interface Props {
 	title?: string;
 	description?: string;
@@ -10,19 +11,30 @@ const {
 	description = 'Web portofolio modern dengan animasi'
 } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="id">
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width" />
 	<link rel="icon" type="image/svg+xml" href="/profile.svg" />
-	<link rel="icon" href="/profile.svg" />
+	<link rel="icon" href="/lana.svg" />
 	<meta name="generator" content={Astro.generator} />
 	<meta name="description" content={description} />
 	<title>{title}</title>
 </head>
-<body>
+<body><!--
+<div class="container">
+	<section id="home" data-theme="dark">...</section>
+	<section id="about" data-theme="light">...</section>
+	<section id="projects" data-theme="dark">...</section>
+	<section id="github" data-theme="light">...</section>
+	<section id="contact" data-theme="dark">...</section>
+</div> -->
+
+<div class="bg-blur bg-blur-one"></div>
+<div class="bg-blur bg-blur-two"></div>
+
 <slot />
 <ViewTransitions />
 </body>

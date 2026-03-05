@@ -1,11 +1,25 @@
 ---
 import Porto from '../components/Porto.astro';
 import Layout from '../layouts/Layout.astro';
+import Menu from '../Coba/Navbar.astro'
 ---
 
 <Layout
-	title="Portofolio Lana Jauhar | Software Engineering"
+	title="Lana Jauhar | Software Developer"
 	description="Portofolio Lana Jauhar - Software Engineering dengan pengalaman developer dan guru"
 >
 	<Porto />
-</Layout>
+</Layout><!--
+<Menu>
+</Menu>
+-->
+	<!--
+<script>
+	const menu = document.querySelector('.menu');
+
+	menu?.addEventListener('click', () => {
+		const isExpanded = menu.getAttribute('aria-expanded') === 'true';
+		menu.setAttribute('aria-expanded', `${!isExpanded}`);
+	});
+</script>
+-->
