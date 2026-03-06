@@ -1,0 +1,20 @@
+---
+import "../styles/global.css"
+---
+
+<div class="hidden md:flex space-x-8 items-center" >
+    <button class="text-foreground hover:text-primary transition-colors">Home</button>
+    <button class="text-foreground hover:text-primary transition-colors">Projects</button>
+    <button class="text-foreground hover:text-primary transition-colors">Experience</button>
+    <button class="text-foreground hover:text-primary transition-colors">Certifications</button>
+    <button class="text-foreground hover:text-primary transition-colors">Contact</button>
+    <button class="text-foreground hover:text-primary transition-colors font-medium">Gists</button>
+</div>
+<script>
+    const menu = document.querySelector('.menu');
+
+    menu?.addEventListener('click', () => {
+        const isExpanded = menu.getAttribute('aria-expanded') === 'true';
+        menu.setAttribute('aria-expanded', `${!isExpanded}`);
+    });
+</script>
