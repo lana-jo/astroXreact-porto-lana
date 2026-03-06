@@ -569,7 +569,8 @@ section {
     }
 
     .profile-photo {
-        mask-image: linear-gradient(to top, black 10%, transparent 100%);
+        /* mask-image:  radial-gradient(circle at top, black 10%, transparent 100%); */
+        mask-image:  linear-gradient( to bottom, black 10%, transparent 100%);
         justify-self: center;
         max-width: 220px;
     }

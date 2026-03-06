@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Navbar() {
-    const [lastScroll, setLastScroll] = useState(0);
     const [hidden, setHidden] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const idleTimeoutRef = useRef(null);
     
     
     useEffect(() => {
@@ -14,18 +14,31 @@ export default function Navbar() {
         };
 
         const handleScroll = () => {
-            const currentScroll = window.pageYOffset;
-            setHidden(currentScroll > lastScroll && currentScroll > 10);
-            setLastScroll(currentScroll);
+            // Hide navbar when scrolling
+            setHidden(true);
+            
+            // Clear previous timeout
+            if (idleTimeoutRef.current) {
+                clearTimeout(idleTimeoutRef.current);
+            }
+            
+            // Show navbar after 150ms of no scrolling (idle)
+            idleTimeoutRef.current = setTimeout(() => {
+                setHidden(false);
+            }, 130);
         };
 
         window.addEventListener("resize", handleResize);
         window.addEventListener("scroll", handleScroll);
+        
         return () => {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleResize);
+            if (idleTimeoutRef.current) {
+                clearTimeout(idleTimeoutRef.current);
+            }
         };
-    }, [lastScroll]);
+    }, []);
 
     const navLinks = [
         { label: "Home", href: "#home" },

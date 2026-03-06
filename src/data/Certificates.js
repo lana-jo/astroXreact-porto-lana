@@ -8,6 +8,7 @@ import aws from '../assets/certificates/aws restart.png'
 import ai from '../assets/certificates/Sertifikat-lana jauhar-AI Dicoding_page-0001.jpg'
 import ai1 from '../assets/certificates/Sertifikat-lana jauhar-AI Dicoding_page-0002.jpg'
 import ai2 from '../assets/certificates/Sertifikat-lana jauhar-AI Dicoding_page-0003.jpg'
+import ds from '../assets/certificates/sertifikat junior designer.jpg'
 
 export const certificates = [
 
@@ -16,7 +17,7 @@ export const certificates = [
         photo: [ai, ai1, ai2]
     },
     {
-        name: 'cisco cyber security',
+        name: 'Cisco Cyber Security',
         photo: ciscoImg
     },
     {
@@ -28,8 +29,8 @@ export const certificates = [
         photo: [js,js1,js2]
     },
     {
-        name: 'AWS Re/Start',
-        photo: aws
+        name: 'Junior Designer',
+        photo: ds
     }
 ]
 

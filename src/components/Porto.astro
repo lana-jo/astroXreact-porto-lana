@@ -18,7 +18,8 @@ import {certificates} from '../data/Certificates';
     <header id="home" class="fade-up hero card reveal delay-1">
         <div>
             <!--<h1>{profile.title} | {profile.name}</h1>-->
-            <h1>{profile.name} | {profile.title}</h1>
+            <!-- <h1>{profile.name} | {profile.title}</h1> -->
+            <h1>{profile.title}</h1>
             <p class="description">{profile.description}</p>
             <div class="social-buttons">
                 <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn"
@@ -81,7 +82,9 @@ import {certificates} from '../data/Certificates';
         <div class="chips">
             {
                 techStacks.map((stack) => (
-                        <span class="chip">{stack}</span>
+                       <a href="https://github.com/lana-jo" class="view-all-btn">
+ {stack}
+                       </a>
                 ))
             }
         </div>
@@ -140,19 +143,26 @@ import {certificates} from '../data/Certificates';
             <!--<h1>{profile.title} | {profile.name}</h1>-->
             <h1>Let Contact with me</h1>
             <div class="contact-buttons">
-                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="contact-icon-btn"
-                   title="GitHub">
-                    <img src="/github.svg" alt="https://github.com/lana-jo"/>
-                </a>
+                <a href="https://t.me/j0_here" target="_blank" rel="noopener" class="contact-icon-btn"
+                   title="Telegram">
+                    <img src="/telegram.svg" alt="https://t.me/j0_here"/>
+                 </a>
+                    <!--<a href="https://t.me/j0_here" target="_blank" rel="noopener" class="contact-icon-btn"
+                   title="Telegram">
+                    <img src="/telegram.svg" alt="https://t.me/j0_here"/>
+                </a> -->
 
                 <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener"
                    class="contact-icon-btn" title="LinkedIn">
-                    <!-- LinkedIn Icon -->
                     <img src="/linkedin.svg" alt="https://www.linkedin.com/in/lana-jauhar-75604317a/"/>
                 </a>
 
                 <a href="mailto:lanajauhar06@gmail.com" class="contact-icon-btn" title="Email Me">
                     <img src="/mail.svg" alt="lanajauhr06@gmail.com"/>
+                </a>
+
+                <a href="https://wa.me/6285866638153" target="_blank" rel="noopener" class="contact-icon-btn" title="WhatsApp">
+                    <img src="/whatsapp.svg" alt="WhatsApp"/>
                 </a>
             </div>
 
