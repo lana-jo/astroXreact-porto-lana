@@ -4,6 +4,7 @@ import contactApi from '../assets/porto/beCA.png';
 import BookShelf from '../assets/porto/beBS.png';
 import dataDiri from '../assets/porto/mockup-web-data-diri.jpg';
 import perpus from '../assets/porto/mockup-perpusPHP.jpg';
+import fNoteApp from '../assets/porto/mockup-flutter-NoteApp.jpg'
 export const portfolios = [
 
     {
@@ -42,12 +43,13 @@ export const portfolios = [
     //     github: 'https://github.com/lana-jo/NoteApp',
     //     // img:
     // },
-    // {
-    //     title: 'Flutter NoteApp',
-    //     detail: 'Developed a cross-platform note app with CRUD functionality.',
-    //     stack: 'Dart, Flutter, Room, CRUD',
-    //     github: 'https://github.com/lana-jo/Flutter-crud-dasar'
-    // },
+    {
+        title: 'Flutter NoteApp',
+        detail: 'Developed a cross-platform note app with CRUD functionality.',
+        stack: 'Dart, Flutter, Room, CRUD',
+        github: 'https://github.com/lana-jo/Flutter-crud-dasar',
+        img: fNoteApp
+    },
     {
         title: 'PHP Data Diri',
         detail: 'Built a web-based note-taking application with CRUD features.',
