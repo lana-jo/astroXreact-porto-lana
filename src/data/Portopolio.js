@@ -3,6 +3,7 @@ import inv from '../assets/porto/invApp.png';
 import contactApi from '../assets/porto/beCA.png';
 import BookShelf from '../assets/porto/beBS.png';
 import dataDiri from '../assets/porto/mockup-web-data-diri.jpg';
+import perpus from '../assets/porto/mockup-perpusPHP.jpg';
 export const portfolios = [
 
     {
@@ -54,10 +55,11 @@ export const portfolios = [
         github: 'https://github.com/lana-jo/contohCRUDDasarPHPNative',
         img: dataDiri
     },
-    // {
-    //     title: 'PHP Library System',
-    //     detail: 'Developed a web-based library management system with CRUD and authentication.',
-    //     stack: 'PHP, MySQL, CRUD',
-    //     github: 'https://github.com/lana-jo/PerpusPHP'
-    // }
+    {
+        title: 'PHP Library System',
+        detail: 'Developed a web-based library management system with CRUD and authentication.',
+        stack: 'PHP, MySQL, CRUD',
+        github: 'https://github.com/lana-jo/PerpusPHP',
+        img: perpus
+    }
 ];
