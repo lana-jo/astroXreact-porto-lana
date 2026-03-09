@@ -7,6 +7,7 @@ import {experiences} from '../data/Experiences';
 import {portfolios} from '../data/Portopolio';
 import {techStacks} from '../data/TechStacks';
 import {certificates} from '../data/Certificates';
+import {organizations} from '../data/Organizations';
 
 ---
 
@@ -53,6 +54,29 @@ import {certificates} from '../data/Certificates';
     </section>-->
 
 
+    <section id="organization" class="fade-up card reveal delay-2">
+        <h2>Organization</h2>
+
+        <div class="timeline">
+            {
+                organizations.map((item) => (
+                        <div class="timeline-item">
+                            <div class="timeline-content">
+                                <h3>{item.role}</h3>
+                                <small>{item.period}</small>
+                                <h4>{item.company}</h4>
+
+                                <ul>
+                                    {item.descriptions.map((desc) => (
+                                            <li>{desc}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                ))
+            }
+        </div>
+    </section>
     <section id="experience" class="fade-up card reveal delay-2">
         <h2>Experience</h2>
 
