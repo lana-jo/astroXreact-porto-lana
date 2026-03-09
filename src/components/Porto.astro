@@ -102,6 +102,11 @@ import {certificates} from '../data/Certificates';
             {
                 portfolios.map((item) => (
                         <article class="project-item">
+                            {item.img && (
+                                <div class="project-image-wrapper" data-title={item.title}>
+                                    <Image src={item.img} alt={item.title} class="project-image"/>
+                                </div>
+                            )}
                             <h3>{item.title}</h3>
                             <p>{item.detail}</p>
                             <small>{item.stack}</small>
@@ -109,6 +114,7 @@ import {certificates} from '../data/Certificates';
                             <a href={item.github} target="_blank">
                                 <button class="porto-btn">View Project</button>
                             </a>
+
                         </article>
                 ))
             }
@@ -126,10 +132,14 @@ import {certificates} from '../data/Certificates';
 
                             {Array.isArray(item.photo) ? (
                                 item.photo.map((img) => (
-                                        <Image src={img} alt={item.name}/>
+                                        <div class="cert-image-wrapper" data-title={item.name}>
+                                            <Image src={img} alt={item.name}/>
+                                        </div>
                                 ))
                             ) : (
-                                    <Image src={item.photo} alt={item.name}/>
+                                    <div class="cert-image-wrapper" data-title={item.name}>
+                                        <Image src={item.photo} alt={item.name}/>
+                                    </div>
                             )}
 
                         </div>
@@ -141,16 +151,15 @@ import {certificates} from '../data/Certificates';
     <section id="contact" class="fade-up card reveal delay-4">
         <div class="flex flex-col space-y-2">
             <!--<h1>{profile.title} | {profile.name}</h1>-->
-            <h1>Let Contact with me</h1>
+            <h1>Connect with me</h1>
             <div class="contact-buttons">
                 <a href="https://t.me/j0_here" target="_blank" rel="noopener" class="contact-icon-btn"
                    title="Telegram">
                     <img src="/telegram.svg" alt="https://t.me/j0_here"/>
                  </a>
-                    <!--<a href="https://t.me/j0_here" target="_blank" rel="noopener" class="contact-icon-btn"
-                   title="Telegram">
-                    <img src="/telegram.svg" alt="https://t.me/j0_here"/>
-                </a> -->
+                <a href="https://wa.me/6285866638153" target="_blank" rel="noopener" class="contact-icon-btn" title="WhatsApp">
+                    <img src="/whatsapp.svg" alt="WhatsApp"/>
+                </a>
 
                 <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener"
                    class="contact-icon-btn" title="LinkedIn">
@@ -161,13 +170,20 @@ import {certificates} from '../data/Certificates';
                     <img src="/mail.svg" alt="lanajauhr06@gmail.com"/>
                 </a>
 
-                <a href="https://wa.me/6285866638153" target="_blank" rel="noopener" class="contact-icon-btn" title="WhatsApp">
-                    <img src="/whatsapp.svg" alt="WhatsApp"/>
-                </a>
+              
             </div>
 
         </div>
     </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt=""/>
+            <p id="lightbox-title"></p>
+        </div>
+    </div>
 
     <script>
         import {gsap} from "gsap";
@@ -209,8 +225,43 @@ import {certificates} from '../data/Certificates';
                 );
             });
 
-            // Option 2: If you want to animate the existing "reveal" cards instead:
-            // gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => { ... });
+            // Lightbox functionality
+            const modal = document.getElementById('lightbox-modal');
+            const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+            const modalTitle = document.getElementById('lightbox-title');
+            const closeBtn = document.querySelector('.lightbox-close');
+            
+            // Include both project and certificate image wrappers
+            const imageWrappers = document.querySelectorAll('.project-image-wrapper, .cert-image-wrapper');
+
+            imageWrappers.forEach((wrapper) => {
+                wrapper.addEventListener('click', () => {
+                    const img = wrapper.querySelector('img');
+                    const title = wrapper.getAttribute('data-title');
+                    if (img && modal && modalImg && modalTitle) {
+                        modalImg.src = img.src;
+                        modalImg.alt = img.alt;
+                        modalTitle.textContent = title || '';
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            const closeModal = () => {
+                if (modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            };
+
+            closeBtn?.addEventListener('click', closeModal);
+            modal?.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
         });
     </script>
 
