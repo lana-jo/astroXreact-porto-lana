@@ -121,16 +121,7 @@ import {organizations} from '../data/Organizations';
                 View All
             </a>
         </div>
-
-        <section id="project" class="fade-up card reveal delay-4">
-            <div class="porto-header">
-                <h2>Project</h2>
-                <a href="https://github.com/lana-jo" target="_blank" class="view-all-btn">
-                    View All
-                </a>
-            </div>
-
-            <div class="projects">
+        <div class="projects">
                 {
                     portfolios.map((item) => (
                             <article class="project-item">
@@ -170,7 +161,6 @@ import {organizations} from '../data/Organizations';
                 }
             </div>
         </section>
-    </section>
 
     <section id="certif" class="card reveal delay-2">
         <h2>Certificate</h2>
