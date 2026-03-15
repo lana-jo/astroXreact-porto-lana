@@ -910,7 +910,68 @@ section {
         grid-template-columns: 1fr;
         gap: 0.8rem;
     }
+    .project-actions {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-top: 0.8rem;
+        align-items: center;
+    }
 
+    .project-actions a {
+        text-decoration: none;
+    }
+
+    .porto-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .live-btn {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 212, 0.15));
+        border-color: rgba(16, 185, 129, 0.5);
+        color: #6ee7b7;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .live-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0.75rem;
+        width: 6px;
+        height: 6px;
+        background: #10b981;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        box-shadow: 0 0 6px #10b981, 0 0 12px #10b981;
+        animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+
+    /* Geser teks sedikit ke kanan biar tidak ketimpa dot */
+    .live-btn svg {
+        margin-left: 0.6rem;
+    }
+
+    .live-btn:hover {
+        background: linear-gradient(135deg, #10b981, #0891b2);
+        border-color: rgba(110, 231, 183, 0.9);
+        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.45);
+        color: #fff;
+    }
+
+    .live-btn:active {
+        background: #10b981;
+        border-color: #10b981;
+        box-shadow: 0 0 14px rgba(16, 185, 129, 0.7);
+    }
+
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+        50% { opacity: 0.5; transform: translateY(-50%) scale(1.4); }
+    }
     .project-item {
         padding: 0.8rem;
     }

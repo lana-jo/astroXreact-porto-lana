@@ -8,11 +8,20 @@ import fNoteApp from '../assets/porto/mockup-flutter-NoteApp.jpg'
 export const portfolios = [
 
     {
+        title: 'PHP Library System',
+        detail: 'Developed a web-based library management system with CRUD and authentication.',
+        stack: 'PHP, MySQL, CRUD',
+        github: 'https://github.com/lana-jo/PerpusPHP',
+        img: perpus,
+        live: 'https://lana-jo.latteace.com/perpustakaan'
+    },
+    {
         title: 'Mini Inventory App',
         detail: 'Developed an inventory tracking app with full CRUD functionality.',
         stack: 'Kotlin, Jetpack Compose, MVP Architecture, CRUD, Supabase',
         github: 'https://github.com/lana-jo/jetpack-compose-InventoryMini-supabase',
-        img: iMini
+        img: iMini,
+        live: '',
 
     },
     {
@@ -57,11 +66,4 @@ export const portfolios = [
         github: 'https://github.com/lana-jo/contohCRUDDasarPHPNative',
         img: dataDiri
     },
-    {
-        title: 'PHP Library System',
-        detail: 'Developed a web-based library management system with CRUD and authentication.',
-        stack: 'PHP, MySQL, CRUD',
-        github: 'https://github.com/lana-jo/PerpusPHP',
-        img: perpus
-    }
 ];
