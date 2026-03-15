@@ -29,6 +29,10 @@ export const certificates = [
         photo: [js,js1,js2]
     },
     {
+        name: 'AWS Re-Start',
+        photo: aws
+    },
+    {
         name: 'Junior Designer',
         photo: ds
     }
