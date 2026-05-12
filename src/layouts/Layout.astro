@@ -51,6 +51,9 @@ const {
                 <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
                     <img src="/linkedin.svg" alt="LinkedIn"/>
                 </a>
+                <a href="https://t.me/j0_here" target="_blank" rel="noopener" class="social-icon-btn" title="Telegram">
+                    <img src="/telegram.svg" alt="Telegram"/>
+                </a>
                 <a href="mailto:lanajauhar06@gmail.com" class="social-icon-btn" title="Email Me">
                     <img src="/mail.svg" alt="Email"/>
                 </a>
@@ -63,6 +66,37 @@ const {
 	:root {
 		font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
 		color-scheme: dark;
+		
+		/* Light theme variables */
+		--bg-primary: #ffffff;
+		--bg-secondary: #f8fafc;
+		--card-bg: #ffffff;
+		--text-primary: #0f172a;
+		--text-secondary: #475569;
+		--border-color: #e2e8f0;
+		--accent: #3b82f6;
+	}
+
+	/* Dark theme */
+	[data-theme="dark"] {
+		--bg-primary: #070b16;
+		--bg-secondary: #0f172a;
+		--card-bg: #1e293b;
+		--text-primary: #e8eeff;
+		--text-secondary: #94a3b8;
+		--border-color: #334155;
+		--accent: #60a5fa;
+	}
+
+	/* Light theme */
+	[data-theme="light"] {
+		--bg-primary: #ffffff;
+		--bg-secondary: #f8fafc;
+		--card-bg: #ffffff;
+		--text-primary: #0f172a;
+		--text-secondary: #475569;
+		--border-color: #e2e8f0;
+		--accent: #3b82f6;
 	}
 
 	* {
@@ -74,8 +108,31 @@ const {
 		margin: 0;
 		width: 100%;
 		min-height: 100%;
-		background: #070b16;
-		color: #e8eeff;
+		background: var(--bg-primary);
+		color: var(--text-primary);
+		transition: background-color 0.3s ease, color 0.3s ease;
+	}
+
+	/* Theme dropdown styles */
+	.theme-toggle-btn:hover {
+		background: var(--bg-secondary) !important;
+		transform: scale(1.05);
+		transition: all 0.2s ease;
+	}
+
+	.theme-dropdown-option:hover {
+		background: var(--bg-secondary) !important;
+		color: var(--text-primary) !important;
+	}
+
+	.theme-dropdown-option.active {
+		background: var(--accent) !important;
+		color: white !important;
+	}
+
+	/* Smooth transitions for theme changes */
+	* {
+		transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 	}
 </style>
 <script>

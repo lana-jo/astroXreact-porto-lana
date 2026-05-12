@@ -9,6 +9,7 @@ export default function Navbar() {
     const themeMenuRef = useRef(null);
 
     useEffect(() => {
+        // Fungsi untuk menerapkan tema ke dokumen (root element)
         const applyTheme = (targetTheme) => {
             let actualTheme = targetTheme;
             if (targetTheme === "system") {
@@ -17,19 +18,23 @@ export default function Navbar() {
             document.documentElement.setAttribute("data-theme", actualTheme);
         };
 
+        // Inisialisasi tema dari localStorage atau default system
         const savedTheme = localStorage.getItem("theme") || "system";
         setTheme(savedTheme);
         applyTheme(savedTheme);
 
+        // Listener untuk perubahan tema sistem OS
         const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        const handleSystemChange = () => {
-            if (localStorage.getItem("theme") === "system" || !localStorage.getItem("theme")) {
-                applyTheme("system");
+        const handleSystemChange = (e) => {
+            if (localStorage.getItem("theme") === "system") {
+                const newTheme = e.matches ? "dark" : "light";
+                document.documentElement.setAttribute("data-theme", newTheme);
             }
         };
 
         mediaQuery.addEventListener("change", handleSystemChange);
 
+        // Penanganan klik di luar menu untuk menutup dropdown
         const handleClickOutside = (event) => {
             if (themeMenuRef.current && !themeMenuRef.current.contains(event.target)) {
                 setShowThemeMenu(false);
@@ -38,10 +43,8 @@ export default function Navbar() {
 
         document.addEventListener("mousedown", handleClickOutside);
 
-        const handleResize = () => {
-            if (window.innerWidth >= 768) setIsOpen(false);
-        };
-
+        // Resize dan scroll behavior
+        const handleResize = () => { if (window.innerWidth >= 768) setIsOpen(false); };
         const handleScroll = () => {
             setHidden(true);
             if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
@@ -60,7 +63,8 @@ export default function Navbar() {
         };
     }, []);
 
-    const updateTheme = (newTheme) => {
+    // Fungsi update saat user memilih tema dari dropdown
+    const handleThemeChange = (newTheme) => {
         setTheme(newTheme);
         localStorage.setItem("theme", newTheme);
         
@@ -113,7 +117,7 @@ export default function Navbar() {
                             <button 
                                 key={opt.id}
                                 className={`theme-dropdown-option ${theme === opt.id ? 'active' : ''}`}
-                                onClick={() => updateTheme(opt.id)}
+                                onClick={() => handleThemeChange(opt.id)}
                                 style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', width: '100%', border: 'none', background: 'transparent', color: 'var(--text-secondary)', cursor: 'pointer', borderRadius: '6px', textAlign: 'left', fontWeight: '500' }}
                             >
                                 <span>{opt.icon}</span>
@@ -152,7 +156,6 @@ export default function Navbar() {
                     </a>
                 ))}
             </div>
-
         </nav>
     );
 }
