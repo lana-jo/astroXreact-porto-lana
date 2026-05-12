@@ -103,9 +103,11 @@ body {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: 0.3rem;
 
     padding: 0.8rem 1rem;
+    margin: 0;
+    border: 1px solid var(--border-color);
 }
 
 .menu a {
@@ -114,7 +116,6 @@ body {
     color: var(--text-primary);
     padding: 0.55rem 0.9rem;
     border-radius: 999px;
-    justify-content: center;
     border: 1px solid var(--border-color);
     font-size: 0.92rem;
     transition: transform 0.25s ease,
@@ -919,12 +920,31 @@ section {
     }
 
     .navbar__hamburger {
-        display: flex; /* ✅ visible by default */
+        display: flex !important;
         flex-direction: column;
         gap: 6px;
         background: transparent;
         border: none;
         cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: background 0.3s ease;
+    }
+
+    .navbar__hamburger:hover {
+        background: var(--bg-secondary);
+    }
+
+    .navbar__hamburger span {
+        width: 24px;
+        height: 3px;
+        background: var(--text-primary);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .theme-select-container {
+        margin-right: 0.5rem !important;
     }
 
     .portofolio {
@@ -938,7 +958,7 @@ section {
 
     .menu {
         padding: 0.6rem 0.8rem;
-        gap: 0.4rem;
+        gap: 0.2rem;
     }
 
     .menu a {
@@ -1187,7 +1207,6 @@ img {
 
 @media (min-width: 770px) {
 
-
     .social-buttons {
         margin-top: 2.5rem;
         display: flex;
@@ -1199,10 +1218,9 @@ img {
     .navbar__links {
         display: flex !important;
         list-style: none;
-        gap: 2rem;
+        gap: 0.3rem;
         margin: 0;
         padding: 0;
-
     }
 
     .navbar__hamburger {
@@ -1211,6 +1229,10 @@ img {
 
     .navbar__mobile {
         display: none !important;
+    }
+
+    .theme-select-container {
+        margin-right: 1rem !important;
     }
 
 }
@@ -1393,14 +1415,13 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    margin: 0 8px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 1rem 1.5rem;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
     transition: transform 0.3s ease;
 }
 
@@ -1442,7 +1463,9 @@ img {
 .navbar__links {
     display: none;
     list-style: none;
-    gap: 1rem;
+    gap: 0.3rem;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -1487,7 +1510,7 @@ img {
 .navbar__hamburger span {
     width: 24px;
     height: 3px;
-    background: white;
+    background: var(--text-primary);
     border-radius: 4px;
     transition: 0.3s ease;
 }
@@ -1506,21 +1529,21 @@ img {
 
 .navbar__mobile {
     position: fixed;
-    top: 64px;
+    top: 70px;
     left: 0;
-    width: 100%;
+    right: 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    padding: 1.5rem 0;
-    gap: 0;
-    background: var(--bg-color);
-    backdrop-filter: blur(10px);
+    gap: 0.5rem;
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 999;
+    transition: all 0.3s ease;
+    z-index: 998;
 }
 
 .navbar__mobile a {
