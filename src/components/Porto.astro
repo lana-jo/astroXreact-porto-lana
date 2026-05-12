@@ -1,116 +1,81 @@
 ---
-import '../components/porto.css'
-import Navbar from '../components/Navbar.jsx'
-import {Image} from 'astro:assets'
-import {profile} from '../data/Profile';
-import {experiences} from '../data/Experiences';
-import {portfolios} from '../data/Portopolio';
-import {techStacks} from '../data/TechStacks';
-import {certificates} from '../data/Certificates';
-import {organizations} from '../data/Organizations';
-
+import '../components/porto.css';
+import Navbar from '../components/Navbar.jsx';
+import { Image } from 'astro:assets';
+import { profile } from '../data/Profile';
+import { experiences } from '../data/Experiences';
+import { portfolios } from '../data/Portopolio';
+import { techStacks } from '../data/TechStacks';
+import { certificates } from '../data/Certificates';
+import { organizations } from '../data/Organizations';
 ---
 
-
 <main class="portofolio">
-    <Navbar client:load/>
-
+    <Navbar client:load />
 
     <header id="home" class="fade-up hero card reveal delay-1">
         <div>
-            <!--<h1>{profile.title} | {profile.name}</h1>-->
-            <!-- <h1>{profile.name} | {profile.title}</h1> -->
             <h1>{profile.title}</h1>
             <p class="description">{profile.description}</p>
             <div class="social-buttons">
-                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn"
-                   title="GitHub">
-                    <img src="/github.svg" alt="https://github.com/lana-jo"/>
+                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub">
+                    <img src="/github.svg" alt="GitHub" />
                 </a>
-
-                <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener"
-                   class="social-icon-btn" title="LinkedIn">
-                    <!-- LinkedIn Icon -->
-                    <img src="/linkedin.svg" alt="https://www.linkedin.com/in/lana-jauhar-75604317a/"/>
+                <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+                    <img src="/linkedin.svg" alt="LinkedIn" />
                 </a>
-
                 <a href="mailto:lanajauhar06@gmail.com" class="social-icon-btn" title="Email Me">
-                    <img src="/mail.svg" alt="lanajauhr06@gmail.com"/>
+                    <img src="/mail.svg" alt="Email" />
                 </a>
             </div>
-
         </div>
-        <Image class="profile-photo" src={profile.photo} alt={profile.name}/>
-        <!--<img class="profile-photo" src={profile.photo} alt={`Foto profil ${profile.name}`} loading="eager"/>-->
+        <Image class="profile-photo" src={profile.photo} alt={profile.name} />
     </header>
-
-    <!--<section id="aboutme" class="card reveal delay-2">
-        <h2>About Me</h2>
-        <p>
-            Saya memiliki pengalaman <strong>1 tahun sebagai developer</strong> dan <strong>2 tahun
-            sebagai guru</strong>, sehingga saya bisa memadukan keduanya untuk mewujudkan keinginan
-            Anda secara teknis sekaligus komunikatif.
-        </p>
-    </section>-->
-
 
     <section id="organization" class="fade-up card reveal delay-2">
         <h2>Organization</h2>
-
         <div class="timeline">
-            {
-                organizations.map((item) => (
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>{item.role}</h3>
-                                <small>{item.period}</small>
-                                <h4>{item.company}</h4>
-
-                                <ul>
-                                    {item.descriptions.map((desc) => (
-                                            <li>{desc}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                ))
-            }
+            {organizations.map((item) => (
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>{item.role}</h3>
+                        <small>{item.period}</small>
+                        <h4>{item.company}</h4>
+                        <ul>
+                            {item.descriptions.map((desc) => <li>{desc}</li>)}
+                        </ul>
+                    </div>
+                </div>
+            ))}
         </div>
     </section>
+
     <section id="experience" class="fade-up card reveal delay-2">
         <h2>Experience</h2>
-
         <div class="timeline">
-            {
-                experiences.map((item) => (
-                        <div class="timeline-item">
-                            <div class="timeline-content">
-                                <h3>{item.role}</h3>
-                                <small>{item.period}</small>
-                                <h4>{item.company}</h4>
-
-                                <ul>
-                                    {item.descriptions.map((desc) => (
-                                            <li>{desc}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                ))
-            }
+            {experiences.map((item) => (
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>{item.role}</h3>
+                        <small>{item.period}</small>
+                        <h4>{item.company}</h4>
+                        <ul>
+                            {item.descriptions.map((desc) => <li>{desc}</li>)}
+                        </ul>
+                    </div>
+                </div>
+            ))}
         </div>
     </section>
 
     <section id="techstack" class="fade-up card reveal delay-2">
         <h2>Tech Stack</h2>
         <div class="chips">
-            {
-                techStacks.map((stack) => (
-                        <a href="https://github.com/lana-jo" class="view-all-btn">
-                            {stack}
-                        </a>
-                ))
-            }
+            {techStacks.map((stack) => (
+                <a href="https://github.com/lana-jo" class="view-all-btn">
+                    {stack}
+                </a>
+            ))}
         </div>
     </section>
 
@@ -122,157 +87,123 @@ import {organizations} from '../data/Organizations';
             </a>
         </div>
         <div class="projects">
-                {
-                    portfolios.map((item) => (
-                            <article class="project-item">
-                                {item.img && (
-                                        <div class="project-image-wrapper" data-title={item.title}>
-                                            <Image src={item.img} alt={item.title} class="project-image"/>
-                                        </div>
-                                )}
-                                <h3>{item.title}</h3>
-                                <p>{item.detail}</p>
-                                <small>{item.stack}</small>
-                                <br/>
-                                <div class="project-actions">
-                                    <a href={item.github} target="_blank">
-                                        <button class="porto-btn">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                                                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-                                            </svg>
-                                            GitHub
-                                        </button>
-                                    </a>
-                                    {item.live && (
-                                            <a href={item.live} target="_blank">
-                                                <button class="porto-btn live-btn">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <circle cx="12" cy="12" r="10"/>
-                                                        <line x1="2" y1="12" x2="22" y2="12"/>
-                                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                                                    </svg>
-                                                    Live Demo
-                                                </button>
-                                            </a>
-                                    )}
-                                </div>
-                            </article>
-                    ))
-                }
-            </div>
-        </section>
+            {portfolios.map((item) => (
+                <article class="project-item">
+                    {item.img && (
+                        <div class="project-image-wrapper" data-title={item.title}>
+                            <Image src={item.img} alt={item.title} class="project-image" />
+                        </div>
+                    )}
+                    <h3>{item.title}</h3>
+                    <p>{item.detail}</p>
+                    <small>{item.stack}</small>
+                    <br />
+                    <div class="project-actions">
+                        {item.github && (
+                            <a href={item.github} target="_blank">
+                                <button class="porto-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                                    </svg>
+                                    GitHub
+                                </button>
+                            </a>
+                        )}
+                        {item.live && (
+                            <a href={item.live} target="_blank">
+                                <button class="porto-btn live-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <line x1="2" y1="12" x2="22" y2="12" />
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                    </svg>
+                                    Live Demo
+                                </button>
+                            </a>
+                        )}
+                    </div>
+                </article>
+            ))}
+        </div>
+    </section>
 
     <section id="certif" class="card reveal delay-2">
         <h2>Certificate</h2>
-
         <div>
-            {
-                certificates.map((item) => (
-                        <div class="certificate-item">
-                            <h3>{item.name}</h3>
-
-                            {Array.isArray(item.photo) ? (
-                                item.photo.map((img) => (
-                                        <div class="cert-image-wrapper" data-title={item.name}>
-                                            <Image src={img} alt={item.name}/>
-                                        </div>
-                                ))
-                            ) : (
-                                    <div class="cert-image-wrapper" data-title={item.name}>
-                                        <Image src={item.photo} alt={item.name}/>
-                                    </div>
-                            )}
-
+            {certificates.map((item) => (
+                <div class="certificate-item">
+                    <h3>{item.name}</h3>
+                    {Array.isArray(item.photo) ? (
+                        item.photo.map((img) => (
+                            <div class="cert-image-wrapper" data-title={item.name}>
+                                <Image src={img} alt={item.name} />
+                            </div>
+                        ))
+                    ) : (
+                        <div class="cert-image-wrapper" data-title={item.name}>
+                            <Image src={item.photo} alt={item.name} />
                         </div>
-                ))
-            }
+                    )}
+                </div>
+            ))}
         </div>
     </section>
 
     <section id="contact" class="fade-up card reveal delay-4">
         <div class="flex flex-col space-y-2">
-            <!--<h1>{profile.title} | {profile.name}</h1>-->
             <h1>Connect with me</h1>
             <div class="contact-buttons">
-                <a href="https://t.me/j0_here" target="_blank" rel="noopener" class="contact-icon-btn"
-                   title="Telegram">
-                    <img src="/telegram.svg" alt="https://t.me/j0_here"/>
+                <a href="https://t.me/j0_here" target="_blank" rel="noopener" class="contact-icon-btn" title="Telegram">
+                    <img src="/telegram.svg" alt="Telegram" />
                 </a>
                 <a href="https://wa.me/6285866638153" target="_blank" rel="noopener" class="contact-icon-btn" title="WhatsApp">
-                    <img src="/whatsapp.svg" alt="WhatsApp"/>
+                    <img src="/whatsapp.svg" alt="WhatsApp" />
                 </a>
-
-                <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener"
-                   class="contact-icon-btn" title="LinkedIn">
-                    <img src="/linkedin.svg" alt="https://www.linkedin.com/in/lana-jauhar-75604317a/"/>
+                <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener" class="contact-icon-btn" title="LinkedIn">
+                    <img src="/linkedin.svg" alt="LinkedIn" />
                 </a>
-
                 <a href="mailto:lanajauhar06@gmail.com" class="contact-icon-btn" title="Email Me">
-                    <img src="/mail.svg" alt="lanajauhr06@gmail.com"/>
+                    <img src="/mail.svg" alt="Email" />
                 </a>
-
-
             </div>
-
         </div>
     </section>
 
-    <!-- Lightbox Modal -->
     <div id="lightbox-modal" class="lightbox-modal">
         <button class="lightbox-close" aria-label="Close">&times;</button>
         <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt=""/>
+            <img id="lightbox-img" src="" alt="" />
             <p id="lightbox-title"></p>
         </div>
     </div>
 
     <script>
-        import {gsap} from "gsap";
-        import {ScrollTrigger} from "gsap/ScrollTrigger";
+        import { gsap } from "gsap";
+        import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-        // Register the plugin (required!)
         gsap.registerPlugin(ScrollTrigger);
+
         const reveals = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        }, {
-            threshold: 0.2
-        });
-
+        }, { threshold: 0.2 });
 
         reveals.forEach((eL) => observer.observe(eL));
 
         document.addEventListener("astro:page-load", () => {
-            // Option 1: Use the generic (safest with strict TS)
             gsap.utils.toArray<HTMLElement>(".fade-up").forEach((el) => {
-                gsap.fromTo(
-                    el,
-                    {opacity: 0, y: 100},
-                    {
-                        opacity: 1,
-                        y: 0,
-                        duration: 0.8,
-                        ease: "power3.out",
-                        scrollTrigger: {
-                            trigger: el,
-                            start: "top 85%",
-                            toggleActions: "play none none reverse",
-                        },
-                    }
-                );
+                gsap.fromTo(el, { opacity: 0, y: 100 }, {
+                    opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
+                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" }
+                });
             });
 
-            // Lightbox functionality
             const modal = document.getElementById('lightbox-modal');
             const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
             const modalTitle = document.getElementById('lightbox-title');
             const closeBtn = document.querySelector('.lightbox-close');
-
-            // Include both project and certificate image wrappers
             const imageWrappers = document.querySelectorAll('.project-image-wrapper, .cert-image-wrapper');
 
             imageWrappers.forEach((wrapper) => {
@@ -281,7 +212,7 @@ import {organizations} from '../data/Organizations';
                     const title = wrapper.getAttribute('data-title');
                     if (img && modal && modalImg && modalTitle) {
                         modalImg.src = img.src;
-                        modalImg.alt = img.alt;
+                        modalImg.alt = img.alt || '';
                         modalTitle.textContent = title || '';
                         modal.classList.add('active');
                         document.body.style.overflow = 'hidden';
@@ -297,13 +228,8 @@ import {organizations} from '../data/Organizations';
             };
 
             closeBtn?.addEventListener('click', closeModal);
-            modal?.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeModal();
-            });
+            modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
         });
     </script>
-
 </main>
