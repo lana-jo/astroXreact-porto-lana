@@ -3,42 +3,74 @@ import { useEffect, useState, useRef } from "react";
 export default function Navbar() {
     const [hidden, setHidden] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [theme, setTheme] = useState("system");
+    const [showThemeMenu, setShowThemeMenu] = useState(false);
     const idleTimeoutRef = useRef(null);
-    
-    
+    const themeMenuRef = useRef(null);
+
     useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth >= 768) {
-                setIsOpen(false);
+        const applyTheme = (targetTheme) => {
+            let actualTheme = targetTheme;
+            if (targetTheme === "system") {
+                actualTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            }
+            document.documentElement.setAttribute("data-theme", actualTheme);
+        };
+
+        const savedTheme = localStorage.getItem("theme") || "system";
+        setTheme(savedTheme);
+        applyTheme(savedTheme);
+
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const handleSystemChange = () => {
+            if (localStorage.getItem("theme") === "system" || !localStorage.getItem("theme")) {
+                applyTheme("system");
             }
         };
 
-        const handleScroll = () => {
-            // Hide navbar when scrolling
-            setHidden(true);
-            
-            // Clear previous timeout
-            if (idleTimeoutRef.current) {
-                clearTimeout(idleTimeoutRef.current);
+        mediaQuery.addEventListener("change", handleSystemChange);
+
+        const handleClickOutside = (event) => {
+            if (themeMenuRef.current && !themeMenuRef.current.contains(event.target)) {
+                setShowThemeMenu(false);
             }
-            
-            // Show navbar after 150ms of no scrolling (idle)
-            idleTimeoutRef.current = setTimeout(() => {
-                setHidden(false);
-            }, 130);
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        const handleResize = () => {
+            if (window.innerWidth >= 768) setIsOpen(false);
+        };
+
+        const handleScroll = () => {
+            setHidden(true);
+            if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
+            idleTimeoutRef.current = setTimeout(() => setHidden(false), 130);
         };
 
         window.addEventListener("resize", handleResize);
         window.addEventListener("scroll", handleScroll);
-        
+
         return () => {
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleResize);
-            if (idleTimeoutRef.current) {
-                clearTimeout(idleTimeoutRef.current);
-            }
+            mediaQuery.removeEventListener("change", handleSystemChange);
+            document.removeEventListener("mousedown", handleClickOutside);
+            if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
         };
     }, []);
+
+    const updateTheme = (newTheme) => {
+        setTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+        
+        let actualTheme = newTheme;
+        if (newTheme === "system") {
+            actualTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", actualTheme);
+        setShowThemeMenu(false);
+    };
 
     const navLinks = [
         { label: "Home", href: "#home" },
@@ -50,14 +82,58 @@ export default function Navbar() {
         { label: "Contact", href: "#contact" },
     ];
 
+    const themeOptions = [
+        { id: "light", label: "Light", icon: "☀️" },
+        { id: "dark", label: "Dark", icon: "🌙" },
+        { id: "system", label: "System", icon: "🌓" },
+    ];
+
     return (
         <nav className={`navbar ${hidden ? "navbar--hidden" : ""}`}>
-
             <a href="#home" className="navbar__logo">
                 Lana Jauhar
             </a>
 
-            {/* Hamburger - Mobile Only (hidden on md+) */}
+            {/* Theme Selector - Placed between Logo and Menu Links */}
+            <div className="theme-select-container" ref={themeMenuRef} style={{ position: 'relative', display: 'flex', alignItems: 'center', marginLeft: 'auto', marginRight: '2rem' }}>
+                <button 
+                    className="theme-toggle-btn" 
+                    onClick={() => setShowThemeMenu(!showThemeMenu)}
+                    aria-label="Select theme"
+                    style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '50%', width: '36px', height: '36px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-primary)' }}
+                >
+                    <span style={{ fontSize: '18px' }}>
+                        {theme === "light" ? "☀️" : theme === "dark" ? "🌙" : "🌓"}
+                    </span>
+                </button>
+                
+                {showThemeMenu && (
+                    <div className="theme-dropdown-menu" style={{ position: 'absolute', top: 'calc(100% + 15px)', right: '0', background: 'var(--card-bg)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '4px', zIndex: '1002', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+                        {themeOptions.map((opt) => (
+                            <button 
+                                key={opt.id}
+                                className={`theme-dropdown-option ${theme === opt.id ? 'active' : ''}`}
+                                onClick={() => updateTheme(opt.id)}
+                                style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', width: '100%', border: 'none', background: 'transparent', color: 'var(--text-secondary)', cursor: 'pointer', borderRadius: '6px', textAlign: 'left', fontWeight: '500' }}
+                            >
+                                <span>{opt.icon}</span>
+                                {opt.label}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {/* Desktop Links */}
+            <ul className="navbar__links">
+                {navLinks.map((item, index) => (
+                    <li key={index}>
+                        <a href={item.href}>{item.label}</a>
+                    </li>
+                ))}
+            </ul>
+
+            {/* Hamburger - Mobile Only */}
             <button
                 className={`navbar__hamburger ${isOpen ? "active" : ""}`}
                 onClick={() => setIsOpen(!isOpen)}
@@ -68,7 +144,7 @@ export default function Navbar() {
                 <span />
             </button>
 
-            {/* Mobile Dropdown with animation */}
+            {/* Mobile Dropdown */}
             <div className={`navbar__mobile ${isOpen ? "open" : ""}`}>
                 {navLinks.map((item, index) => (
                     <a key={index} href={item.href} onClick={() => setIsOpen(false)}>
@@ -76,15 +152,6 @@ export default function Navbar() {
                     </a>
                 ))}
             </div>
-
-            {/* Desktop Links (hidden on mobile) */}
-            <ul className="navbar__links">
-                {navLinks.map((item, index) => (
-                    <li key={index}>
-                        <a href={item.href}>{item.label}</a>
-                    </li>
-                ))}
-            </ul>
 
         </nav>
     );
