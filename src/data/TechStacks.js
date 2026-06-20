@@ -1,4 +1,3 @@
-
 export const techStacks = [
     'Kotlin',
     'Java',
@@ -7,13 +6,13 @@ export const techStacks = [
     'CSS',
     'Laravel',
     'Jetpack Compose',
-    'Kotlin Multi Platform',
-    'astro',
+    'Kotlin Multiplatform',
+    'Astro',
     'Express.js',
     'Flutter',
     'Spring Boot',
-    'firebase',
-    'supabase',
+    'Firebase',
+    'Supabase',
     'PostgreSQL',
     'MySQL',
 ];

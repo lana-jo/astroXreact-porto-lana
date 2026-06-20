@@ -1,5 +1,20 @@
 export const experiences = [
     {
+        period: "December 2025 - Present",
+        role: "Freelance Full-Stack Developer",
+        company: "Latech",
+        descriptions: [
+            "Prospected and communicated with clients to understand project requirements and scope.",
+            "Analyzed client needs and prepared technical proposals including features, timeline, and cost estimation.",
+            "Designed system architecture and UI/UX using Figma before the development process began.",
+            "Developed frontend and backend applications according to client specifications using technologies such as React, Next.js, Node.js, and MySQL/PostgreSQL databases.",
+            "Conducted testing to ensure all features met client expectations.",
+            "Deployed and delivered completed projects to clients along with usage documentation.",
+            "Provided post-delivery maintenance and technical support.",
+            "Managed the entire project lifecycle independently from start to finish (end-to-end)."
+        ]
+    },
+    {
         period: "July 2025 - November 2025",
         role: "Network & Programming Instructor",
         company: "SMK Harapan Mulya",
@@ -12,7 +27,7 @@ export const experiences = [
         ]
     },
     {
-        period: "Maret 2024 - April 2025",
+        period: "March 2024 - April 2025",
         role: "Software Engineering Instructor",
         company: "SMK Texmaco Semarang",
         descriptions: [
@@ -24,7 +39,7 @@ export const experiences = [
         ]
     },
     {
-        period: "Jun 2023 - Dec 2023",
+        period: "June 2023 - Dec 2023",
         role: "Software Developer",
         company: "PT Bangun Nusa Network",
         descriptions: [

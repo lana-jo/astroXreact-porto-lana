@@ -5,9 +5,9 @@ import BookShelf from '../assets/porto/beBS.png';
 import dataDiri from '../assets/porto/mockup-web-data-diri.jpg';
 import perpus from '../assets/porto/mockup-perpusPHP.jpg';
 import pw from '../assets/porto/la-pos-web.png';
-import fNoteApp from '../assets/porto/mockup-flutter-NoteApp.jpg'
-export const portfolios = [
+import fNoteApp from '../assets/porto/mockup-flutter-NoteApp.jpg';
 
+export const portfolios = [
     {
         title: 'PHP Library System',
         detail: 'Developed a web-based library management system with CRUD and authentication.',
@@ -15,8 +15,9 @@ export const portfolios = [
         github: 'https://github.com/lana-jo/PerpusPHP',
         img: perpus,
         live: 'https://lana-jo.latteace.com/'
-    },{
-        title: 'NEXTJS POS',
+    },
+    {
+        title: 'Next.js POS',
         detail: 'Modern Point of Sale application featuring real-time transaction tracking and inventory management.',
         stack: 'Next.js, Tailwind CSS, Supabase, TypeScript',
         img: pw,
@@ -25,15 +26,13 @@ export const portfolios = [
     {
         title: 'Mini Inventory App',
         detail: 'A lightweight inventory management application featuring real-time data synchronization and secure CRUD operations.',
-        stack: 'Kotlin, Jetpack Compose, Supabase, MVVM Architecture, Coroutines, Flow',
+        stack: 'Kotlin, Jetpack Compose, Supabase, MVVM, Coroutines, Flow',
         github: 'https://github.com/lana-jo/jetpack-compose-InventoryMini-supabase',
-        img: iMini,
-        live: '',
-
+        img: iMini
     },
     {
         title: 'Inventory App',
-        detail: 'Comprehensive inventory system featuring advanced search, secure user authentication, and offline data persistence using local database.',
+        detail: 'Comprehensive inventory system featuring advanced search, secure user authentication, and offline data persistence.',
         stack: 'Kotlin, Jetpack Compose, Supabase, Room Database, DataStore, MVVM, WorkManager',
         github: 'https://github.com/lana-jo/jetpackCompose-CRUDSearch-Supabase',
         img: inv
@@ -54,14 +53,14 @@ export const portfolios = [
     },
     {
         title: 'Flutter NoteApp',
-        detail: 'Cross-platform mobile note-taking app offering smooth UI and local data storage, ensuring high user accessibility.',
+        detail: 'Cross-platform mobile note-taking app offering smooth UI and local data storage.',
         stack: 'Dart, Flutter, SQLite, Provider State Management',
         github: 'https://github.com/lana-jo/Flutter-crud-dasar',
         img: fNoteApp
     },
     {
         title: 'PHP Data Diri',
-        detail: 'A personalized web-based digital portfolio and management system featuring dynamic content rendering and database integration.',
+        detail: 'A personalized web-based digital portfolio and management system featuring dynamic content rendering.',
         stack: 'PHP Native, MySQL, HTML5, CSS3, JavaScript',
         github: 'https://github.com/lana-jo/contohCRUDDasarPHPNative',
         img: dataDiri

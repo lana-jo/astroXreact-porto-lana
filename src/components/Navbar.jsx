@@ -87,9 +87,9 @@ export default function Navbar() {
     ];
 
     const themeOptions = [
-        { id: "light", label: "Light", icon: "☀️" },
-        { id: "dark", label: "Dark", icon: "🌙" },
-        { id: "system", label: "System", icon: "🌓" },
+        { id: "light", label: "Light", icon: "☀" },
+        { id: "dark", label: "Dark", icon: "☾" },
+        { id: "system", label: "System", icon: "◎" },
     ];
 
     return (
@@ -98,29 +98,26 @@ export default function Navbar() {
                 Lana Jauhar
             </a>
 
-            {/* Theme Selector - Placed between Logo and Menu Links */}
-            <div className="theme-select-container" ref={themeMenuRef} style={{ position: 'relative', display: 'flex', alignItems: 'center', marginLeft: 'auto', marginRight: '2rem' }}>
+            <div className="theme-select-container" ref={themeMenuRef} style={{ position: 'relative', display: 'flex', alignItems: 'center', marginLeft: 'auto', marginRight: '1.5rem' }}>
                 <button 
                     className="theme-toggle-btn" 
                     onClick={() => setShowThemeMenu(!showThemeMenu)}
                     aria-label="Select theme"
-                    style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '50%', width: '36px', height: '36px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-primary)' }}
+                    style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '8px', width: '32px', height: '32px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: '14px' }}
                 >
-                    <span style={{ fontSize: '18px' }}>
-                        {theme === "light" ? "☀️" : theme === "dark" ? "🌙" : "🌓"}
-                    </span>
+                    {theme === "light" ? "☀" : theme === "dark" ? "☾" : "◎"}
                 </button>
                 
                 {showThemeMenu && (
-                    <div className="theme-dropdown-menu" style={{ position: 'absolute', top: 'calc(100% + 15px)', right: '0', background: 'var(--card-bg)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.5rem', display: 'flex', flexDirection: 'column', gap: '4px', zIndex: '1002', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+                    <div className="theme-dropdown-menu" style={{ position: 'absolute', top: 'calc(100% + 10px)', right: '0', background: 'var(--card-bg)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0.35rem', display: 'flex', flexDirection: 'column', gap: '2px', zIndex: '1002', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}>
                         {themeOptions.map((opt) => (
                             <button 
                                 key={opt.id}
                                 className={`theme-dropdown-option ${theme === opt.id ? 'active' : ''}`}
                                 onClick={() => handleThemeChange(opt.id)}
-                                style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', width: '100%', border: 'none', background: 'transparent', color: 'var(--text-secondary)', cursor: 'pointer', borderRadius: '6px', textAlign: 'left', fontWeight: '500' }}
+                                style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 10px', width: '100%', border: 'none', background: 'transparent', color: 'var(--text-secondary)', cursor: 'pointer', borderRadius: '6px', textAlign: 'left', fontSize: '0.82rem' }}
                             >
-                                <span>{opt.icon}</span>
+                                <span style={{ fontSize: '13px' }}>{opt.icon}</span>
                                 {opt.label}
                             </button>
                         ))}

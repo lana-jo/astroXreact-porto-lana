@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar.jsx';
 import { Image } from 'astro:assets';
 import { profile } from '../data/Profile';
 import { experiences } from '../data/Experiences';
-import { portfolios } from '../data/Portopolio';
+import { portfolios } from '../data/Portfolio';
 import { techStacks } from '../data/TechStacks';
 import { certificates } from '../data/Certificates';
 import { organizations } from '../data/Organizations';
@@ -13,7 +13,7 @@ import { organizations } from '../data/Organizations';
 <main class="portofolio">
     <Navbar client:load />
 
-    <header id="home" class="fade-up hero card reveal delay-1">
+    <header id="home" class="hero card reveal">
         <div>
             <h1>{profile.title}</h1>
             <p class="description">{profile.description}</p>
@@ -32,7 +32,7 @@ import { organizations } from '../data/Organizations';
         <Image class="profile-photo" src={profile.photo} alt={profile.name} />
     </header>
 
-    <section id="organization" class="fade-up card reveal delay-2">
+    <section id="organization" class="card reveal">
         <h2>Organization</h2>
         <div class="timeline">
             {organizations.map((item) => (
@@ -50,7 +50,7 @@ import { organizations } from '../data/Organizations';
         </div>
     </section>
 
-    <section id="experience" class="fade-up card reveal delay-2">
+    <section id="experience" class="card reveal">
         <h2>Experience</h2>
         <div class="timeline">
             {experiences.map((item) => (
@@ -68,7 +68,7 @@ import { organizations } from '../data/Organizations';
         </div>
     </section>
 
-    <section id="techstack" class="fade-up card reveal delay-2">
+    <section id="techstack" class="card reveal">
         <h2>Tech Stack</h2>
         <div class="chips">
             {techStacks.map((stack) => (
@@ -79,7 +79,7 @@ import { organizations } from '../data/Organizations';
         </div>
     </section>
 
-    <section id="project" class="fade-up card reveal delay-4">
+    <section id="project" class="card reveal">
         <div class="porto-header">
             <h2>Project</h2>
             <a href="https://github.com/lana-jo" target="_blank" class="view-all-btn">
@@ -127,7 +127,7 @@ import { organizations } from '../data/Organizations';
         </div>
     </section>
 
-    <section id="certif" class="card reveal delay-2">
+    <section id="certif" class="card reveal">
         <h2>Certificate</h2>
         <div>
             {certificates.map((item) => (
@@ -149,10 +149,9 @@ import { organizations } from '../data/Organizations';
         </div>
     </section>
 
-    <section id="contact" class="fade-up card reveal delay-4">
-        <div class="flex flex-col space-y-2">
-            <h1>Connect with me</h1>
-            <div class="contact-buttons">
+    <section id="contact" class="card reveal">
+        <h2>Connect with me</h2>
+        <div class="contact-buttons">
                 <a href="https://t.me/j0_here" target="_blank" rel="noopener" class="contact-icon-btn" title="Telegram">
                     <img src="/telegram.svg" alt="Telegram" />
                 </a>
@@ -166,7 +165,6 @@ import { organizations } from '../data/Organizations';
                     <img src="/mail.svg" alt="Email" />
                 </a>
             </div>
-        </div>
     </section>
 
     <div id="lightbox-modal" class="lightbox-modal">
@@ -183,21 +181,23 @@ import { organizations } from '../data/Organizations';
 
         gsap.registerPlugin(ScrollTrigger);
 
-        const reveals = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.2 });
-
-        reveals.forEach((eL) => observer.observe(eL));
-
-        document.addEventListener("astro:page-load", () => {
-            gsap.utils.toArray<HTMLElement>(".fade-up").forEach((el) => {
-                gsap.fromTo(el, { opacity: 0, y: 100 }, {
-                    opacity: 1, y: 0, duration: 0.8, ease: "power3.out",
-                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" }
-                });
+        function initScrollAnimations() {
+            gsap.utils.toArray<HTMLElement>(".reveal").forEach((el, i) => {
+                gsap.fromTo(el,
+                    { opacity: 0, y: 20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 90%",
+                            end: "top 60%",
+                            toggleActions: "play none play reverse"
+                        }
+                    }
+                );
             });
 
             const modal = document.getElementById('lightbox-modal');
@@ -230,6 +230,9 @@ import { organizations } from '../data/Organizations';
             closeBtn?.addEventListener('click', closeModal);
             modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
             document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-        });
+        }
+
+        initScrollAnimations();
+        document.addEventListener("astro:page-load", initScrollAnimations);
     </script>
 </main>

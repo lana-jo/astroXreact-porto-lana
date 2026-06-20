@@ -1,6 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-// import Navbar from "../components/Navbar";
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -12,91 +12,82 @@ const {
 } = Astro.props;
 ---
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8" />
-    <meta property="og:image"
-    content="img.png">
-    <meta property="og:image:type" content="image/png">
-	<meta name="viewport" content="width=device-width" />
-	<link rel="icon" type="image/svg+xml" href="/profile.svg" />
-	<link rel="icon" href="/lana.svg" />
-	<meta name="generator" content={Astro.generator} />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="description" content={description} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:image" content="img.png" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="generator" content={Astro.generator} />
+	<link rel="icon" type="image/svg+xml" href="/lana.svg" />
 	<title>{title}</title>
 </head>
-<body><!--
-<div class="container">
-	<section id="home" data-theme="dark">...</section>
-	<section id="about" data-theme="light">...</section>
-	<section id="projects" data-theme="dark">...</section>
-	<section id="github" data-theme="light">...</section>
-	<section id="contact" data-theme="dark">...</section>
-</div> -->
+<body>
+	<slot />
 
-<div class="bg-blur bg-blur-one"></div>
-<div class="bg-blur bg-blur-two"></div>
+	<footer class="footer">
+		<div class="footer-content">
+			<p class="footer-copyright">&copy; <span id="year"></span> Lana Jauhar. All rights reserved.</p>
+			<div class="footer-social">
+				<a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub">
+					<img src="/github.svg" alt="GitHub" />
+				</a>
+				<a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+					<img src="/linkedin.svg" alt="LinkedIn" />
+				</a>
+				<a href="https://t.me/j0_here" target="_blank" rel="noopener" class="social-icon-btn" title="Telegram">
+					<img src="/telegram.svg" alt="Telegram" />
+				</a>
+				<a href="mailto:lanajauhar06@gmail.com" class="social-icon-btn" title="Email Me">
+					<img src="/mail.svg" alt="Email" />
+				</a>
+			</div>
+		</div>
+	</footer>
 
-<slot />
-<ViewTransitions />
+	<ViewTransitions />
 </body>
- <footer class="footer">
-        <div class="footer-content">
-            <p class="footer-copyright">&copy; <span id="year"></span> Lana Jauhar. All rights reserved.</p>
-            <div class="footer-social">
-                <a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub">
-                    <img src="/github.svg" alt="GitHub"/>
-                </a>
-                <a href="https://www.linkedin.com/in/lana-jauhar-75604317a/" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
-                    <img src="/linkedin.svg" alt="LinkedIn"/>
-                </a>
-                <a href="https://t.me/j0_here" target="_blank" rel="noopener" class="social-icon-btn" title="Telegram">
-                    <img src="/telegram.svg" alt="Telegram"/>
-                </a>
-                <a href="mailto:lanajauhar06@gmail.com" class="social-icon-btn" title="Email Me">
-                    <img src="/mail.svg" alt="Email"/>
-                </a>
-            </div>
-        </div>
-    </footer>
 </html>
 
-<style>
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 	:root {
-		font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-		color-scheme: dark;
-		
-		/* Light theme variables */
-		--bg-primary: #ffffff;
-		--bg-secondary: #f8fafc;
+		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+		color-scheme: light;
+
+		--bg-primary: #fafafa;
+		--bg-secondary: #f0f0f0;
 		--card-bg: #ffffff;
-		--text-primary: #0f172a;
-		--text-secondary: #475569;
-		--border-color: #e2e8f0;
-		--accent: #3b82f6;
+		--text-primary: #111111;
+		--text-secondary: #666666;
+		--border-color: #e5e5e5;
+		--accent: #2563eb;
 	}
 
-	/* Dark theme */
 	[data-theme="dark"] {
-		--bg-primary: #070b16;
-		--bg-secondary: #0f172a;
-		--card-bg: #1e293b;
-		--text-primary: #e8eeff;
-		--text-secondary: #94a3b8;
-		--border-color: #334155;
+		color-scheme: dark;
+		--bg-primary: #0a0a0a;
+		--bg-secondary: #171717;
+		--card-bg: #141414;
+		--text-primary: #ededed;
+		--text-secondary: #888888;
+		--border-color: #262626;
 		--accent: #60a5fa;
 	}
 
-	/* Light theme */
 	[data-theme="light"] {
-		--bg-primary: #ffffff;
-		--bg-secondary: #f8fafc;
+		color-scheme: light;
+		--bg-primary: #fafafa;
+		--bg-secondary: #f0f0f0;
 		--card-bg: #ffffff;
-		--text-primary: #0f172a;
-		--text-secondary: #475569;
-		--border-color: #e2e8f0;
-		--accent: #3b82f6;
+		--text-primary: #111111;
+		--text-secondary: #666666;
+		--border-color: #e5e5e5;
+		--accent: #2563eb;
 	}
 
 	* {
@@ -110,14 +101,33 @@ const {
 		min-height: 100%;
 		background: var(--bg-primary);
 		color: var(--text-primary);
-		transition: background-color 0.3s ease, color 0.3s ease;
 	}
 
-	/* Theme dropdown styles */
+	h2 {
+		font-size: 1rem;
+		font-weight: 600;
+		margin: 0 0 0.5rem;
+		letter-spacing: -0.01em;
+	}
+
+	h3 {
+		font-size: 0.9rem;
+		font-weight: 600;
+		margin: 0 0 0.25rem;
+	}
+
+	ul {
+		margin: 0.25rem 0;
+	}
+
+	li {
+		font-size: 0.85rem;
+		line-height: 1.6;
+	}
+
 	.theme-toggle-btn:hover {
 		background: var(--bg-secondary) !important;
-		transform: scale(1.05);
-		transition: all 0.2s ease;
+		transition: background 0.2s ease;
 	}
 
 	.theme-dropdown-option:hover {
@@ -126,29 +136,22 @@ const {
 	}
 
 	.theme-dropdown-option.active {
-		background: var(--accent) !important;
-		color: white !important;
-	}
-
-	/* Smooth transitions for theme changes */
-	* {
-		transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+		background: var(--text-primary) !important;
+		color: var(--bg-primary) !important;
 	}
 </style>
+
 <script>
 	import { gsap } from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    const yearElement = document.getElementById('year');
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear().toString();
-    }
+	const yearElement = document.getElementById('year');
+	if (yearElement) {
+		yearElement.textContent = new Date().getFullYear().toString();
+	}
 
-
-	// Register once
 	gsap.registerPlugin(ScrollTrigger);
 
-	// Fix ScrollTrigger after Astro View Transitions
 	const refreshScrollTrigger = () => {
 		ScrollTrigger.refresh();
 	};

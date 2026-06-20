@@ -1,21 +1,21 @@
 export const organizations = [
     {
         period: "July 2020 - November 2021",
-        role: "Hubungan Masyarakat",
+        role: "Public Relations",
         company: "Himpunan Mahasiswa Rekayasa Perangkat Lunak",
         descriptions: [
-            "providing a space for discussion about software engineering.",
-            "talk show for student personal development.",
+            "Provided a space for discussion about software engineering.",
+            "Organized talk shows for student personal development."
         ]
     },
     {
         period: "July 2019 - July 2021",
-        role: "Hubungan Masyarakat",
+        role: "Public Relations",
         company: "Badan Eksekutif Mahasiswa",
         descriptions: [
-            "cleaning up the campus surroundings and the surrounding environment.",
-            "talk show for student personal development .",
-            "Responsible for the running of the “ngaji bareng” event, which is a Quran recitation and religious lecture event. ",
+            "Organized campus cleaning and environmental activities.",
+            "Organized talk shows for student personal development.",
+            "Managed the 'Ngaji Bareng' event, a Quran recitation and religious lecture program."
         ]
-    },
-]
+    }
+];
