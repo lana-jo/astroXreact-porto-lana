@@ -108,6 +108,7 @@
 	const closeModal = () => {
 		if (modal) {
 			modal.classList.remove('active');
+			if (modalImg) modalImg.src = '';
 			document.body.style.overflow = '';
 			if (lastFocusedElement) {
 				lastFocusedElement.focus();
