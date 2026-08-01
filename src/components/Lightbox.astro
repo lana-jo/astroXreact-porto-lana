@@ -52,6 +52,7 @@
 	};
 
 	const renderImage = () => {
+		if (!modalImg || !modalCounter || !prevBtn || !nextBtn) return;
 		const src = gallery[galleryIndex];
 		modalImg.src = src;
 		modalImg.alt = galleryTitle || '';
