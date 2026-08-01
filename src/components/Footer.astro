@@ -1,0 +1,21 @@
+---
+import { heroSocials } from '../data/social';
+---
+
+<footer class="footer">
+	<div class="footer-content">
+		<p class="footer-copyright">&copy; <span id="year"></span> Lana Jauhar. All rights reserved.</p>
+		<div class="footer-social">
+			{heroSocials.map((social) => (
+				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" title={social.label}>
+					<img src={social.icon} alt={social.label} />
+				</a>
+			))}
+		</div>
+	</div>
+</footer>
+
+<script>
+	const year = document.getElementById('year');
+	if (year) year.textContent = new Date().getFullYear().toString();
+</script>

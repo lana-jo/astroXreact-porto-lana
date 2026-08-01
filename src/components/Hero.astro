@@ -1,0 +1,20 @@
+---
+import { Image } from 'astro:assets';
+import { profile } from '../data/profile';
+import { heroSocials } from '../data/social';
+---
+
+<header id="home" class="fade-up hero card reveal delay-1">
+	<div>
+		<h1>{profile.title}</h1>
+		<p class="description">{profile.description}</p>
+		<div class="social-buttons">
+			{heroSocials.map((social) => (
+				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" title={social.label}>
+					<img src={social.icon} alt={social.label} />
+				</a>
+			))}
+		</div>
+	</div>
+	<Image class="profile-photo" src={profile.photo} alt={profile.name} />
+</header>

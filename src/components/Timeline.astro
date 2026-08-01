@@ -1,0 +1,28 @@
+---
+import type { TimelineEntry } from '../data/types';
+
+interface Props {
+	title: string;
+	entries: TimelineEntry[];
+}
+
+const { title, entries } = Astro.props;
+---
+
+<section class="fade-up card reveal delay-2">
+	<h2>{title}</h2>
+	<div class="timeline">
+		{entries.map((item) => (
+			<div class="timeline-item">
+				<div class="timeline-content">
+					<h3>{item.role}</h3>
+					<small>{item.period}</small>
+					<h4>{item.company}</h4>
+					<ul>
+						{item.descriptions.map((desc) => <li>{desc}</li>)}
+					</ul>
+				</div>
+			</div>
+		))}
+	</div>
+</section>

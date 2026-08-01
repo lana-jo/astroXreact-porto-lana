@@ -1,0 +1,14 @@
+---
+import { techStacks } from '../data/techStacks';
+---
+
+<section id="techstack" class="fade-up card reveal delay-2">
+	<h2>Tech Stack</h2>
+	<div class="chips">
+		{techStacks.map((stack) => (
+			<a href="https://github.com/lana-jo" class="chip">
+				{stack}
+			</a>
+		))}
+	</div>
+</section>
