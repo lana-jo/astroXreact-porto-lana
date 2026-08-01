@@ -1220,4 +1220,18 @@ section p {
 	}
 }
 
+/* Utility classes */
+.p-6 { padding: 1.5rem; }
+.pt-0 { padding-top: 0; }
+.space-y-4 > * + * { margin-top: 1rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.gap-2 { gap: 0.5rem; }
+.text-muted-foreground { color: var(--text-secondary); }
+.hover\:text-foreground:hover { color: var(--text-primary); }
+.transition-colors { transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; }
+
+
 
