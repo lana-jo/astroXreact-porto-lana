@@ -1,5 +1,5 @@
 ---
-import { heroSocials } from '../data/social';
+import { contactSocials } from '../data/social';
 
 const year = new Date().getFullYear();
 ---
@@ -7,9 +7,9 @@ const year = new Date().getFullYear();
 <footer class="footer">
 	<div class="footer-content">
 		<p class="footer-copyright">&copy; {year} Lana Jauhar. All rights reserved.</p>
-		<div class="footer-social">
-			{heroSocials.map((social) => (
-				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" aria-label={social.label}>
+		<div class="contact-buttons">
+			{contactSocials.map((social) => (
+				<a href={social.href} target="_blank" rel="noopener" class="contact-icon-btn" aria-label={social.label} title={social.label}>
 					<img src={social.icon} alt="" aria-hidden="true" />
 				</a>
 			))}
