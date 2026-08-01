@@ -23,10 +23,10 @@ function resolveTheme(theme: Theme): 'light' | 'dark' {
 
 export default function Navbar() {
 	const [hidden, setHidden] = useState(false);
+	const [scrolled, setScrolled] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [theme, setTheme] = useState<Theme>('system');
 	const [showThemeMenu, setShowThemeMenu] = useState(false);
-	const idleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 	const themeMenuRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -55,25 +55,45 @@ export default function Navbar() {
 			if (window.innerWidth >= 768) setIsOpen(false);
 		};
 
-		const handleScroll = () => {
-			setHidden(true);
-			if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
-			idleTimeoutRef.current = setTimeout(() => setHidden(false), 130);
-		};
-
 		mediaQuery.addEventListener('change', handleSystemChange);
 		document.addEventListener('mousedown', handleClickOutside);
 		window.addEventListener('resize', handleResize);
-		window.addEventListener('scroll', handleScroll);
 
 		return () => {
 			mediaQuery.removeEventListener('change', handleSystemChange);
 			document.removeEventListener('mousedown', handleClickOutside);
 			window.removeEventListener('resize', handleResize);
-			window.removeEventListener('scroll', handleScroll);
-			if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
 		};
 	}, []);
+
+	useEffect(() => {
+		let idleTimer: ReturnType<typeof setTimeout> | undefined;
+
+		const handleScroll = () => {
+			const currentScrollY = window.scrollY;
+			setScrolled(currentScrollY > 10);
+
+			if (isOpen) {
+				setHidden(false);
+				return;
+			}
+
+			if (idleTimer) clearTimeout(idleTimer);
+
+			if (currentScrollY > 100) {
+				setHidden(true);
+				idleTimer = setTimeout(() => setHidden(false), 300);
+			} else {
+				setHidden(false);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+			if (idleTimer) clearTimeout(idleTimer);
+		};
+	}, [isOpen]);
 
 	const handleThemeChange = (newTheme: Theme) => {
 		setTheme(newTheme);
@@ -83,7 +103,7 @@ export default function Navbar() {
 	};
 
 	return (
-		<nav className={`navbar ${hidden ? 'navbar--hidden' : ''}`}>
+		<nav className={`navbar ${hidden ? 'navbar--hidden' : ''} ${scrolled ? 'navbar--scrolled' : ''}`}>
 			<a href="#home" className="navbar__logo">
 				Lana Jauhar
 			</a>
@@ -145,3 +165,4 @@ export default function Navbar() {
 		</nav>
 	);
 }
+

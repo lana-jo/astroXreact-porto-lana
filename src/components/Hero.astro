@@ -5,28 +5,20 @@ import { heroSocials } from '../data/social';
 ---
 
 <header id="home" class="fade-up hero card reveal delay-1">
-	<div class="hero-content">
-		<div class="status-badge">
-			<span class="status-dot"></span>
-			<span>Available for New Opportunities</span>
-		</div>
-		<h1 class="hero-title">{profile.name}</h1>
-		<h2 class="hero-subtitle">{profile.title}</h2>
+	<div>
+		<h1>{profile.title}</h1>
 		<p class="description">{profile.description}</p>
 		<div class="hero-actions">
 			<a href="#project" class="porto-btn primary-btn">View Projects</a>
-			<a href="#contact" class="porto-btn secondary-btn">Contact Me</a>
+			<a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="porto-btn secondary-btn">GitHub</a>
 		</div>
 		<div class="social-buttons">
 			{heroSocials.map((social) => (
-				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" aria-label={social.label} title={social.label}>
-					<img src={social.icon} alt="" aria-hidden="true" />
+				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" title={social.label} aria-label={social.label}>
+					<img src={social.icon} alt={social.label} loading="lazy" />
 				</a>
 			))}
 		</div>
 	</div>
-	<div class="profile-photo-container">
-		<Image class="profile-photo" src={profile.photo} alt={profile.name} loading="eager" />
-	</div>
+	<Image class="profile-photo" src={profile.photo} alt={profile.name} width={461} height={661} loading="lazy" />
 </header>
-

@@ -69,6 +69,7 @@
 
 html {
 	scroll-behavior: smooth;
+	scroll-padding-top: 84px;
 }
 
 html,
@@ -165,11 +166,12 @@ h1, h2, h3, h4, h5, h6 {
 .portofolio {
 	position: relative;
 	z-index: 1;
-	max-width: 1040px;
+	width: 100%;
+	max-width: 1600px;
 	margin: 0 auto;
-	padding: 2rem 1.25rem 4rem;
+	padding: 2rem 1.5rem 4rem;
 	display: grid;
-	gap: 1.5rem;
+	gap: 2rem;
 }
 
 .porto-header {
@@ -224,71 +226,30 @@ section p {
 	display: grid;
 	grid-template-columns: 1.25fr 0.75fr;
 	align-items: center;
-	gap: 2rem;
+	gap: 2.5rem;
 }
 
-.hero-content {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
-.status-badge {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.5rem;
-	padding: 0.35rem 0.85rem;
-	border-radius: 9999px;
-	background: var(--status-bg);
-	color: var(--status-text);
-	font-size: 0.825rem;
-	font-weight: 600;
-	margin-bottom: 1rem;
-	border: 1px solid var(--status-dot);
-}
-
-.status-dot {
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: var(--status-dot);
-	display: inline-block;
-}
-
-.hero-title {
+.hero h1 {
 	font-size: clamp(2rem, 5vw, 3rem);
 	font-weight: 800;
 	letter-spacing: -0.03em;
-	margin: 0 0 0.25rem 0;
+	margin: 0 0 1rem 0;
 	color: var(--text-primary);
 	line-height: 1.1;
-}
-
-.hero-subtitle {
-	font-size: 1.25rem;
-	font-weight: 600;
-	color: var(--accent);
-	margin: 0 0 1rem 0;
 }
 
 .hero-actions {
 	display: flex;
 	gap: 0.75rem;
-	margin-top: 1.25rem;
+	margin-top: 1.5rem;
 	flex-wrap: wrap;
-}
-
-.profile-photo-container {
-	width: 100%;
-	max-width: 260px;
-	justify-self: end;
 }
 
 .profile-photo {
 	width: 100%;
+	max-width: 260px;
 	height: auto;
-	aspect-ratio: 1 / 1;
-	object-fit: cover;
+	justify-self: end;
 	border-radius: 12px;
 	border: 1px solid var(--border-color);
 	background: var(--bg-secondary);
@@ -411,7 +372,7 @@ section p {
    ============================================ */
 .projects {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
 	gap: 1.25rem;
 }
 
@@ -554,7 +515,7 @@ section p {
 .timeline-item::before {
 	content: '';
 	position: absolute;
-	left: -13px;
+	left: -19px;
 	top: 8px;
 	width: 10px;
 	height: 10px;
@@ -624,7 +585,7 @@ section p {
    ============================================ */
 .certificates-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
 	gap: 1.25rem;
 	margin-top: 0.5rem;
 }
@@ -725,6 +686,7 @@ section p {
 	font-weight: 700;
 	color: var(--accent);
 	text-decoration: none;
+	overflow-wrap: anywhere;
 }
 
 .email-link:hover {
@@ -738,6 +700,10 @@ section p {
 	align-items: center;
 	justify-content: flex-start;
 	flex-wrap: wrap;
+}
+
+.social-buttons {
+	margin-top: 1.5rem;
 }
 
 .social-icon-btn,
@@ -799,6 +765,13 @@ section p {
 
 .navbar--hidden {
 	transform: translateY(-100%);
+}
+
+.navbar--scrolled {
+	background: color-mix(in srgb, var(--card-bg) 72%, transparent);
+	backdrop-filter: blur(14px) saturate(160%);
+	-webkit-backdrop-filter: blur(14px) saturate(160%);
+	border-bottom-color: color-mix(in srgb, var(--border-color) 60%, transparent);
 }
 
 .navbar__logo {
@@ -1000,8 +973,9 @@ section p {
 }
 
 .footer-content {
-	max-width: 1040px;
+	max-width: 1600px;
 	margin: 0 auto;
+	padding: 0 1.5rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -1135,15 +1109,34 @@ section p {
 		grid-template-columns: 1fr;
 	}
 
-	.profile-photo-container {
+	.profile-photo {
 		justify-self: start;
 		max-width: 220px;
 	}
 }
 
 @media (max-width: 768px) {
+	.portofolio {
+		padding: 1.5rem 1.25rem 3rem;
+		gap: 1.5rem;
+	}
+
+	.card {
+		padding: 1.5rem;
+	}
+
 	.hero {
-		text-align: left;
+		text-align: center;
+		gap: 2rem;
+	}
+
+	.profile-photo {
+		justify-self: center;
+	}
+
+	.hero .social-buttons,
+	.hero .hero-actions {
+		justify-content: center;
 	}
 
 	.navbar__links {
@@ -1163,6 +1156,7 @@ section p {
 @media (max-width: 480px) {
 	.portofolio {
 		padding: 1rem 0.75rem 2rem;
+		gap: 1.5rem;
 	}
 
 	.card {
@@ -1170,16 +1164,39 @@ section p {
 		border-radius: 8px;
 	}
 
-	.hero-title {
+	.porto-header h2 {
+		font-size: 1.35rem;
+	}
+
+	.hero h1 {
 		font-size: 2rem;
 	}
 
-	.profile-photo-container {
+	.profile-photo {
 		max-width: 180px;
 	}
 
-	.projects {
-		grid-template-columns: 1fr;
+	.projects,
+	.certificates-grid {
+		gap: 1rem;
+	}
+
+	.project-item,
+	.certificate-item {
+		padding: 1rem;
+	}
+
+	.project-image {
+		height: 140px;
+	}
+
+	.timeline-content {
+		padding: 1rem;
+	}
+
+	.period-badge {
+		font-size: 0.7rem;
+		padding: 0.2rem 0.5rem;
 	}
 
 	.timeline {
@@ -1188,6 +1205,18 @@ section p {
 
 	.timeline-item {
 		padding-left: 1rem;
+	}
+
+	.timeline-item::before {
+		left: -15px;
+	}
+
+	.email-box {
+		padding: 0.85rem 1rem;
+	}
+
+	.footer {
+		padding: 1.5rem 1rem;
 	}
 }
 
