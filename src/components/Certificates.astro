@@ -3,18 +3,36 @@ import { Image } from 'astro:assets';
 import { certificates } from '../data/certificates';
 ---
 
-<section id="certif" class="card reveal delay-2">
-	<h2>Certificate</h2>
-	<div>
-		{certificates.map((item) => (
-			<div class="certificate-item">
-				<h3>{item.name}</h3>
-				{(Array.isArray(item.photo) ? item.photo : [item.photo]).map((img) => (
-					<div class="cert-image-wrapper" data-title={item.name}>
-						<Image src={img} alt={item.name} />
+<section id="certif" class="fade-up card reveal delay-3">
+	<div class="porto-header">
+		<div>
+			<h2>Certificates & Licenses</h2>
+			<span class="section-subtitle">{certificates.length} Verified Certificates</span>
+		</div>
+	</div>
+	<div class="certificates-grid">
+		{certificates.map((item) => {
+			const photos = Array.isArray(item.photo) ? item.photo : [item.photo];
+			return (
+				<article class="certificate-item">
+					<div class="cert-header">
+						<h3>{item.name}</h3>
+						{photos.length > 1 && <span class="page-badge">{photos.length} Pages</span>}
 					</div>
-				))}
-			</div>
-		))}
+					<div class="cert-images">
+						{photos.map((img) => (
+							<div class="cert-image-wrapper" data-title={item.name}>
+								<Image src={img} alt={item.name} class="cert-image" />
+								<div class="image-overlay">
+									<span class="zoom-icon">🔍 View Certificate</span>
+								</div>
+							</div>
+						))}
+					</div>
+				</article>
+			);
+		})}
 	</div>
 </section>
+
+

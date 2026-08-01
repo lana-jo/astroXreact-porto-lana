@@ -5,16 +5,28 @@ import { heroSocials } from '../data/social';
 ---
 
 <header id="home" class="fade-up hero card reveal delay-1">
-	<div>
-		<h1>{profile.title}</h1>
+	<div class="hero-content">
+		<div class="status-badge">
+			<span class="status-dot"></span>
+			<span>Available for New Opportunities</span>
+		</div>
+		<h1 class="hero-title">{profile.name}</h1>
+		<h2 class="hero-subtitle">{profile.title}</h2>
 		<p class="description">{profile.description}</p>
+		<div class="hero-actions">
+			<a href="#project" class="porto-btn primary-btn">View Projects</a>
+			<a href="#contact" class="porto-btn secondary-btn">Contact Me</a>
+		</div>
 		<div class="social-buttons">
 			{heroSocials.map((social) => (
-				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" aria-label={social.label}>
+				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" aria-label={social.label} title={social.label}>
 					<img src={social.icon} alt="" aria-hidden="true" />
 				</a>
 			))}
 		</div>
 	</div>
-	<Image class="profile-photo" src={profile.photo} alt={profile.name} />
+	<div class="profile-photo-container">
+		<Image class="profile-photo" src={profile.photo} alt={profile.name} loading="eager" />
+	</div>
 </header>
+

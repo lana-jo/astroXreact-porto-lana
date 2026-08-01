@@ -4,13 +4,23 @@ import { contactSocials } from '../data/social';
 
 <section id="contact" class="fade-up card reveal delay-4">
 	<div class="contact-section-inner">
-		<h2>Connect with me</h2>
+		<div class="porto-header">
+			<div>
+				<h2>Connect with Me</h2>
+				<span class="section-subtitle">Let's discuss projects, collaborations, or inquiries</span>
+			</div>
+		</div>
+		<div class="email-box">
+			<span class="email-label">Direct Email</span>
+			<a href="mailto:lanajauhar06@gmail.com" class="email-link">lanajauhar06@gmail.com ↗</a>
+		</div>
 		<div class="contact-buttons">
 			{contactSocials.map((social) => (
-				<a href={social.href} target="_blank" rel="noopener" class="contact-icon-btn" aria-label={social.label}>
+				<a href={social.href} target="_blank" rel="noopener" class="contact-icon-btn" aria-label={social.label} title={social.label}>
 					<img src={social.icon} alt="" aria-hidden="true" />
 				</a>
 			))}
 		</div>
 	</div>
 </section>
+
