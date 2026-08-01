@@ -13,26 +13,31 @@ import { certificates } from '../data/certificates';
 	<div class="certificates-grid">
 		{certificates.map((item) => {
 			const photos = Array.isArray(item.photo) ? item.photo : [item.photo];
+			const gallery = photos.length > 1 ? JSON.stringify(photos.map((p) => p.src)) : undefined;
 			return (
 				<article class="certificate-item">
 					<div class="cert-header">
 						<h3>{item.name}</h3>
-						{photos.length > 1 && <span class="page-badge">{photos.length} Pages</span>}
+						{photos.length > 1 && <span class="page-badge">{photos.length} Photos</span>}
 					</div>
-					<div class="cert-images">
-						{photos.map((img) => (
-							<div class="cert-image-wrapper" data-title={item.name}>
-								<Image src={img} alt={item.name} class="cert-image" />
-								<div class="image-overlay">
-									<span class="zoom-icon">🔍 View Certificate</span>
-								</div>
-							</div>
-						))}
+					<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
+						<Image src={photos[0]} alt={item.name} class="cert-image" />
+						<div class="image-overlay">
+							<span class="zoom-icon">🔍 View Certificate</span>
+						</div>
 					</div>
+					{photos.length > 1 && (
+						<button
+							class="gallery-btn"
+							type="button"
+							data-title={item.name}
+							data-gallery={gallery}
+						>
+							View All {photos.length} Photos
+						</button>
+					)}
 				</article>
 			);
 		})}
 	</div>
 </section>
-
-
