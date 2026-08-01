@@ -12,12 +12,12 @@ import { organizations } from '../data/organizations';
 import { experiences } from '../data/experiences';
 ---
 
-<main class="portofolio">
+<main id="main-content" class="portofolio">
 	<Navbar client:load />
 
 	<Hero />
-	<Timeline title="Organization" entries={organizations} />
-	<Timeline title="Experience" entries={experiences} />
+	<Timeline title="Organization" id="organization" entries={organizations} />
+	<Timeline title="Experience" id="experience" entries={experiences} />
 	<TechStack />
 	<Projects />
 	<Certificates />

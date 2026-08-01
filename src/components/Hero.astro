@@ -10,8 +10,8 @@ import { heroSocials } from '../data/social';
 		<p class="description">{profile.description}</p>
 		<div class="social-buttons">
 			{heroSocials.map((social) => (
-				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" title={social.label}>
-					<img src={social.icon} alt={social.label} />
+				<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" aria-label={social.label}>
+					<img src={social.icon} alt="" aria-hidden="true" />
 				</a>
 			))}
 		</div>

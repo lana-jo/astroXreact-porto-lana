@@ -3,12 +3,12 @@ import { contactSocials } from '../data/social';
 ---
 
 <section id="contact" class="fade-up card reveal delay-4">
-	<div class="flex flex-col space-y-2">
-		<h1>Connect with me</h1>
+	<div class="contact-section-inner">
+		<h2>Connect with me</h2>
 		<div class="contact-buttons">
 			{contactSocials.map((social) => (
-				<a href={social.href} target="_blank" rel="noopener" class="contact-icon-btn" title={social.label}>
-					<img src={social.icon} alt={social.label} />
+				<a href={social.href} target="_blank" rel="noopener" class="contact-icon-btn" aria-label={social.label}>
+					<img src={social.icon} alt="" aria-hidden="true" />
 				</a>
 			))}
 		</div>

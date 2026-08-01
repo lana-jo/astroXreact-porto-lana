@@ -1,7 +1,7 @@
 ---
 // Lightbox markup + behavior for project and certificate images.
 ---
-<div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Image preview">
+<div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Image preview" tabindex="-1">
 	<button class="lightbox-close" aria-label="Close">&times;</button>
 	<div class="lightbox-content">
 		<img id="lightbox-img" src="" alt="" />
@@ -14,16 +14,43 @@
 	const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
 	const modalTitle = document.getElementById('lightbox-title');
 	const closeBtn = document.querySelector('.lightbox-close');
+	let lastFocusedElement: HTMLElement | null = null;
+
+	const getFocusableElements = () => {
+		if (!modal) return [];
+		return modal.querySelectorAll<HTMLElement>('button, [tabindex]:not([tabindex="-1"])');
+	};
+
+	const trapFocus = (e: KeyboardEvent) => {
+		if (e.key !== 'Tab' || !modal?.classList.contains('active')) return;
+		const focusable = getFocusableElements();
+		if (focusable.length === 0) return;
+		const first = focusable[0];
+		const last = focusable[focusable.length - 1];
+		if (e.shiftKey) {
+			if (document.activeElement === first) {
+				e.preventDefault();
+				last.focus();
+			}
+		} else {
+			if (document.activeElement === last) {
+				e.preventDefault();
+				first.focus();
+			}
+		}
+	};
 
 	const openModal = (wrapper: HTMLElement) => {
 		const img = wrapper.querySelector('img');
 		const title = wrapper.getAttribute('data-title');
 		if (img && modal && modalImg && modalTitle) {
+			lastFocusedElement = document.activeElement as HTMLElement;
 			modalImg.src = img.src;
 			modalImg.alt = img.alt || '';
 			modalTitle.textContent = title || '';
 			modal.classList.add('active');
 			document.body.style.overflow = 'hidden';
+			modal.focus();
 		}
 	};
 
@@ -31,6 +58,10 @@
 		if (modal) {
 			modal.classList.remove('active');
 			document.body.style.overflow = '';
+			if (lastFocusedElement) {
+				lastFocusedElement.focus();
+				lastFocusedElement = null;
+			}
 		}
 	};
 
@@ -46,7 +77,10 @@
 
 	closeBtn?.addEventListener('click', closeModal);
 	modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-	document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeModal();
+		trapFocus(e);
+	});
 
 	init();
 	document.addEventListener('astro:page-load', init);

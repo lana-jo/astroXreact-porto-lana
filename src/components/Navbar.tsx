@@ -99,12 +99,13 @@ export default function Navbar() {
 				</button>
 
 				{showThemeMenu && (
-					<div className="theme-dropdown-menu">
+					<div className="theme-dropdown-menu" role="menu" aria-label="Theme options">
 						{themeOptions.map((opt) => (
 							<button
 								key={opt.id}
 								className={`theme-dropdown-option ${theme === opt.id ? 'active' : ''}`}
 								onClick={() => handleThemeChange(opt.id)}
+								role="menuitem"
 							>
 								<span>{THEME_ICONS[opt.id]}</span>
 								{opt.label}
@@ -127,13 +128,14 @@ export default function Navbar() {
 				onClick={() => setIsOpen((open) => !open)}
 				aria-label="Toggle menu"
 				aria-expanded={isOpen}
+				aria-controls="mobile-menu"
 			>
 				<span />
 				<span />
 				<span />
 			</button>
 
-			<div className={`navbar__mobile ${isOpen ? 'open' : ''}`}>
+			<div id="mobile-menu" className={`navbar__mobile ${isOpen ? 'open' : ''}`} role="menu">
 				{navLinks.map((item) => (
 					<a key={item.href} href={item.href} onClick={() => setIsOpen(false)}>
 						{item.label}

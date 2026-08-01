@@ -3,13 +3,14 @@ import type { TimelineEntry } from '../data/types';
 
 interface Props {
 	title: string;
+	id: string;
 	entries: TimelineEntry[];
 }
 
-const { title, entries } = Astro.props;
+const { title, id, entries } = Astro.props;
 ---
 
-<section class="fade-up card reveal delay-2">
+<section {id} class="fade-up card reveal delay-2">
 	<h2>{title}</h2>
 	<div class="timeline">
 		{entries.map((item) => (
