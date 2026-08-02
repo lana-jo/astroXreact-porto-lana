@@ -3,16 +3,18 @@
 ---
 <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Image preview" tabindex="-1">
 	<button class="lightbox-close" aria-label="Close">&times;</button>
-	<button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Previous image" type="button">&#10094;</button>
-	<div class="lightbox-content">
-		<img id="lightbox-img" src="" alt="" />
-		<div class="lightbox-meta">
-			<p id="lightbox-title"></p>
-			<span id="lightbox-counter"></span>
+	<div class="lightbox-stage">
+		<button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Previous image" type="button">&#10094;</button>
+		<div class="lightbox-content">
+			<img id="lightbox-img" src="" alt="" />
+			<div class="lightbox-meta">
+				<p id="lightbox-title"></p>
+				<span id="lightbox-counter"></span>
+			</div>
+			<div id="lightbox-dots" class="lightbox-dots"></div>
 		</div>
-		<div id="lightbox-dots" class="lightbox-dots"></div>
+		<button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Next image" type="button">&#10095;</button>
 	</div>
-	<button id="lightbox-next" class="lightbox-nav lightbox-next" aria-label="Next image" type="button">&#10095;</button>
 </div>
 
 <script>
