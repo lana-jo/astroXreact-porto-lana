@@ -26,7 +26,6 @@ export interface Project {
 	stack: string;
 	img: ImageMetadata;
 	github?: string;
-	live?: string;
 }
 
 export interface Certificate {

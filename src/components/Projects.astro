@@ -2,16 +2,22 @@
 import { Image } from 'astro:assets';
 import { projects } from '../data/projects';
 import Bi from './Bi.astro';
+
+interface Props {
+	lang?: 'en' | 'id';
+}
+
+const { lang = 'en' } = Astro.props;
 ---
 
 <section id="project" class="fade-up card reveal delay-4">
 	<div class="porto-header">
 		<div>
-			<h2><Bi en="Featured Projects" id="Proyek Unggulan" /></h2>
-			<span class="section-subtitle"><Bi en={`${projects.length} Projects Built`} id={`${projects.length} Proyek Dibuat`} /></span>
+			<h2><Bi en="Featured Projects" id="Proyek Unggulan" lang={lang} /></h2>
+			<span class="section-subtitle"><Bi en={`${projects.length} Projects Built`} id={`${projects.length} Proyek Dibuat`} lang={lang} /></span>
 		</div>
 		<a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="view-all-btn">
-			<Bi en="View All on GitHub ↗" id="Lihat Semua di GitHub ↗" />
+			<Bi en="View All on GitHub ↗" id="Lihat Semua di GitHub ↗" lang={lang} />
 		</a>
 	</div>
 	<div class="projects">
@@ -20,16 +26,16 @@ import Bi from './Bi.astro';
 			return (
 				<article class="project-item">
 					{item.img && (
-						<div class="project-image-wrapper" data-title={item.title}>
-							<Image src={item.img} alt={item.title} class="project-image" />
+						<div class="project-image-wrapper" data-title={lang === 'id' ? item.titleId : item.title}>
+							<Image src={item.img} alt={lang === 'id' ? item.titleId : item.title} class="project-image" />
 							<div class="image-overlay">
-								<span class="zoom-icon">🔍 <Bi en="View Screenshot" id="Lihat Tangkapan Layar" /></span>
+								<span class="zoom-icon">🔍 <Bi en="View Screenshot" id="Lihat Tangkapan Layar" lang={lang} /></span>
 							</div>
 						</div>
 					)}
 					<div class="project-info">
-						<h3><Bi en={item.title} id={item.titleId} /></h3>
-						<p><Bi en={item.detail} id={item.detailId} /></p>
+						<h3><Bi en={item.title} id={item.titleId} lang={lang} /></h3>
+						<p><Bi en={item.detail} id={item.detailId} lang={lang} /></p>
 						<div class="project-tags">
 							{tags.map((tag) => (
 								<span class="project-tag">{tag}</span>
@@ -51,7 +57,7 @@ import Bi from './Bi.astro';
 										<line x1="2" y1="12" x2="22" y2="12" />
 										<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
 									</svg>
-									<Bi en="Live Demo" id="Demo Langsung" />
+									<Bi en="Live Demo" id="Demo Langsung" lang={lang} />
 								</a>
 							)}
 						</div>

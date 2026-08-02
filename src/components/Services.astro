@@ -1,21 +1,27 @@
 ---
 import { services } from '../data/services';
 import Bi from './Bi.astro';
+
+interface Props {
+	lang?: 'en' | 'id';
+}
+
+const { lang = 'en' } = Astro.props;
 ---
 
 <section id="services" class="fade-up card reveal delay-2">
 	<div class="porto-header">
 		<div>
-			<h2><Bi en="IT Services" id="Layanan Jasa IT" /></h2>
-			<span class="section-subtitle"><Bi en="Website, App & Mobile Development Services" id="Jasa Pembuatan Website, Aplikasi, & Mobile App" /></span>
+			<h2><Bi en="IT Services" id="Layanan Jasa IT" lang={lang} /></h2>
+			<span class="section-subtitle"><Bi en="Website, App & Mobile Development Services" id="Jasa Pembuatan Website, Aplikasi, & Mobile App" lang={lang} /></span>
 		</div>
 	</div>
 	<div class="services-grid">
 		{services.map((service) => (
 			<article class="service-item">
 				<div class="service-icon" aria-hidden="true">{service.icon}</div>
-				<h3><Bi en={service.title} id={service.titleId} /></h3>
-				<p class="service-desc"><Bi en={service.description} id={service.descriptionId} /></p>
+				<h3><Bi en={service.title} id={service.titleId} lang={lang} /></h3>
+				<p class="service-desc"><Bi en={service.description} id={service.descriptionId} lang={lang} /></p>
 				<div class="service-tags">
 					{service.tags.map((tag) => (
 						<span class="project-tag">{tag}</span>
@@ -31,8 +37,8 @@ import Bi from './Bi.astro';
 			rel="noopener"
 			class="porto-btn primary-btn"
 		>
-			<Bi en="Free Consultation via WhatsApp →" id="Konsultasi Gratis via WhatsApp →" />
+			<Bi en="Free Consultation via WhatsApp →" id="Konsultasi Gratis via WhatsApp →" lang={lang} />
 		</a>
-		<a href="#contact" class="porto-btn secondary-btn"><Bi en="Contact Me" id="Hubungi Saya" /></a>
+		<a href="#contact" class="porto-btn secondary-btn"><Bi en="Contact Me" id="Hubungi Saya" lang={lang} /></a>
 	</div>
 </section>

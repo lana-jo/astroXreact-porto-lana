@@ -2,8 +2,9 @@
 interface Props {
 	en: string;
 	id: string;
+	lang: 'en' | 'id';
 }
 
-const { en, id } = Astro.props;
+const { en, id, lang } = Astro.props;
 ---
-<span lang="en">{en}</span><span lang="id">{id}</span>
+{lang === 'id' ? id : en}

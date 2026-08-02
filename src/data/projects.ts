@@ -16,8 +16,7 @@ export const projects: Project[] = [
 		detailId: 'Mengembangkan sistem manajemen perpustakaan berbasis web dengan CRUD dan autentikasi.',
 		stack: 'PHP, MySQL, CRUD',
 		github: 'https://github.com/lana-jo/PerpusPHP',
-		img: perpus,
-		live: 'https://lana-jo.latteace.com/'
+		img: perpus
 	},
 	{
 		title: 'NEXTJS POS',
@@ -26,8 +25,7 @@ export const projects: Project[] = [
 		detailId:
 			'Aplikasi Point of Sale modern dengan pelacakan transaksi real-time dan manajemen inventaris.',
 		stack: 'Next.js, Tailwind CSS, Supabase, TypeScript',
-		img: pw,
-		live: 'https://la-pos-web.vercel.app/'
+		img: pw
 	},
 	{
 		title: 'Mini Inventory App',
@@ -38,8 +36,7 @@ export const projects: Project[] = [
 			'Aplikasi manajemen inventaris ringan dengan sinkronisasi data real-time dan operasi CRUD yang aman.',
 		stack: 'Kotlin, Jetpack Compose, Supabase, MVVM Architecture, Coroutines, Flow',
 		github: 'https://github.com/lana-jo/jetpack-compose-InventoryMini-supabase',
-		img: iMini,
-		live: ''
+		img: iMini
 	},
 	{
 		title: 'Inventory App',

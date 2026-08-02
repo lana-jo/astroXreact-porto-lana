@@ -7,15 +7,16 @@ interface Props {
 	titleId: string;
 	id: string;
 	entries: TimelineEntry[];
+	lang?: 'en' | 'id';
 }
 
-const { title, titleId, id, entries } = Astro.props;
+const { title, titleId, id, entries, lang = 'en' } = Astro.props;
 ---
 
 <section {id} class="fade-up card reveal delay-2">
 	<div class="porto-header">
 		<div>
-			<h2><Bi en={title} id={titleId} /></h2>
+			<h2><Bi en={title} id={titleId} lang={lang} /></h2>
 		</div>
 	</div>
 	<div class="timeline">
@@ -24,14 +25,14 @@ const { title, titleId, id, entries } = Astro.props;
 				<div class="timeline-content">
 					<div class="timeline-header">
 						<div>
-							<h3><Bi en={item.role} id={item.roleId} /></h3>
-							<h4 class="company-name"><Bi en={item.company} id={item.companyId || item.company} /></h4>
+							<h3><Bi en={item.role} id={item.roleId} lang={lang} /></h3>
+							<h4 class="company-name"><Bi en={item.company} id={item.companyId || item.company} lang={lang} /></h4>
 						</div>
-						<span class="period-badge"><Bi en={item.period} id={item.periodId} /></span>
+						<span class="period-badge"><Bi en={item.period} id={item.periodId} lang={lang} /></span>
 					</div>
 					<ul class="timeline-list">
 						{item.descriptions.map((desc, i) => (
-							<li><Bi en={desc} id={item.descriptionsId[i] ?? desc} /></li>
+							<li><Bi en={desc} id={item.descriptionsId[i] ?? desc} lang={lang} /></li>
 						))}
 					</ul>
 				</div>

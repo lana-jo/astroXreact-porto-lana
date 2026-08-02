@@ -22,17 +22,22 @@ const LANG_OPTIONS: { id: Lang; label: string }[] = [
 ];
 
 function resolveTheme(theme: Theme): 'light' | 'dark' {
+	if (typeof window === 'undefined') return 'light';
 	return theme === 'system'
 		? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 		: theme;
-}	export default function Navbar() {
+}
+
+interface NavbarProps {
+	lang?: Lang;
+}
+
+export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 	const [hidden, setHidden] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [theme, setTheme] = useState<Theme>('system');
-	const [lang, setLang] = useState<Lang>(() =>
-		window.location.pathname.startsWith('/id') ? 'id' : 'en'
-	);
+	const [lang] = useState<Lang>(initialLang);
 	const [showThemeMenu, setShowThemeMenu] = useState(false);
 	const [showLangMenu, setShowLangMenu] = useState(false);
 	const themeMenuRef = useRef<HTMLDivElement>(null);
@@ -184,10 +189,7 @@ function resolveTheme(theme: Theme): 'light' | 'dark' {
 			<ul className="navbar__links">
 				{navLinks.map((item) => (
 					<li key={item.href}>
-						<a href={item.href}>
-							<span lang="en">{item.label}</span>
-							<span lang="id">{item.labelId}</span>
-						</a>
+						<a href={item.href}>{lang === 'id' ? item.labelId : item.label}</a>
 					</li>
 				))}
 			</ul>
@@ -207,8 +209,7 @@ function resolveTheme(theme: Theme): 'light' | 'dark' {
 			<div id="mobile-menu" className={`navbar__mobile ${isOpen ? 'open' : ''}`} role="menu">
 				{navLinks.map((item) => (
 					<a key={item.href} href={item.href} onClick={() => setIsOpen(false)}>
-						<span lang="en">{item.label}</span>
-						<span lang="id">{item.labelId}</span>
+						{lang === 'id' ? item.labelId : item.label}
 					</a>
 				))}
 			</div>
