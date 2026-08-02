@@ -1,3 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+	--color-primary: var(--accent);
+	--color-foreground: var(--text-primary);
+	--color-background: var(--bg-primary);
+}
+
 /* ============================================
    Design Tokens (Pure Colors, No Gradients, No Shadows)
    ============================================ */

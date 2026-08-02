@@ -10,20 +10,23 @@ npm create astro@latest -- --template basics
 
 Inside of your Astro project, you'll see the following folders and files:
 
-```text
-/
+```text/
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.png
+│   ├── favicon-32x32.png
+│   ├── apple-touch-icon.png
+│   └── og-image.jpg
 ├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+│	├── assets
+│	├── components
+│	├── data
+│	├── layouts
+│	│   └── Layout.astro
+│	├── pages
+│	│   └── index.astro
+│	└── styles
 └── package.json
+
 ```
 
 To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
