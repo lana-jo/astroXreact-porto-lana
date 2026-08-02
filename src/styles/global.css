@@ -1377,11 +1377,49 @@ section p {
 		font-size: 1.35rem;
 	}
 
+	.section-subtitle {
+		font-size: 0.8rem;
+	}
+
 	.project-info h3,
 	.service-item h3,
 	.timeline-header h3,
 	.cert-header h3 {
 		font-size: 1.1rem;
+	}
+
+	.project-info p,
+	.service-desc,
+	.timeline-list,
+	.description,
+	section p {
+		font-size: 0.85rem;
+	}
+
+	.company-name {
+		font-size: 0.85rem;
+	}
+
+	.service-icon {
+		font-size: 1.5rem;
+	}
+
+	.project-tag,
+	.page-badge {
+		font-size: 0.7rem;
+	}
+
+	.zoom-icon {
+		font-size: 0.8rem;
+		padding: 0.35rem 0.7rem;
+	}
+
+	.project-info p {
+		margin-bottom: 0.75rem;
+	}
+
+	.project-tags {
+		margin-bottom: 0.75rem;
 	}
 
 	.hero h1 {
@@ -1431,7 +1469,104 @@ section p {
 	}
 
 	.footer {
-		padding: 1.5rem 1rem;
+		padding: 1.5rem 0.75rem;
+	}
+
+	.footer-copyright {
+		font-size: 0.8rem;
+	}
+
+	.navbar {
+		padding: 0.5rem 0.75rem;
+	}
+
+	.navbar__logo {
+		font-size: 1.05rem;
+	}
+
+	.navbar__mobile a {
+		font-size: 0.9rem;
+		padding: 0.6rem 0.85rem;
+	}
+
+	.lang-toggle-btn {
+		font-size: 0.75rem;
+	}
+}
+
+@media (max-width: 360px) {
+	.card {
+		padding: 1rem;
+	}
+
+	.porto-header h2 {
+		font-size: 1.25rem;
+	}
+
+	.project-info h3,
+	.service-item h3,
+	.timeline-header h3,
+	.cert-header h3 {
+		font-size: 1rem;
+	}
+
+	.hero h1 {
+		font-size: 1.75rem;
+	}
+
+	.project-item,
+	.certificate-item,
+	.service-item {
+		padding: 0.85rem;
+	}
+
+	.project-image {
+		height: 120px;
+	}
+
+	.timeline-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.period-badge {
+		font-size: 0.7rem;
+		padding: 0.15rem 0.45rem;
+	}
+
+	.chip {
+		font-size: 0.8rem;
+		padding: 0.35rem 0.7rem;
+	}
+
+	.view-all-btn {
+		font-size: 0.8rem;
+		padding: 0.4rem 0.8rem;
+	}
+
+	.email-link {
+		font-size: 0.9rem;
+	}
+
+	.navbar__logo {
+		font-size: 1rem;
+	}
+
+	.navbar__mobile {
+		padding: 0.6rem;
+	}
+
+	.navbar__mobile a {
+		font-size: 0.85rem;
+	}
+
+	.footer {
+		margin-top: 2.5rem;
+		padding: 1.25rem 0.75rem;
+	}
+
+	.footer-copyright {
+		font-size: 0.75rem;
 	}
 }
 
