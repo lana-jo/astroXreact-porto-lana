@@ -26,16 +26,6 @@ import { certificates } from '../data/certificates';
 							<span class="zoom-icon">🔍 View Certificate</span>
 						</div>
 					</div>
-					{photos.length > 1 && (
-						<button
-							class="gallery-btn"
-							type="button"
-							data-title={item.name}
-							data-gallery={gallery}
-						>
-							View All {photos.length} Photos
-						</button>
-					)}
 				</article>
 			);
 		})}

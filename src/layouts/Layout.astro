@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
+import SmoothScroll from '../components/SmoothScroll.tsx';
 
 interface Props {
 	title?: string;
@@ -29,7 +30,10 @@ const {
 	<div class="bg-blur bg-blur-one"></div>
 	<div class="bg-blur bg-blur-two"></div>
 
-	<slot />
+	<SmoothScroll client:load>
+		<slot />
+	</SmoothScroll>
+
 	<ClientRouter />
 </body>
 </html>

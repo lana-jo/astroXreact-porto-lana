@@ -2,6 +2,17 @@ import type { TimelineEntry } from './types';
 
 export const experiences: TimelineEntry[] = [
 	{
+		period: 'Desember 2025 - Present',
+		role: 'Freelancer',
+		company: 'Latech',
+		descriptions: [
+			'Managed client relationships end-to-end, from business discussions and requirements gathering to delivery.',
+			'Developed and shipped custom solutions aligned with client needs.',
+			'Handled maintenance and support for delivered projects after sales.',
+			'Ensured project quality and client satisfaction through continuous iteration.'
+		]
+	},
+	{
 		period: 'July 2025 - November 2025',
 		role: 'Network & Programming Instructor',
 		company: 'SMK Harapan Mulya',
