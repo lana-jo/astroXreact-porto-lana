@@ -214,6 +214,7 @@ section {
 
 .description,
 section p {
+	font-size: 0.9rem;
 	line-height: 1.7;
 	color: var(--text-secondary);
 	margin: 0;
