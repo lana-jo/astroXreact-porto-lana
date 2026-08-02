@@ -22,7 +22,7 @@ export const techStacks: TechStack[] = [
 	{ name: 'Jetpack Compose', icon: 'jetpackcompose', color: '4285f4' },
 	{ name: 'Kotlin Multi Platform', icon: 'kotlin', color: '7f52ff' },
 	{ name: 'Flutter', icon: 'flutter', color: '02569b' },
-	{ name: 'React Native', icon: 'reactnative', color: '61dafb' },
+	{ name: 'React Native', icon: 'react', color: '61dafb' },
 	{ name: 'Spring Boot', icon: 'springboot', color: '6db33f' },
 	{ name: 'Firebase', icon: 'firebase', color: 'dd2c00' },
 	{ name: 'Supabase', icon: 'supabase', color: '3fcf8e' },
