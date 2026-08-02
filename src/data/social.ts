@@ -26,10 +26,10 @@ export const contactSocials: SocialIcon[] = [
 export const navLinks: NavItem[] = [
 	{ label: 'Home', labelId: 'Beranda', href: '#home' },
 	{ label: 'Services', labelId: 'Layanan', href: '#services' },
-	{ label: 'Organization', labelId: 'Organisasi', href: '#organization' },
-	{ label: 'Experience', labelId: 'Pengalaman', href: '#experience' },
 	{ label: 'Tech Stack', labelId: 'Tech Stack', href: '#techstack' },
 	{ label: 'Project', labelId: 'Proyek', href: '#project' },
+	{ label: 'Experience', labelId: 'Pengalaman', href: '#experience' },
+	{ label: 'Organization', labelId: 'Organisasi', href: '#organization' },
 	{ label: 'Certificate', labelId: 'Sertifikat', href: '#certif' },
 	{ label: 'Contact', labelId: 'Kontak', href: '#contact' }
 ];

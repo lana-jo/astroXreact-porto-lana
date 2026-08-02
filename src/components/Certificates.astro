@@ -38,20 +38,20 @@ const certificateItems = await Promise.all(
 	</div>
 	<div class="certificates-grid">
 		{certificateItems.map(({ item, photos, gallery }) => (
-		<article class="certificate-item">
-			<div class="cert-header">
-				<h3>{item.name}</h3>
-				{photos.length > 1 && (
-					<span class="page-badge"><Bi en={`${photos.length} Photos`} id={`${photos.length} Foto`} lang={lang} /></span>
-				)}
-			</div>
-			<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
-				<Image src={photos[0]} alt={item.name} class="cert-image" />
-				<div class="image-overlay">
-					<span class="zoom-icon">🔍 <Bi en="View Certificate" id="Lihat Sertifikat" lang={lang} /></span>
+			<article class="certificate-item">
+				<div class="cert-header">
+					<h3>{item.name}</h3>
+					{photos.length > 1 && (
+						<span class="page-badge"><Bi en={`${photos.length} Photos`} id={`${photos.length} Foto`} lang={lang} /></span>
+					)}
 				</div>
-			</div>
-		</article>
-	))}
+				<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
+					<Image src={photos[0]} alt={item.name} class="cert-image" />
+					<div class="image-overlay">
+						<span class="zoom-icon">🔍 <Bi en="View Certificate" id="Lihat Sertifikat" lang={lang} /></span>
+					</div>
+				</div>
+			</article>
+		))}
 	</div>
 </section>
