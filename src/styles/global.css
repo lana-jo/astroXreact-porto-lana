@@ -279,7 +279,7 @@ section p {
    ============================================ */
 .view-all-btn {
 	text-decoration: none;
-	padding: 0.45rem 0.9rem;
+	padding: 0.5rem 1rem;
 	border-radius: 6px;
 	font-size: 0.875rem;
 	font-weight: 600;
@@ -558,7 +558,7 @@ section p {
    ============================================ */
 .timeline {
 	position: relative;
-	margin-top: 1rem;
+	margin-top: 0.5rem;
 	padding-left: 1.25rem;
 }
 
@@ -626,7 +626,7 @@ section p {
 .period-badge {
 	font-size: 0.75rem;
 	font-weight: 600;
-	padding: 0.25rem 0.6rem;
+	padding: 0.2rem 0.5rem;
 	border-radius: 4px;
 	background: var(--card-bg);
 	border: 1px solid var(--border-color);
@@ -727,7 +727,7 @@ section p {
 
 .gallery-btn {
 	width: 100%;
-	padding: 0.6rem;
+	padding: 0.55rem;
 	font-size: 0.875rem;
 	font-weight: 600;
 	color: var(--accent);
@@ -1377,6 +1377,13 @@ section p {
 		font-size: 1.35rem;
 	}
 
+	.project-info h3,
+	.service-item h3,
+	.timeline-header h3,
+	.cert-header h3 {
+		font-size: 1.1rem;
+	}
+
 	.hero h1 {
 		font-size: 2rem;
 	}
@@ -1405,7 +1412,6 @@ section p {
 
 	.period-badge {
 		font-size: 0.7rem;
-		padding: 0.2rem 0.5rem;
 	}
 
 	.timeline {
