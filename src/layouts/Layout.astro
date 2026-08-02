@@ -21,7 +21,7 @@ const {
 
 const isId = lang === 'id';
 
-const site = new URL(Astro.site);
+const site = new URL(Astro.site ?? 'https://lana-jauhar.vercel.app');
 const siteUrl = site.toString();
 const idUrl = new URL('/id/', site).toString();
 const ogImage = new URL('/og-image.jpg', site).toString();
@@ -214,7 +214,7 @@ const jsonLd = {
 	<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<title>{title}</title>
-	<script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
+	<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
 </head>
 <body>
 

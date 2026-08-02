@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import { certificates } from '../data/certificates';
 import Bi from './Bi.astro';
 
@@ -8,9 +8,28 @@ interface Props {
 }
 
 const { lang = 'en' } = Astro.props;
+
+const certificateItems = await Promise.all(
+	certificates.map(async (item) => {
+		const photos = Array.isArray(item.photo) ? item.photo : [item.photo];
+		// Build the lightbox gallery from optimized images instead of full-resolution originals
+		const gallery =
+			photos.length > 1
+				? JSON.stringify(
+						await Promise.all(
+							photos.map(async (photo) => {
+								const optimized = await getImage({ src: photo, width: 1200, format: 'webp' });
+								return optimized.src;
+							})
+						)
+					)
+				: undefined;
+		return { item, photos, gallery };
+	})
+);
 ---
 
-<section id="certif" class="fade-up card reveal delay-3">
+<section id="certif" class="fade-up card delay-3">
 	<div class="porto-header">
 		<div>
 			<h2><Bi en="Certificates & Licenses" id="Sertifikat & Lisensi" lang={lang} /></h2>
@@ -18,25 +37,21 @@ const { lang = 'en' } = Astro.props;
 		</div>
 	</div>
 	<div class="certificates-grid">
-		{certificates.map((item) => {
-			const photos = Array.isArray(item.photo) ? item.photo : [item.photo];
-			const gallery = photos.length > 1 ? JSON.stringify(photos.map((p) => p.src)) : undefined;
-			return (
-				<article class="certificate-item">
-					<div class="cert-header">
-						<h3>{item.name}</h3>
-						{photos.length > 1 && (
-							<span class="page-badge"><Bi en={`${photos.length} Photos`} id={`${photos.length} Foto`} lang={lang} /></span>
-						)}
-					</div>
-					<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
-						<Image src={photos[0]} alt={item.name} class="cert-image" />
-						<div class="image-overlay">
-							<span class="zoom-icon">🔍 <Bi en="View Certificate" id="Lihat Sertifikat" lang={lang} /></span>
-						</div>
-					</div>
-				</article>
-			);
-		})}
+		{certificateItems.map(({ item, photos, gallery }) => (
+		<article class="certificate-item">
+			<div class="cert-header">
+				<h3>{item.name}</h3>
+				{photos.length > 1 && (
+					<span class="page-badge"><Bi en={`${photos.length} Photos`} id={`${photos.length} Foto`} lang={lang} /></span>
+				)}
+			</div>
+			<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
+				<Image src={photos[0]} alt={item.name} class="cert-image" />
+				<div class="image-overlay">
+					<span class="zoom-icon">🔍 <Bi en="View Certificate" id="Lihat Sertifikat" lang={lang} /></span>
+				</div>
+			</div>
+		</article>
+	))}
 	</div>
 </section>

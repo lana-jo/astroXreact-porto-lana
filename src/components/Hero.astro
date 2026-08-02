@@ -11,7 +11,7 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 ---
 
-<header id="home" class="fade-up hero card reveal delay-1">
+<header id="home" class="fade-up hero card delay-1">
 	<div>
 		<span class="hero-badge"><Bi en="Website, App & Mobile Development Services" id="Jasa Pembuatan Website, Aplikasi, & Mobile App" lang={lang} /></span>
 		<h1><Bi en={profile.title} id={profile.titleId} lang={lang} /></h1>
@@ -28,5 +28,5 @@ const { lang = 'en' } = Astro.props;
 			))}
 		</div>
 	</div>
-	<Image class="profile-photo" src={profile.photo} alt={profile.name} width={461} height={661} loading="lazy" />
+	<Image class="profile-photo" src={profile.photo} alt={profile.name} width={461} height={661} />
 </header>

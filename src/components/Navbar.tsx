@@ -48,7 +48,9 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 			document.documentElement.setAttribute('data-theme', resolveTheme(target));
 		};
 
-		const savedTheme = (localStorage.getItem('theme') as Theme) || 'system';
+		const rawTheme = localStorage.getItem('theme');
+		const savedTheme: Theme =
+			rawTheme === 'light' || rawTheme === 'dark' || rawTheme === 'system' ? rawTheme : 'system';
 		setTheme(savedTheme);
 		applyTheme(savedTheme);
 
@@ -72,13 +74,23 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 			if (window.innerWidth >= 768) setIsOpen(false);
 		};
 
+		const handleKeydown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') {
+				setShowThemeMenu(false);
+				setShowLangMenu(false);
+				setIsOpen(false);
+			}
+		};
+
 		mediaQuery.addEventListener('change', handleSystemChange);
 		document.addEventListener('mousedown', handleClickOutside);
+		document.addEventListener('keydown', handleKeydown);
 		window.addEventListener('resize', handleResize);
 
 		return () => {
 			mediaQuery.removeEventListener('change', handleSystemChange);
 			document.removeEventListener('mousedown', handleClickOutside);
+			document.removeEventListener('keydown', handleKeydown);
 			window.removeEventListener('resize', handleResize);
 		};
 	}, []);
