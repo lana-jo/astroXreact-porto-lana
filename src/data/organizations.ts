@@ -3,6 +3,7 @@ import type { TimelineEntry } from './types';
 export const organizations: TimelineEntry[] = [
 	{
 		period: 'July 2020 - November 2021',
+		periodId: 'Juli 2020 - November 2021',
 		role: 'Public Relations',
 		roleId: 'Hubungan Masyarakat',
 		company: 'Software Engineering Student Association',
@@ -18,6 +19,7 @@ export const organizations: TimelineEntry[] = [
 	},
 	{
 		period: 'July 2019 - July 2021',
+		periodId: 'Juli 2019 - Juli 2021',
 		role: 'Public Relations',
 		roleId: 'Hubungan Masyarakat',
 		company: 'Student Executive Board',

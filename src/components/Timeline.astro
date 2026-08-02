@@ -27,7 +27,7 @@ const { title, titleId, id, entries } = Astro.props;
 							<h3><Bi en={item.role} id={item.roleId} /></h3>
 							<h4 class="company-name"><Bi en={item.company} id={item.companyId || item.company} /></h4>
 						</div>
-						<span class="period-badge">{item.period}</span>
+						<span class="period-badge"><Bi en={item.period} id={item.periodId} /></span>
 					</div>
 					<ul class="timeline-list">
 						{item.descriptions.map((desc, i) => (

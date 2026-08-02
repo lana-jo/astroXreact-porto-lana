@@ -25,14 +25,14 @@ function resolveTheme(theme: Theme): 'light' | 'dark' {
 	return theme === 'system'
 		? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 		: theme;
-}
-
-export default function Navbar() {
+}	export default function Navbar() {
 	const [hidden, setHidden] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [theme, setTheme] = useState<Theme>('system');
-	const [lang, setLang] = useState<Lang>('en');
+	const [lang, setLang] = useState<Lang>(() =>
+		window.location.pathname.startsWith('/id') ? 'id' : 'en'
+	);
 	const [showThemeMenu, setShowThemeMenu] = useState(false);
 	const [showLangMenu, setShowLangMenu] = useState(false);
 	const themeMenuRef = useRef<HTMLDivElement>(null);
@@ -46,11 +46,6 @@ export default function Navbar() {
 		const savedTheme = (localStorage.getItem('theme') as Theme) || 'system';
 		setTheme(savedTheme);
 		applyTheme(savedTheme);
-
-		const savedLang = (localStorage.getItem('lang') as Lang) || 'en';
-		setLang(savedLang);
-		document.documentElement.setAttribute('data-lang', savedLang);
-		document.documentElement.setAttribute('lang', savedLang);
 
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		const handleSystemChange = (e: MediaQueryListEvent) => {
@@ -120,14 +115,12 @@ export default function Navbar() {
 	};
 
 	const handleLangChange = (newLang: Lang) => {
-		setLang(newLang);
-		localStorage.setItem('lang', newLang);
-		document.documentElement.setAttribute('data-lang', newLang);
-		document.documentElement.setAttribute('lang', newLang);
+		// Language is determined by URL: / for English, /id/ for Indonesian
+		if (newLang !== lang) {
+			window.location.href = newLang === 'id' ? '/id/' : '/';
+		}
 		setShowLangMenu(false);
 	};
-
-	const langLabels: Record<Lang, string> = { en: 'English', id: 'Indonesia' };
 
 	return (
 		<nav className={`navbar ${hidden ? 'navbar--hidden' : ''} ${scrolled ? 'navbar--scrolled' : ''}`}>
@@ -154,7 +147,7 @@ export default function Navbar() {
 								onClick={() => handleLangChange(opt.id)}
 								role="menuitem"
 							>
-								<span>{langLabels[opt.id]}</span>
+								<span>{opt.label}</span>
 							</button>
 						))}
 					</div>

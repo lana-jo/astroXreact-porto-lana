@@ -2,7 +2,8 @@ import type { TimelineEntry } from './types';
 
 export const experiences: TimelineEntry[] = [
 	{
-		period: 'Desember 2025 - Present',
+		period: 'December 2025 - Present',
+		periodId: 'Desember 2025 - Sekarang',
 		role: 'Freelancer',
 		roleId: 'Freelancer',
 		company: 'Latech',
@@ -21,6 +22,7 @@ export const experiences: TimelineEntry[] = [
 	},
 	{
 		period: 'July 2025 - November 2025',
+		periodId: 'Juli 2025 - November 2025',
 		role: 'Network & Programming Instructor',
 		roleId: 'Instruktur Jaringan & Pemrograman',
 		company: 'SMK Harapan Mulya',
@@ -40,7 +42,8 @@ export const experiences: TimelineEntry[] = [
 		]
 	},
 	{
-		period: 'Maret 2024 - April 2025',
+		period: 'March 2024 - April 2025',
+		periodId: 'Maret 2024 - April 2025',
 		role: 'Software Engineering Instructor',
 		roleId: 'Instruktur Rekayasa Perangkat Lunak',
 		company: 'SMK Texmaco Semarang',
@@ -61,6 +64,7 @@ export const experiences: TimelineEntry[] = [
 	},
 	{
 		period: 'Jun 2023 - Dec 2023',
+		periodId: 'Jun 2023 - Des 2023',
 		role: 'Software Developer',
 		roleId: 'Software Developer',
 		company: 'PT Bangun Nusa Network',
@@ -75,6 +79,7 @@ export const experiences: TimelineEntry[] = [
 	},
 	{
 		period: 'Aug 2021 - Jan 2022',
+		periodId: 'Agu 2021 - Jan 2022',
 		role: 'Back-End Developer Intern',
 		roleId: 'Magang Back-End Developer',
 		company: 'CV Umbrella Corporation',

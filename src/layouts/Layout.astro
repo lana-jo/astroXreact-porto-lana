@@ -10,15 +10,22 @@ import { services } from '../data/services';
 interface Props {
 	title?: string;
 	description?: string;
+	lang?: 'en' | 'id';
 }
 
 const {
 	title = 'Portofolio Pribadi',
-	description = 'Web portofolio modern dengan animasi'
+	description = 'Web portofolio modern dengan animasi',
+	lang = 'en'
 } = Astro.props;
 
+const isId = lang === 'id';
+
 const site = new URL(Astro.site);
+const siteUrl = site.toString();
+const idUrl = new URL('/id/', site).toString();
 const ogImage = new URL('/og-image.jpg', site).toString();
+const canonicalUrl = isId ? idUrl : siteUrl;
 
 // Optimized profile photo for structured data (Schema.org Person.image)
 const profileImage = await getImage({ src: profile.photo, width: 512, format: 'webp' });
@@ -32,99 +39,143 @@ const sameAs = [
 		.map((s) => s.href)
 ].filter((url, i, arr) => arr.indexOf(url) === i);
 
+const serviceName = isId
+	? 'Jasa Pembuatan Website, Aplikasi & Mobile App'
+	: 'Website, Web App & Mobile App Development Services';
+
+const serviceDescription = isId
+	? 'Jasa pembuatan website, aplikasi web, webapp, aplikasi mobile, backend API, jasa IT dan jaringan, serta freelancer IT dan konsultasi teknologi.'
+	: 'Website, web app, webapp, mobile app, backend API, IT & network services, and freelance tech consulting.';
+
+const faq = isId
+	? [
+			{
+				'@type': 'Question',
+				name: 'Apakah menerima jasa pembuatan website?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Ya, kami menerima jasa pembuatan website company profile, toko online, landing page, dan website personal dengan framework modern.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Apakah menerima jasa pembuatan aplikasi dan webapp?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Ya, menerima jasa pembuatan aplikasi web dan webapp seperti sistem POS, inventory, perpustakaan, dan sistem informasi manajemen bisnis.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Apakah menerima jasa pembuatan aplikasi mobile?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Ya, menerima jasa pembuatan aplikasi mobile Android dengan Kotlin & Jetpack Compose, serta aplikasi cross-platform dengan Flutter.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Bagaimana cara memesan jasa atau konsultasi?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Hubungi kami melalui WhatsApp, Telegram, atau email yang tertera di halaman kontak untuk konsultasi gratis.'
+				}
+			}
+		]
+	: [
+			{
+				'@type': 'Question',
+				name: 'Do you accept website development services?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Yes, we accept website development for company profiles, online stores, landing pages, and personal websites built with modern frameworks.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Do you accept web app and webapp development?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Yes, we build web apps and webapps such as POS systems, inventory, libraries, and business management systems.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'Do you accept mobile app development?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Yes, we build native Android apps with Kotlin & Jetpack Compose, and cross-platform apps with Flutter.'
+				}
+			},
+			{
+				'@type': 'Question',
+				name: 'How can I order services or get a consultation?',
+				acceptedAnswer: {
+					'@type': 'Answer',
+					text: 'Contact us via WhatsApp, Telegram, or the email listed on the contact page for a free consultation.'
+				}
+			}
+		];
+
 const jsonLd = {
 	'@context': 'https://schema.org',
 	'@graph': [
 		{
 			'@type': 'WebSite',
-			'@id': `${site}#website`,
-			url: site.toString(),
+			'@id': `${siteUrl}#website`,
+			url: siteUrl,
 			name: profile.name,
 			description,
-			inLanguage: 'en',
-			publisher: { '@id': `${site}#person` }
+			inLanguage: lang,
+			publisher: { '@id': `${siteUrl}#person` }
 		},
 		{
 			'@type': 'Person',
-			'@id': `${site}#person`,
+			'@id': `${siteUrl}#person`,
 			name: profile.name,
 			jobTitle: ['Software Developer', 'Software Engineer'],
-			description: profile.description,
-			url: site.toString(),
+			description: isId ? profile.descriptionId : profile.description,
+			url: siteUrl,
 			image: profileImageUrl,
 			sameAs
 		},
 		{
 			'@type': 'Service',
-			'@id': `${site}#service`,
-			name: 'Jasa Pembuatan Website, Aplikasi & Mobile App',
+			'@id': `${siteUrl}#service`,
+			name: serviceName,
 			serviceType:
 				'Software Developer, Software Engineer, Jasa Pembuatan Website, Jasa Pembuatan Aplikasi, Jasa Pembuatan Aplikasi Mobile',
-			description:
-				'Jasa pembuatan website, aplikasi web, webapp, aplikasi mobile, backend API, jasa IT dan jaringan, serta freelancer IT dan konsultasi teknologi.',
-			provider: { '@id': `${site}#person` },
+			description: serviceDescription,
+			provider: { '@id': `${siteUrl}#person` },
 			areaServed: 'Indonesia',
 			availableChannel: {
 				'@type': 'ServiceChannel',
-				serviceUrl: `${site}#contact`,
+				serviceUrl: `${siteUrl}#contact`,
 				availableLanguage: ['id', 'en']
 			},
 			hasOfferCatalog: {
 				'@type': 'OfferCatalog',
-				name: 'Layanan Jasa IT',
+				name: isId ? 'Layanan Jasa IT' : 'IT Services',
 				itemListElement: services.map((s) => ({
 					'@type': 'Offer',
 					itemOffered: {
 						'@type': 'Service',
-						name: s.titleId,
-						description: s.descriptionId
+						name: isId ? s.titleId : s.title,
+						description: isId ? s.descriptionId : s.description
 					}
 				}))
 			}
 		},
 		{
 			'@type': 'FAQPage',
-			'@id': `${site}#faq`,
-			mainEntity: [
-				{
-					'@type': 'Question',
-					name: 'Apakah menerima jasa pembuatan website?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Ya, kami menerima jasa pembuatan website company profile, toko online, landing page, dan website personal dengan framework modern.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Apakah menerima jasa pembuatan aplikasi dan webapp?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Ya, menerima jasa pembuatan aplikasi web dan webapp seperti sistem POS, inventory, perpustakaan, dan sistem informasi manajemen bisnis.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Apakah menerima jasa pembuatan aplikasi mobile?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Ya, menerima jasa pembuatan aplikasi mobile Android dengan Kotlin & Jetpack Compose, serta aplikasi cross-platform dengan Flutter.'
-					}
-				},
-				{
-					'@type': 'Question',
-					name: 'Bagaimana cara memesan jasa atau konsultasi?',
-					acceptedAnswer: {
-						'@type': 'Answer',
-						text: 'Hubungi kami melalui WhatsApp, Telegram, atau email yang tertera di halaman kontak untuk konsultasi gratis.'
-					}
-				}
-			]
+			'@id': `${siteUrl}#faq`,
+			mainEntity: faq
 		}
 	]
 };
 ---
 <!doctype html>
-<html lang="en" data-lang="en">
+<html lang={lang} data-lang={lang}>
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -132,18 +183,24 @@ const jsonLd = {
 	<meta name="description" content={description} />
 	<meta
 		name="keywords"
-		content="jasa pembuatan website, jasa pembuatan aplikasi, jasa pembuatan aplikasi dan website, jasa pembuatan aplikasi dan webapp, jasa pembuatan mobile, jasa pembuatan aplikasi mobile, jasa IT, freelancer IT, software developer Indonesia, software engineer Indonesia, web developer, pembuatan website murah, programmer Indonesia"
+		content="jasa pembuatan website, jasa pembuatan aplikasi, jasa pembuatan aplikasi dan website, jasa pembuatan aplikasi dan webapp, jasa pembuatan mobile, jasa pembuatan aplikasi mobile, jasa IT, freelancer IT, software developer Indonesia, software engineer Indonesia, web developer, jasa programmer, jasa programmer Indonesia, programmer Indonesia, pembuatan website murah"
 	/>
 	<meta name="robots" content="index, follow" />
 	<meta name="author" content={profile.name} />
+	<link rel="canonical" href={canonicalUrl} />
+	<link rel="alternate" hreflang="en" href={siteUrl} />
+	<link rel="alternate" hreflang="id" href={idUrl} />
+	<link rel="alternate" hreflang="x-default" href={siteUrl} />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	<meta property="og:url" content={site.toString()} />
+	<meta property="og:url" content={canonicalUrl} />
 	<meta property="og:image" content={ogImage} />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+	<meta property="og:locale" content={isId ? 'id_ID' : 'en_US'} />
+	<meta property="og:locale:alternate" content={isId ? 'en_US' : 'id_ID'} />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />

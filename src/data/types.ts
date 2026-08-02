@@ -9,6 +9,7 @@ export interface Profile {
 
 export interface TimelineEntry {
 	period: string;
+	periodId: string;
 	role: string;
 	roleId: string;
 	company: string;
