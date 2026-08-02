@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { navLinks } from '../data/social';
 
 type Theme = 'light' | 'dark' | 'system';
+type Lang = 'en' | 'id';
 
 const THEME_ICONS: Record<Theme, string> = {
 	light: '☀️',
@@ -15,6 +16,11 @@ const themeOptions: { id: Theme; label: string }[] = [
 	{ id: 'system', label: 'System' }
 ];
 
+const LANG_OPTIONS: { id: Lang; label: string }[] = [
+	{ id: 'en', label: 'English' },
+	{ id: 'id', label: 'Indonesia' }
+];
+
 function resolveTheme(theme: Theme): 'light' | 'dark' {
 	return theme === 'system'
 		? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -26,8 +32,11 @@ export default function Navbar() {
 	const [scrolled, setScrolled] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [theme, setTheme] = useState<Theme>('system');
+	const [lang, setLang] = useState<Lang>('en');
 	const [showThemeMenu, setShowThemeMenu] = useState(false);
+	const [showLangMenu, setShowLangMenu] = useState(false);
 	const themeMenuRef = useRef<HTMLDivElement>(null);
+	const langMenuRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const applyTheme = (target: Theme) => {
@@ -37,6 +46,11 @@ export default function Navbar() {
 		const savedTheme = (localStorage.getItem('theme') as Theme) || 'system';
 		setTheme(savedTheme);
 		applyTheme(savedTheme);
+
+		const savedLang = (localStorage.getItem('lang') as Lang) || 'en';
+		setLang(savedLang);
+		document.documentElement.setAttribute('data-lang', savedLang);
+		document.documentElement.setAttribute('lang', savedLang);
 
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 		const handleSystemChange = (e: MediaQueryListEvent) => {
@@ -48,6 +62,9 @@ export default function Navbar() {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (themeMenuRef.current && !themeMenuRef.current.contains(event.target as Node)) {
 				setShowThemeMenu(false);
+			}
+			if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+				setShowLangMenu(false);
 			}
 		};
 
@@ -102,11 +119,47 @@ export default function Navbar() {
 		setShowThemeMenu(false);
 	};
 
+	const handleLangChange = (newLang: Lang) => {
+		setLang(newLang);
+		localStorage.setItem('lang', newLang);
+		document.documentElement.setAttribute('data-lang', newLang);
+		document.documentElement.setAttribute('lang', newLang);
+		setShowLangMenu(false);
+	};
+
+	const langLabels: Record<Lang, string> = { en: 'English', id: 'Indonesia' };
+
 	return (
 		<nav className={`navbar ${hidden ? 'navbar--hidden' : ''} ${scrolled ? 'navbar--scrolled' : ''}`}>
 			<a href="#home" className="navbar__logo">
 				Lana Jauhar
 			</a>
+
+			<div className="lang-select-container" ref={langMenuRef}>
+				<button
+					className="lang-toggle-btn"
+					onClick={() => setShowLangMenu((open) => !open)}
+					aria-label="Select language"
+					aria-expanded={showLangMenu}
+				>
+					<span>{lang === 'id' ? 'ID' : 'EN'}</span>
+				</button>
+
+				{showLangMenu && (
+					<div className="theme-dropdown-menu" role="menu" aria-label="Language options">
+						{LANG_OPTIONS.map((opt) => (
+							<button
+								key={opt.id}
+								className={`theme-dropdown-option ${lang === opt.id ? 'active' : ''}`}
+								onClick={() => handleLangChange(opt.id)}
+								role="menuitem"
+							>
+								<span>{langLabels[opt.id]}</span>
+							</button>
+						))}
+					</div>
+				)}
+			</div>
 
 			<div className="theme-select-container" ref={themeMenuRef}>
 				<button
@@ -138,7 +191,10 @@ export default function Navbar() {
 			<ul className="navbar__links">
 				{navLinks.map((item) => (
 					<li key={item.href}>
-						<a href={item.href}>{item.label}</a>
+						<a href={item.href}>
+							<span lang="en">{item.label}</span>
+							<span lang="id">{item.labelId}</span>
+						</a>
 					</li>
 				))}
 			</ul>
@@ -158,11 +214,11 @@ export default function Navbar() {
 			<div id="mobile-menu" className={`navbar__mobile ${isOpen ? 'open' : ''}`} role="menu">
 				{navLinks.map((item) => (
 					<a key={item.href} href={item.href} onClick={() => setIsOpen(false)}>
-						{item.label}
+						<span lang="en">{item.label}</span>
+						<span lang="id">{item.labelId}</span>
 					</a>
 				))}
 			</div>
 		</nav>
 	);
 }
-

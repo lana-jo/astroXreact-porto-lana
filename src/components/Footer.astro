@@ -1,12 +1,13 @@
 ---
 import { contactSocials } from '../data/social';
+import Bi from './Bi.astro';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
 	<div class="footer-content">
-		<p class="footer-copyright">&copy; {year} Lana Jauhar. All rights reserved.</p>
+		<p class="footer-copyright">&copy; {year} Lana Jauhar. <Bi en="All rights reserved." id="Hak cipta dilindungi." /></p>
 		<div class="contact-buttons">
 			{contactSocials.map((social) => (
 				<a href={social.href} target="_blank" rel="noopener" class="contact-icon-btn" aria-label={social.label} title={social.label}>

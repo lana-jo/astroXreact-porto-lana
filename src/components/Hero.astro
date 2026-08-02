@@ -2,14 +2,16 @@
 import { Image } from 'astro:assets';
 import { profile } from '../data/profile';
 import { heroSocials } from '../data/social';
+import Bi from './Bi.astro';
 ---
 
 <header id="home" class="fade-up hero card reveal delay-1">
 	<div>
-		<h1>{profile.title}</h1>
-		<p class="description">{profile.description}</p>
+		<span class="hero-badge"><Bi en="Website, App & Mobile Development Services" id="Jasa Pembuatan Website, Aplikasi, & Mobile App" /></span>
+		<h1><Bi en={profile.title} id={profile.titleId} /></h1>
+		<p class="description"><Bi en={profile.description} id={profile.descriptionId} /></p>
 		<div class="hero-actions">
-			<a href="#project" class="porto-btn primary-btn">View Projects</a>
+			<a href="#project" class="porto-btn primary-btn"><Bi en="View Projects" id="Lihat Proyek" /></a>
 			<a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="porto-btn secondary-btn">GitHub</a>
 		</div>
 		<div class="social-buttons">

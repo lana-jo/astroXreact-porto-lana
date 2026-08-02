@@ -2,6 +2,7 @@
 import Navbar from './Navbar';
 import Hero from './Hero.astro';
 import Timeline from './Timeline.astro';
+import Services from './Services.astro';
 import TechStack from './TechStack.astro';
 import Projects from './Projects.astro';
 import Certificates from './Certificates.astro';
@@ -16,8 +17,9 @@ import { experiences } from '../data/experiences';
 	<Navbar client:load />
 
 	<Hero />
-	<Timeline title="Organization" id="organization" entries={organizations} />
-	<Timeline title="Experience" id="experience" entries={experiences} />
+	<Services />
+	<Timeline title="Organization" titleId="Organisasi" id="organization" entries={organizations} />
+	<Timeline title="Experience" titleId="Pengalaman" id="experience" entries={experiences} />
 	<TechStack />
 	<Projects />
 	<Certificates />

@@ -1,13 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import { certificates } from '../data/certificates';
+import Bi from './Bi.astro';
 ---
 
 <section id="certif" class="fade-up card reveal delay-3">
 	<div class="porto-header">
 		<div>
-			<h2>Certificates & Licenses</h2>
-			<span class="section-subtitle">{certificates.length} Verified Certificates</span>
+			<h2><Bi en="Certificates & Licenses" id="Sertifikat & Lisensi" /></h2>
+			<span class="section-subtitle"><Bi en={`${certificates.length} Verified Certificates`} id={`${certificates.length} Sertifikat Terverifikasi`} /></span>
 		</div>
 	</div>
 	<div class="certificates-grid">
@@ -18,12 +19,14 @@ import { certificates } from '../data/certificates';
 				<article class="certificate-item">
 					<div class="cert-header">
 						<h3>{item.name}</h3>
-						{photos.length > 1 && <span class="page-badge">{photos.length} Photos</span>}
+						{photos.length > 1 && (
+							<span class="page-badge"><Bi en={`${photos.length} Photos`} id={`${photos.length} Foto`} /></span>
+						)}
 					</div>
 					<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
 						<Image src={photos[0]} alt={item.name} class="cert-image" />
 						<div class="image-overlay">
-							<span class="zoom-icon">🔍 View Certificate</span>
+							<span class="zoom-icon">🔍 <Bi en="View Certificate" id="Lihat Sertifikat" /></span>
 						</div>
 					</div>
 				</article>

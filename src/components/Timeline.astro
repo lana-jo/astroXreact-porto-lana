@@ -1,19 +1,21 @@
 ---
 import type { TimelineEntry } from '../data/types';
+import Bi from './Bi.astro';
 
 interface Props {
 	title: string;
+	titleId: string;
 	id: string;
 	entries: TimelineEntry[];
 }
 
-const { title, id, entries } = Astro.props;
+const { title, titleId, id, entries } = Astro.props;
 ---
 
 <section {id} class="fade-up card reveal delay-2">
 	<div class="porto-header">
 		<div>
-			<h2>{title}</h2>
+			<h2><Bi en={title} id={titleId} /></h2>
 		</div>
 	</div>
 	<div class="timeline">
@@ -22,17 +24,18 @@ const { title, id, entries } = Astro.props;
 				<div class="timeline-content">
 					<div class="timeline-header">
 						<div>
-							<h3>{item.role}</h3>
-							<h4 class="company-name">{item.company}</h4>
+							<h3><Bi en={item.role} id={item.roleId} /></h3>
+							<h4 class="company-name"><Bi en={item.company} id={item.companyId || item.company} /></h4>
 						</div>
 						<span class="period-badge">{item.period}</span>
 					</div>
 					<ul class="timeline-list">
-						{item.descriptions.map((desc) => <li>{desc}</li>)}
+						{item.descriptions.map((desc, i) => (
+							<li><Bi en={desc} id={item.descriptionsId[i] ?? desc} /></li>
+						))}
 					</ul>
 				</div>
 			</div>
 		))}
 	</div>
 </section>
-

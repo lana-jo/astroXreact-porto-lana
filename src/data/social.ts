@@ -2,6 +2,7 @@ import type { SocialLink } from './types';
 
 export interface NavItem {
 	label: string;
+	labelId: string;
 	href: string;
 }
 
@@ -23,11 +24,12 @@ export const contactSocials: SocialIcon[] = [
 ];
 
 export const navLinks: NavItem[] = [
-	{ label: 'Home', href: '#home' },
-	{ label: 'Organization', href: '#organization' },
-	{ label: 'Experience', href: '#experience' },
-	{ label: 'Tech Stack', href: '#techstack' },
-	{ label: 'Project', href: '#project' },
-	{ label: 'Certificate', href: '#certif' },
-	{ label: 'Contact', href: '#contact' }
+	{ label: 'Home', labelId: 'Beranda', href: '#home' },
+	{ label: 'Services', labelId: 'Layanan', href: '#services' },
+	{ label: 'Organization', labelId: 'Organisasi', href: '#organization' },
+	{ label: 'Experience', labelId: 'Pengalaman', href: '#experience' },
+	{ label: 'Tech Stack', labelId: 'Tech Stack', href: '#techstack' },
+	{ label: 'Project', labelId: 'Proyek', href: '#project' },
+	{ label: 'Certificate', labelId: 'Sertifikat', href: '#certif' },
+	{ label: 'Contact', labelId: 'Kontak', href: '#contact' }
 ];

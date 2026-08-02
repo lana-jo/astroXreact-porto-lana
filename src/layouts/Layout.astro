@@ -1,7 +1,11 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import SmoothScroll from '../components/SmoothScroll.tsx';
+import { profile } from '../data/profile';
+import { heroSocials } from '../data/social';
+import { services } from '../data/services';
 
 interface Props {
 	title?: string;
@@ -15,14 +19,123 @@ const {
 
 const site = new URL(Astro.site);
 const ogImage = new URL('/og-image.jpg', site).toString();
+
+// Optimized profile photo for structured data (Schema.org Person.image)
+const profileImage = await getImage({ src: profile.photo, width: 512, format: 'webp' });
+const profileImageUrl = new URL(profileImage.src, site).toString();
+
+// Social profile URLs for Schema.org sameAs (mailto: links are excluded)
+const sameAs = [
+	'https://github.com/lana-jo',
+	...heroSocials
+		.filter((s) => s.href.startsWith('http'))
+		.map((s) => s.href)
+].filter((url, i, arr) => arr.indexOf(url) === i);
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${site}#website`,
+			url: site.toString(),
+			name: profile.name,
+			description,
+			inLanguage: 'en',
+			publisher: { '@id': `${site}#person` }
+		},
+		{
+			'@type': 'Person',
+			'@id': `${site}#person`,
+			name: profile.name,
+			jobTitle: ['Software Developer', 'Software Engineer'],
+			description: profile.description,
+			url: site.toString(),
+			image: profileImageUrl,
+			sameAs
+		},
+		{
+			'@type': 'Service',
+			'@id': `${site}#service`,
+			name: 'Jasa Pembuatan Website, Aplikasi & Mobile App',
+			serviceType:
+				'Software Developer, Software Engineer, Jasa Pembuatan Website, Jasa Pembuatan Aplikasi, Jasa Pembuatan Aplikasi Mobile',
+			description:
+				'Jasa pembuatan website, aplikasi web, webapp, aplikasi mobile, backend API, jasa IT dan jaringan, serta freelancer IT dan konsultasi teknologi.',
+			provider: { '@id': `${site}#person` },
+			areaServed: 'Indonesia',
+			availableChannel: {
+				'@type': 'ServiceChannel',
+				serviceUrl: `${site}#contact`,
+				availableLanguage: ['id', 'en']
+			},
+			hasOfferCatalog: {
+				'@type': 'OfferCatalog',
+				name: 'Layanan Jasa IT',
+				itemListElement: services.map((s) => ({
+					'@type': 'Offer',
+					itemOffered: {
+						'@type': 'Service',
+						name: s.titleId,
+						description: s.descriptionId
+					}
+				}))
+			}
+		},
+		{
+			'@type': 'FAQPage',
+			'@id': `${site}#faq`,
+			mainEntity: [
+				{
+					'@type': 'Question',
+					name: 'Apakah menerima jasa pembuatan website?',
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: 'Ya, kami menerima jasa pembuatan website company profile, toko online, landing page, dan website personal dengan framework modern.'
+					}
+				},
+				{
+					'@type': 'Question',
+					name: 'Apakah menerima jasa pembuatan aplikasi dan webapp?',
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: 'Ya, menerima jasa pembuatan aplikasi web dan webapp seperti sistem POS, inventory, perpustakaan, dan sistem informasi manajemen bisnis.'
+					}
+				},
+				{
+					'@type': 'Question',
+					name: 'Apakah menerima jasa pembuatan aplikasi mobile?',
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: 'Ya, menerima jasa pembuatan aplikasi mobile Android dengan Kotlin & Jetpack Compose, serta aplikasi cross-platform dengan Flutter.'
+					}
+				},
+				{
+					'@type': 'Question',
+					name: 'Bagaimana cara memesan jasa atau konsultasi?',
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: 'Hubungi kami melalui WhatsApp, Telegram, atau email yang tertera di halaman kontak untuk konsultasi gratis.'
+					}
+				}
+			]
+		}
+	]
+};
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta name="generator" content={Astro.generator} />
 	<meta name="description" content={description} />
+	<meta
+		name="keywords"
+		content="jasa pembuatan website, jasa pembuatan aplikasi, jasa pembuatan aplikasi dan website, jasa pembuatan aplikasi dan webapp, jasa pembuatan mobile, jasa pembuatan aplikasi mobile, jasa IT, freelancer IT, software developer Indonesia, software engineer Indonesia, web developer, pembuatan website murah, programmer Indonesia"
+	/>
+	<meta name="robots" content="index, follow" />
+	<meta name="author" content={profile.name} />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
@@ -42,6 +155,7 @@ const ogImage = new URL('/og-image.jpg', site).toString();
 	<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 	<title>{title}</title>
+	<script type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
 </head>
 <body>
 
