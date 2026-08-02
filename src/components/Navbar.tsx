@@ -141,82 +141,84 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 
 	return (
 		<nav className={`navbar ${hidden ? 'navbar--hidden' : ''} ${scrolled ? 'navbar--scrolled' : ''}`}>
-			<a href="#home" className="navbar__logo">
-				Lana Jauhar
-			</a>
+			<div className="navbar__inner">
+				<a href="#home" className="navbar__logo">
+					Lana Jauhar
+				</a>
 
-			<div className="lang-select-container" ref={langMenuRef}>
+				<div className="lang-select-container" ref={langMenuRef}>
+					<button
+						className="lang-toggle-btn"
+						onClick={() => setShowLangMenu((open) => !open)}
+						aria-label="Select language"
+						aria-expanded={showLangMenu}
+					>
+						<span>{lang === 'id' ? 'ID' : 'EN'}</span>
+					</button>
+
+					{showLangMenu && (
+						<div className="theme-dropdown-menu" role="menu" aria-label="Language options">
+							{LANG_OPTIONS.map((opt) => (
+								<button
+									key={opt.id}
+									className={`theme-dropdown-option ${lang === opt.id ? 'active' : ''}`}
+									onClick={() => handleLangChange(opt.id)}
+									role="menuitem"
+								>
+									<span>{opt.label}</span>
+								</button>
+							))}
+						</div>
+					)}
+				</div>
+
+				<div className="theme-select-container" ref={themeMenuRef}>
+					<button
+						className="theme-toggle-btn"
+						onClick={() => setShowThemeMenu((open) => !open)}
+						aria-label="Select theme"
+						aria-expanded={showThemeMenu}
+					>
+						<span>{THEME_ICONS[theme]}</span>
+					</button>
+
+					{showThemeMenu && (
+						<div className="theme-dropdown-menu" role="menu" aria-label="Theme options">
+							{themeOptions.map((opt) => (
+								<button
+									key={opt.id}
+									className={`theme-dropdown-option ${theme === opt.id ? 'active' : ''}`}
+									onClick={() => handleThemeChange(opt.id)}
+									role="menuitem"
+								>
+									<span>{THEME_ICONS[opt.id]}</span>
+									{opt.label}
+								</button>
+							))}
+						</div>
+					)}
+				</div>
+
+				<ul className="navbar__links">
+					{navLinks.map((item) => (
+						<li key={item.href}>
+							<a href={item.href}>{lang === 'id' ? item.labelId : item.label}</a>
+						</li>
+					))}
+				</ul>
+
 				<button
-					className="lang-toggle-btn"
-					onClick={() => setShowLangMenu((open) => !open)}
-					aria-label="Select language"
-					aria-expanded={showLangMenu}
+					className={`navbar__hamburger ${isOpen ? 'active' : ''}`}
+					onClick={() => setIsOpen((open) => !open)}
+					aria-label="Toggle menu"
+					aria-expanded={isOpen}
+					aria-controls="mobile-menu"
 				>
-					<span>{lang === 'id' ? 'ID' : 'EN'}</span>
+					<span />
+					<span />
+					<span />
 				</button>
-
-				{showLangMenu && (
-					<div className="theme-dropdown-menu" role="menu" aria-label="Language options">
-						{LANG_OPTIONS.map((opt) => (
-							<button
-								key={opt.id}
-								className={`theme-dropdown-option ${lang === opt.id ? 'active' : ''}`}
-								onClick={() => handleLangChange(opt.id)}
-								role="menuitem"
-							>
-								<span>{opt.label}</span>
-							</button>
-						))}
-					</div>
-				)}
 			</div>
-
-			<div className="theme-select-container" ref={themeMenuRef}>
-				<button
-					className="theme-toggle-btn"
-					onClick={() => setShowThemeMenu((open) => !open)}
-					aria-label="Select theme"
-					aria-expanded={showThemeMenu}
-				>
-					<span>{THEME_ICONS[theme]}</span>
-				</button>
-
-				{showThemeMenu && (
-					<div className="theme-dropdown-menu" role="menu" aria-label="Theme options">
-						{themeOptions.map((opt) => (
-							<button
-								key={opt.id}
-								className={`theme-dropdown-option ${theme === opt.id ? 'active' : ''}`}
-								onClick={() => handleThemeChange(opt.id)}
-								role="menuitem"
-							>
-								<span>{THEME_ICONS[opt.id]}</span>
-								{opt.label}
-							</button>
-						))}
-					</div>
-				)}
-			</div>
-
-			<ul className="navbar__links">
-				{navLinks.map((item) => (
-					<li key={item.href}>
-						<a href={item.href}>{lang === 'id' ? item.labelId : item.label}</a>
-					</li>
-				))}
-			</ul>
-
-			<button
-				className={`navbar__hamburger ${isOpen ? 'active' : ''}`}
-				onClick={() => setIsOpen((open) => !open)}
-				aria-label="Toggle menu"
-				aria-expanded={isOpen}
-				aria-controls="mobile-menu"
-			>
-				<span />
-				<span />
-				<span />
-			</button>
 
 			<div id="mobile-menu" className={`navbar__mobile ${isOpen ? 'open' : ''}`} role="menu">
 				{navLinks.map((item) => (

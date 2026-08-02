@@ -19,9 +19,9 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 ---
 
-<main id="main-content" class="portofolio">
-	<Navbar client:load lang={lang} />
+<Navbar client:load lang={lang} />
 
+<main id="main-content" class="portofolio">
 	<Hero lang={lang} />
 	<Services lang={lang} />
 	<TechStack lang={lang} />
