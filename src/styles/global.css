@@ -3,6 +3,7 @@
    ============================================ */
 :root {
 	font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+	font-size: 20px;
 	color-scheme: light dark;
 
 	--bg-primary: #f8fafc;

@@ -11,9 +11,15 @@ import { techStacks } from '../data/techStacks';
 	</div>
 	<div class="chips">
 		{techStacks.map((stack) => (
-			<span class="chip">
-				<span class="chip-dot"></span>
-				{stack}
+			<span class="chip" title={stack.name}>
+				<img
+					src={`https://cdn.simpleicons.org/${stack.icon}/${stack.color}`}
+					alt={`${stack.name} logo`}
+					width="16"
+					height="16"
+					loading="lazy"
+				/>
+				{stack.name}
 			</span>
 		))}
 	</div>
