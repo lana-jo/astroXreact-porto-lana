@@ -847,7 +847,7 @@ section p {
 	padding: 0.5rem 1.25rem;
 	background: var(--card-bg);
 	border-bottom: 1px solid var(--border-color);
-	transition: transform 0.3s ease;
+	transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .navbar__inner {
@@ -1167,14 +1167,16 @@ section p {
 	transition: opacity 0.25s ease;
 }
 
-/* Keep the navbar visible above the lightbox overlay */
+/* Hide the navbar while the lightbox is open */
 .lightbox-open .navbar {
-	transform: translateY(0);
-	z-index: 10000;
+	visibility: hidden;
+	opacity: 0;
+	transform: translateY(-100%);
+	pointer-events: none;
 }
 
 .lightbox-open .lightbox-close {
-	top: 64px;
+	top: 20px;
 }
 
 @media (prefers-reduced-motion: reduce) {
