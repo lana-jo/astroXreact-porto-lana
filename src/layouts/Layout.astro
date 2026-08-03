@@ -194,13 +194,16 @@ const jsonLd = {
 	<link rel="alternate" hreflang="id" href={idUrl} />
 	<link rel="alternate" hreflang="x-default" href={siteUrl} />
 	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content={profile.name} />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content={canonicalUrl} />
 	<meta property="og:image" content={ogImage} />
+	<meta property="og:image:secure_url" content={ogImage} />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content={isId ? 'Portofolio Lana Jauhar' : 'Lana Jauhar Portfolio'} />
 	<meta property="og:locale" content={isId ? 'id_ID' : 'en_US'} />
 	<meta property="og:locale:alternate" content={isId ? 'en_US' : 'id_ID'} />
 	<meta name="twitter:card" content="summary_large_image" />

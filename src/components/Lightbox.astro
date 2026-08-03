@@ -139,8 +139,14 @@
 	const closeModal = () => {
 		if (modal) {
 			modal.classList.remove('active');
-			if (modalImg) modalImg.src = '';
 			document.body.style.overflow = '';
+			if (modalImg) {
+				// Defer clearing the src until the fade-out transition finishes,
+				// so the photo stays visible while the modal fades closed.
+				setTimeout(() => {
+					if (!modal.classList.contains('active')) modalImg.src = '';
+				}, 250);
+			}
 			if (lastFocusedElement) {
 				lastFocusedElement.focus();
 				lastFocusedElement = null;

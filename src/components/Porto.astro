@@ -41,8 +41,14 @@ const { lang = 'en' } = Astro.props;
 
 	gsap.registerPlugin(ScrollTrigger);
 
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
 	document.addEventListener('astro:page-load', () => {
 		ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+		if (reducedMotion.matches) {
+			return;
+		}
 
 		const DELAY_MAP: Record<string, number> = {
 			'delay-1': 0,
