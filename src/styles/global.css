@@ -1075,6 +1075,10 @@ section p {
 	transition: transform 0.2s ease;
 }
 
+.back-to-top__rocket svg {
+	transform: rotate(-45deg);
+}
+
 .back-to-top:hover .back-to-top__rocket {
 	transform: translateY(-2px);
 }
@@ -1110,13 +1114,16 @@ section p {
 
 @keyframes rocket-launch {
 	0% {
-		transform: translateY(0) rotate(0deg);
+		transform: translateY(0) scale(1);
 	}
-	30% {
-		transform: translateY(-14px) rotate(-10deg);
+	15% {
+		transform: translateY(4px) scale(1.05);
+	}
+	35% {
+		transform: translateY(-20px) scale(1);
 	}
 	100% {
-		transform: translateY(-130vh) rotate(-25deg);
+		transform: translateY(-130vh) scale(0.95);
 	}
 }
 
