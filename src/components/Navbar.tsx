@@ -97,6 +97,8 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 
 	useEffect(() => {
 		let idleTimer: ReturnType<typeof setTimeout> | undefined;
+		// Keep the navbar visible on scroll for users who prefer reduced motion
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 		const handleScroll = () => {
 			const currentScrollY = window.scrollY;
@@ -109,7 +111,7 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 
 			if (idleTimer) clearTimeout(idleTimer);
 
-			if (currentScrollY > 100) {
+			if (currentScrollY > 100 && !reducedMotion.matches) {
 				setHidden(true);
 				idleTimer = setTimeout(() => setHidden(false), 300);
 			} else {

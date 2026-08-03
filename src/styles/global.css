@@ -1305,11 +1305,18 @@ section p {
 @media (max-width: 900px) {
 	.hero {
 		grid-template-columns: 1fr;
+		text-align: center;
+		gap: 2rem;
 	}
 
 	.profile-photo {
-		justify-self: start;
+		justify-self: center;
 		max-width: 220px;
+	}
+
+	.hero .social-buttons,
+	.hero .hero-actions {
+		justify-content: center;
 	}
 }
 
@@ -1323,20 +1330,6 @@ section p {
 		padding: 1.5rem;
 	}
 
-	.hero {
-		text-align: center;
-		gap: 2rem;
-	}
-
-	.profile-photo {
-		justify-self: center;
-	}
-
-	.hero .social-buttons,
-	.hero .hero-actions {
-		justify-content: center;
-	}
-
 	.navbar__links {
 		display: none;
 	}
@@ -1348,6 +1341,16 @@ section p {
 	.footer-content {
 		flex-direction: column;
 		text-align: center;
+	}
+}
+
+@media (max-width: 768px) {
+	.portofolio {
+		padding: 1.5rem 1rem 3rem;
+	}
+
+	.card {
+		padding: 1.25rem;
 	}
 }
 
