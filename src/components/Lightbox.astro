@@ -131,6 +131,7 @@
 			modalTitle.textContent = galleryTitle;
 			renderImage();
 			modal.classList.add('active');
+			document.body.classList.add('lightbox-open');
 			document.body.style.overflow = 'hidden';
 			modal.focus();
 		}
@@ -139,6 +140,7 @@
 	const closeModal = () => {
 		if (modal) {
 			modal.classList.remove('active');
+			document.body.classList.remove('lightbox-open');
 			document.body.style.overflow = '';
 			if (modalImg) {
 				// Defer clearing the src until the fade-out transition finishes,

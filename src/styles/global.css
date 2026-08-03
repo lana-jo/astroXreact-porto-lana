@@ -1167,6 +1167,16 @@ section p {
 	transition: opacity 0.25s ease;
 }
 
+/* Keep the navbar visible above the lightbox overlay */
+.lightbox-open .navbar {
+	transform: translateY(0);
+	z-index: 10000;
+}
+
+.lightbox-open .lightbox-close {
+	top: 64px;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.lightbox-modal,
 	.lightbox-modal.active {
