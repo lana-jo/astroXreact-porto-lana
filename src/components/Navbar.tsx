@@ -42,6 +42,7 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 	const [showLangMenu, setShowLangMenu] = useState(false);
 	const themeMenuRef = useRef<HTMLDivElement>(null);
 	const langMenuRef = useRef<HTMLDivElement>(null);
+	const progressRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const applyTheme = (target: Theme) => {
@@ -126,6 +127,46 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 		};
 	}, [isOpen]);
 
+	useEffect(() => {
+		const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.navbar a[href^="#"]'));
+		const sections = navLinks
+			.map((item) => document.getElementById(item.href.slice(1)))
+			.filter((el): el is HTMLElement => el !== null);
+
+		const update = () => {
+			const doc = document.documentElement;
+			const max = doc.scrollHeight - window.innerHeight;
+			const progress = max > 0 ? window.scrollY / max : 0;
+			if (progressRef.current) progressRef.current.style.transform = `scaleX(${progress})`;
+
+			const pos = window.scrollY + window.innerHeight * 0.35;
+			let current = sections.length > 0 ? sections[0].id : '';
+			for (const section of sections) {
+				if (section.offsetTop <= pos) current = section.id;
+			}
+			if (window.innerHeight + window.scrollY >= doc.scrollHeight - 4) {
+				current = sections[sections.length - 1]?.id ?? current;
+			}
+			links.forEach((link) => {
+				const isActive = link.getAttribute('href') === `#${current}`;
+				link.classList.toggle('active', isActive);
+				if (isActive) {
+					link.setAttribute('aria-current', 'true');
+				} else {
+					link.removeAttribute('aria-current');
+				}
+			});
+		};
+
+		update();
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update);
+		return () => {
+			window.removeEventListener('scroll', update);
+			window.removeEventListener('resize', update);
+		};
+	}, []);
+
 	const handleThemeChange = (newTheme: Theme) => {
 		setTheme(newTheme);
 		localStorage.setItem('theme', newTheme);
@@ -143,6 +184,7 @@ export default function Navbar({ lang: initialLang = 'en' }: NavbarProps) {
 
 	return (
 		<nav className={`navbar ${hidden ? 'navbar--hidden' : ''} ${scrolled ? 'navbar--scrolled' : ''}`}>
+			<div className="scroll-progress" ref={progressRef} aria-hidden="true" />
 			<div className="navbar__inner">
 				<a href="#home" className="navbar__logo">
 					Lana Jauhar

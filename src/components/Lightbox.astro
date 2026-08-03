@@ -3,6 +3,7 @@
 ---
 <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Image preview" tabindex="-1">
 	<button class="lightbox-close" aria-label="Close">&times;</button>
+	<div id="lightbox-spinner" class="lightbox-spinner" aria-hidden="true" hidden></div>
 	<div class="lightbox-stage">
 		<button id="lightbox-prev" class="lightbox-nav lightbox-prev" aria-label="Previous image" type="button">&#10094;</button>
 		<div class="lightbox-content">
@@ -23,6 +24,7 @@
 	const modalTitle = document.getElementById('lightbox-title');
 	const modalCounter = document.getElementById('lightbox-counter');
 	const dotsContainer = document.getElementById('lightbox-dots');
+	const spinner = document.getElementById('lightbox-spinner');
 	const closeBtn = document.querySelector('.lightbox-close');
 	const prevBtn = document.getElementById('lightbox-prev');
 	const nextBtn = document.getElementById('lightbox-next');
@@ -31,6 +33,24 @@
 	let galleryIndex = 0;
 	let galleryTitle = '';
 	let pendingSrc: string | null = null;
+	let touchStartX = 0;
+	let touchStartY = 0;
+	let touchActive = false;
+
+	const showSpinner = () => {
+		if (spinner) spinner.hidden = false;
+	};
+
+	const hideSpinner = () => {
+		if (spinner) spinner.hidden = true;
+	};
+
+	const restartAnim = (el: HTMLElement | null, cls: string) => {
+		if (!el) return;
+		el.classList.remove(cls);
+		void el.offsetWidth;
+		el.classList.add(cls);
+	};
 
 	const getFocusableElements = () => {
 		if (!modal) return [];
@@ -82,13 +102,19 @@
 	const renderImage = () => {
 		if (!modalImg || !modalCounter || !prevBtn || !nextBtn) return;
 		const src = gallery[galleryIndex];
+		modalImg.classList.remove('loaded');
+		modalImg.alt = galleryTitle || '';
+		showSpinner();
 		const loader = new Image();
 		loader.onload = () => {
-			if (pendingSrc === src) modalImg.src = src;
+			if (pendingSrc !== src) return;
+			modalImg.src = src;
+			modalImg.classList.add('loaded');
+			hideSpinner();
 		};
+		loader.onerror = hideSpinner;
 		pendingSrc = src;
 		loader.src = src;
-		modalImg.alt = galleryTitle || '';
 		if (gallery.length > 1) {
 			modalCounter.textContent = `${galleryIndex + 1} / ${gallery.length}`;
 			prevBtn.style.display = '';
@@ -101,13 +127,19 @@
 			if (dotsContainer) dotsContainer.style.display = 'none';
 		}
 		updateDots();
+		restartAnim(modalTitle, 'lightbox-anim');
+		restartAnim(modalCounter, 'lightbox-anim');
 	};
 
-	const preloadGallery = () => {
-		gallery.forEach((src) => {
+	const preloadAdjacent = () => {
+		const len = gallery.length;
+		if (len < 2) return;
+		const preload = (src: string) => {
 			const img = new Image();
 			img.src = src;
-		});
+		};
+		preload(gallery[(galleryIndex + 1) % len]);
+		preload(gallery[(galleryIndex - 1 + len) % len]);
 	};
 
 	const openModal = (wrapper: HTMLElement) => {
@@ -125,7 +157,7 @@
 			gallery = img ? [img.src] : [];
 		}
 		galleryIndex = 0;
-		preloadGallery();
+		preloadAdjacent();
 		renderDots();
 		if (gallery.length > 0 && modal && modalImg && modalTitle) {
 			modalTitle.textContent = galleryTitle;
@@ -142,7 +174,11 @@
 			modal.classList.remove('active');
 			document.body.classList.remove('lightbox-open');
 			document.body.style.overflow = '';
+			hideSpinner();
 			if (modalImg) {
+				modalImg.style.transform = '';
+				modalImg.style.transition = '';
+				modalImg.classList.remove('loaded');
 				// Defer clearing the src until the fade-out transition finishes,
 				// so the photo stays visible while the modal fades closed.
 				setTimeout(() => {
@@ -160,6 +196,7 @@
 		if (gallery.length < 2) return;
 		galleryIndex = (galleryIndex + dir + gallery.length) % gallery.length;
 		renderImage();
+		preloadAdjacent();
 	};
 
 	const init = () => {
@@ -183,6 +220,41 @@
 	prevBtn?.addEventListener('click', () => navigate(-1));
 	nextBtn?.addEventListener('click', () => navigate(1));
 	modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+	const isModalActive = () => modal?.classList.contains('active') ?? false;
+
+	modal?.addEventListener('touchstart', (e) => {
+		if (!isModalActive() || e.touches.length !== 1) return;
+		touchStartX = e.touches[0].clientX;
+		touchStartY = e.touches[0].clientY;
+		touchActive = true;
+		if (modalImg) modalImg.style.transition = 'none';
+	}, { passive: true });
+
+	modal?.addEventListener('touchmove', (e) => {
+		if (!touchActive || !isModalActive() || !modalImg) return;
+		const dx = e.touches[0].clientX - touchStartX;
+		const dy = e.touches[0].clientY - touchStartY;
+		if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
+		if (Math.abs(dx) > Math.abs(dy)) {
+			e.preventDefault();
+			modalImg.style.transform = `translateX(${Math.max(-120, Math.min(120, dx))}px)`;
+		}
+	}, { passive: false });
+
+	modal?.addEventListener('touchend', (e) => {
+		if (!touchActive || !modalImg) return;
+		touchActive = false;
+		modalImg.style.transition = '';
+		modalImg.style.transform = '';
+		if (!isModalActive()) return;
+		const dx = e.changedTouches[0].clientX - touchStartX;
+		const dy = e.changedTouches[0].clientY - touchStartY;
+		if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+			navigate(dx < 0 ? 1 : -1);
+		}
+	});
+
 	document.addEventListener('keydown', (e) => {
 		if (e.key === 'Escape') closeModal();
 		if (modal?.classList.contains('active') && e.key === 'ArrowLeft') navigate(-1);
