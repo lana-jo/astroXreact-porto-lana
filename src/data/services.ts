@@ -60,5 +60,25 @@ export const services: Service[] = [
 			'Freelancer IT dan konsultasi: QA testing, konsultasi teknologi, dan solusi software custom untuk bisnis Anda.',
 		icon: '🤝',
 		tags: ['QA', 'Konsultasi', 'Custom Solution']
+	},
+	{
+		title: 'Joki Tugas IT',
+		titleId: 'Joki Tugas IT',
+		description:
+			'IT assignment help for college students — networking, database, programming, and system design tasks handled by experienced developers.',
+		descriptionId:
+			'Joki tugas IT untuk mahasiswa — tugas jaringan, database, pemrograman, dan desain sistem dikerjakan oleh developer berpengalaman.',
+		icon: '🎓',
+		tags: ['Tugas IT', 'Networking', 'Database', 'Pemrograman']
+	},
+	{
+		title: 'Joki Coding',
+		titleId: 'Joki Coding',
+		description:
+			'Coding assistance for students and professionals — web development, app development, API integration, and bug fixing by expert developers.',
+		descriptionId:
+			'Joki coding untuk mahasiswa dan profesional — pengembangan web, aplikasi, integrasi API, dan perbaikan bug dikerjakan oleh developer ahli.',
+		icon: '💻',
+		tags: ['Joki Coding', 'Web Dev', 'API', 'Bug Fix']
 	}
 ];
