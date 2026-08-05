@@ -1,0 +1,60 @@
+---
+interface Props {
+	name?: string;
+}
+
+const { name = '' } = Astro.props;
+
+const initials = name
+	.split(' ')
+	.map((w) => w.charAt(0))
+	.join('')
+	.slice(0, 2)
+	.toUpperCase();
+---
+
+<div class="splash" id="splash" aria-hidden="true">
+	<div class="splash__box">
+		<span class="splash__logo">{initials}</span>
+		<p class="splash__name"><span id="splash-text" data-name={name}></span><span class="splash__caret" aria-hidden="true"></span></p>
+		<p class="splash__sub">Software Developer</p>
+		<div class="splash__bar"><span></span></div>
+	</div>
+</div>
+
+<noscript><style>.splash{display:none!important}</style></noscript>
+
+<script is:inline>
+	(function () {
+		var el = document.getElementById('splash');
+		if (!el) return;
+
+		var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		if (reduced) {
+			el.remove();
+			return;
+		}
+
+		document.body.classList.add('splash-active');
+
+		var nameEl = document.getElementById('splash-text');
+		var name = (nameEl && nameEl.getAttribute('data-name')) || '';
+		var i = 0;
+
+		var typing = setInterval(function () {
+			i++;
+			if (nameEl) nameEl.textContent = name.slice(0, i);
+			if (i >= name.length) clearInterval(typing);
+		}, 450);
+
+		setTimeout(function () {
+			el.classList.add('splash--hide');
+			document.body.classList.remove('splash-active');
+		}, 6000);
+
+		setTimeout(function () {
+			el.remove();
+		}, 6650);
+	})();
+</script>

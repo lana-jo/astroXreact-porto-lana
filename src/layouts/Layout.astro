@@ -3,6 +3,7 @@ import { ClientRouter } from 'astro:transitions';
 import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import SmoothScroll from '../components/SmoothScroll.tsx';
+import Splash from '../components/Splash.astro';
 import { profile } from '../data/profile';
 import { heroSocials } from '../data/social';
 import { services } from '../data/services';
@@ -252,6 +253,8 @@ const jsonLd = {
 	<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')} />
 </head>
 <body>
+
+	<Splash name={profile.name} />
 
 	<SmoothScroll client:load>
 		<slot />
