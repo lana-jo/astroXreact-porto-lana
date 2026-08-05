@@ -1669,7 +1669,7 @@ section p {
 	height: 100%;
 	width: 0;
 	background: var(--accent);
-	animation: splash-fill 5.5s ease-in-out forwards;
+	animation: splash-fill 4.5s ease-in-out forwards;
 }
 
 body.splash-active {

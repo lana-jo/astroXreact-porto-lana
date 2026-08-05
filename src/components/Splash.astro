@@ -46,15 +46,15 @@ const initials = name
 			i++;
 			if (nameEl) nameEl.textContent = name.slice(0, i);
 			if (i >= name.length) clearInterval(typing);
-		}, 450);
+		}, 380);
 
 		setTimeout(function () {
 			el.classList.add('splash--hide');
 			document.body.classList.remove('splash-active');
-		}, 6000);
+		}, 5000);
 
 		setTimeout(function () {
 			el.remove();
-		}, 6650);
+		}, 5650);
 	})();
 </script>
