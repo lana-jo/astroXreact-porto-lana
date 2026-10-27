@@ -1,4 +1,6 @@
 ---
+import mountainVideo from '../assets/mountain 3D.mp4';
+
 interface Props {
 	name?: string;
 }
@@ -14,6 +16,10 @@ const initials = name
 ---
 
 <div class="splash" id="splash" aria-hidden="true">
+	<video class="splash__video" autoplay muted loop playsinline>
+		<source src={mountainVideo} type="video/mp4" />
+	</video>
+	<div class="splash__overlay"></div>
 	<div class="splash__box">
 		<span class="splash__logo">{initials}</span>
 		<p class="splash__name"><span id="splash-text" data-name={name}></span><span class="splash__caret" aria-hidden="true"></span></p>

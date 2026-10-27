@@ -1617,8 +1617,25 @@ section p {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	overflow: hidden;
 	background: var(--bg-primary);
 	transition: transform 0.65s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.splash__video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+.splash__overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45);
+	z-index: 1;
 }
 
 .splash--hide {
@@ -1626,6 +1643,8 @@ section p {
 }
 
 .splash__box {
+	position: relative;
+	z-index: 2;
 	background: var(--card-bg);
 	border: 3px solid var(--border-color);
 	box-shadow: var(--shadow-lg);
