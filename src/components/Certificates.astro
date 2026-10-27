@@ -67,6 +67,7 @@ const certificateItems = await Promise.all(
 				e.stopPropagation();
 				const imgUrl = btn.getAttribute('data-img');
 				const certName = btn.getAttribute('data-name') || 'certificate';
+				console.log('Cert imgUrl:', imgUrl);
 				if (!imgUrl) return;
 
 				try {
@@ -78,11 +79,14 @@ const certificateItems = await Promise.all(
 					});
 
 					const img = new Image();
-					img.crossOrigin = 'Anonymous';
+					// img.crossOrigin = 'Anonymous';
 					img.src = imgUrl;
 					await new Promise((resolve, reject) => {
 						img.onload = resolve;
-						img.onerror = reject;
+						img.onerror = (err) => {
+							console.error('Cert image load error:', err);
+							reject(err);
+						};
 					});
 
 					const pageWidth = doc.internal.pageSize.getWidth();
@@ -104,7 +108,7 @@ const certificateItems = await Promise.all(
 					doc.save(`${certName.toLowerCase().replace(/\s+/g, '-')}.pdf`);
 				} catch (err) {
 					console.error('Failed to generate PDF', err);
-					alert('Gagal mendownload PDF sertifikat.');
+					alert('Gagal mendownload PDF sertifikat: ' + err);
 				}
 			});
 		});

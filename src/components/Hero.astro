@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import { profile } from '../data/profile';
 import { heroSocials } from '../data/social';
+import cvImgSrc from '../assets/profile.png';
 import Bi from './Bi.astro';
 
 interface Props {
@@ -19,7 +20,7 @@ const { lang = 'en' } = Astro.props;
 			<p class="description"><Bi en={profile.description} id={profile.descriptionId} lang={lang} /></p>
 				<div class="hero-actions">
 					<a href="#project" class="porto-btn primary-btn"><Bi en="View Projects" id="Lihat Proyek" lang={lang} /></a>
-					<button id="download-cv-btn" class="porto-btn secondary-btn" data-img={profile.photo.src}><Bi en="Download CV" id="Unduh CV" lang={lang} /></button>
+					<button id="download-cv-btn" class="porto-btn secondary-btn" data-img={cvImgSrc.src}><Bi en="Download CV" id="Unduh CV" lang={lang} /></button>
 					<a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="porto-btn secondary-btn">GitHub</a>
 				</div>
 				<div class="social-buttons">
@@ -38,6 +39,8 @@ const { lang = 'en' } = Astro.props;
 		document.getElementById('download-cv-btn')?.addEventListener('click', async () => {
 			const btn = document.getElementById('download-cv-btn');
 			const imgUrl = btn?.getAttribute('data-img');
+			console.log('CV imgUrl:', imgUrl);
+			console.log('window.jspdf:', (window as any).jspdf);
 			if (!imgUrl) return;
 
 			try {
@@ -49,11 +52,14 @@ const { lang = 'en' } = Astro.props;
 				});
 
 				const img = new Image();
-				img.crossOrigin = 'Anonymous';
+				// img.crossOrigin = 'Anonymous'; // Commented out to test
 				img.src = imgUrl;
 				await new Promise((resolve, reject) => {
 					img.onload = resolve;
-					img.onerror = reject;
+					img.onerror = (err) => {
+						console.error('Image load error:', err);
+						reject(err);
+					};
 				});
 
 				const pageWidth = doc.internal.pageSize.getWidth();
@@ -74,7 +80,7 @@ const { lang = 'en' } = Astro.props;
 				doc.save('lana-jauhar-cv.pdf');
 			} catch (err) {
 				console.error('Failed to generate CV PDF', err);
-				alert('Gagal mendownload CV PDF.');
+				alert('Gagal mendownload CV PDF: ' + err);
 			}
 		});
 	</script>
