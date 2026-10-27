@@ -17,18 +17,64 @@ const { lang = 'en' } = Astro.props;
 			<span class="hero-badge"><Bi en="Website, App & Mobile Development Services" id="Jasa Pembuatan Website, Aplikasi, & Mobile App" lang={lang} /></span>
 			<h1><Bi en={profile.title} id={profile.titleId} lang={lang} /></h1>
 			<p class="description"><Bi en={profile.description} id={profile.descriptionId} lang={lang} /></p>
-			<div class="hero-actions">
-				<a href="#project" class="porto-btn primary-btn"><Bi en="View Projects" id="Lihat Proyek" lang={lang} /></a>
-				<a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="porto-btn secondary-btn">GitHub</a>
+				<div class="hero-actions">
+					<a href="#project" class="porto-btn primary-btn"><Bi en="View Projects" id="Lihat Proyek" lang={lang} /></a>
+					<button id="download-cv-btn" class="porto-btn secondary-btn" data-img={profile.photo.src}><Bi en="Download CV" id="Unduh CV" lang={lang} /></button>
+					<a href="https://github.com/lana-jo" target="_blank" rel="noopener" class="porto-btn secondary-btn">GitHub</a>
+				</div>
+				<div class="social-buttons">
+					{heroSocials.map((social) => (
+						<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" title={social.label} aria-label={social.label}>
+							<img src={social.icon} alt={social.label} loading="lazy" />
+						</a>
+					))}
+				</div>
 			</div>
-			<div class="social-buttons">
-				{heroSocials.map((social) => (
-					<a href={social.href} target="_blank" rel="noopener" class="social-icon-btn" title={social.label} aria-label={social.label}>
-						<img src={social.icon} alt={social.label} loading="lazy" />
-					</a>
-				))}
-			</div>
+			<Image class="profile-photo" src={profile.photo} alt={profile.name} width={461} height={661} />
 		</div>
-		<Image class="profile-photo" src={profile.photo} alt={profile.name} width={461} height={661} />
-	</div>
-</header>
+	</header>
+
+	<script>
+		document.getElementById('download-cv-btn')?.addEventListener('click', async () => {
+			const btn = document.getElementById('download-cv-btn');
+			const imgUrl = btn?.getAttribute('data-img');
+			if (!imgUrl) return;
+
+			try {
+				const { jsPDF } = (window as any).jspdf;
+				const doc = new jsPDF({
+					orientation: 'portrait',
+					unit: 'px',
+					format: 'a4'
+				});
+
+				const img = new Image();
+				img.crossOrigin = 'Anonymous';
+				img.src = imgUrl;
+				await new Promise((resolve, reject) => {
+					img.onload = resolve;
+					img.onerror = reject;
+				});
+
+				const pageWidth = doc.internal.pageSize.getWidth();
+				const pageHeight = doc.internal.pageSize.getHeight();
+				
+				const imgRatio = img.width / img.height;
+				let w = pageWidth - 40;
+				let h = w / imgRatio;
+				if (h > pageHeight - 40) {
+					h = pageHeight - 40;
+					w = h * imgRatio;
+				}
+
+				const x = (pageWidth - w) / 2;
+				const y = (pageHeight - h) / 2;
+
+				doc.addImage(img, 'JPEG', x, y, w, h);
+				doc.save('lana-jauhar-cv.pdf');
+			} catch (err) {
+				console.error('Failed to generate CV PDF', err);
+				alert('Gagal mendownload CV PDF.');
+			}
+		});
+	</script>

@@ -25,7 +25,7 @@ export const techStacks: TechStack[] = [
 	{ name: 'React Native', icon: 'react', color: '61dafb' },
 	{ name: 'Spring Boot', icon: 'springboot', color: '6db33f' },
 	{ name: 'Firebase', icon: 'firebase', color: 'dd2c00' },
-	{ name: 'Supabase', icon: 'supabase', color: '3fcf8e' },
 	{ name: 'PostgreSQL', icon: 'postgresql', color: '4169e1' },
-	{ name: 'MySQL', icon: 'mysql', color: '4479a1' }
+	{ name: 'MySQL', icon: 'mysql', color: '4479a1' },
+	{ name: 'Self-hosted (Homeserver)', icon: 'server', color: '000000' }
 ];

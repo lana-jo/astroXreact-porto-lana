@@ -6,7 +6,7 @@ import dataDiri from '../assets/porto/mockup-web-data-diri.jpg';
 import perpus from '../assets/porto/mockup-perpusPHP.jpg';
 import pw from '../assets/porto/la-pos-web.png';
 import fNoteApp from '../assets/porto/mockup-flutter-NoteApp.jpg';
-import saasPos from '../assets/porto/la-pos-web.png';
+import saasPos from '../assets/porto/saas-pos.png';
 import type { Project } from './types';
 
 export const projects: Project[] = [
@@ -15,7 +15,7 @@ export const projects: Project[] = [
 		titleId: 'SAAS POS NuxtJS',
 		detail: 'Full-stack SAAS Point of Sale platform with multi-tenant architecture, real-time analytics, inventory management, and role-based access control.',
 		detailId: 'Platform SAAS Point of Sale full-stack dengan arsitektur multi-tenant, analitik real-time, manajemen inventaris, dan kontrol akses berbasis peran.',
-		stack: 'Nuxt 3, Vue 3, TypeScript, Tailwind CSS, Pinia, Supabase, PostgreSQL',
+			stack: 'Nuxt 3, Vue 3, TypeScript, Tailwind CSS, Pinia, PostgreSQL',
 		github: 'https://github.com/lana-jo',
 		live: 'https://demo-sejahtera-pos.latech.web.id/',
 		img: saasPos
@@ -35,7 +35,7 @@ export const projects: Project[] = [
 		detail: 'Modern Point of Sale application featuring real-time transaction tracking and inventory management.',
 		detailId:
 			'Aplikasi Point of Sale modern dengan pelacakan transaksi real-time dan manajemen inventaris.',
-		stack: 'Next.js, Tailwind CSS, Supabase, TypeScript',
+			stack: 'Next.js, Tailwind CSS, PostgreSQL, TypeScript, Cloudflare Tunnel',
 		img: pw
 	},
 	{

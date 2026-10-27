@@ -45,13 +45,67 @@ const certificateItems = await Promise.all(
 						<span class="page-badge"><Bi en={`${photos.length} Photos`} id={`${photos.length} Foto`} lang={lang} /></span>
 					)}
 				</div>
-				<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
-					<Image src={photos[0]} alt={item.name} class="cert-image" />
-					<div class="image-overlay">
-						<span class="zoom-icon">🔍 <Bi en="View Certificate" id="Lihat Sertifikat" lang={lang} /></span>
+					<div class="cert-image-wrapper" data-title={item.name} data-gallery={gallery}>
+						<Image src={photos[0]} alt={item.name} class="cert-image" />
+						<div class="image-overlay">
+							<span class="zoom-icon">🔍 <Bi en="View Certificate" id="Lihat Sertifikat" lang={lang} /></span>
+						</div>
 					</div>
-				</div>
-			</article>
-		))}
-	</div>
-</section>
+					<div style="margin-top: 10px; text-align: right;">
+						<button class="porto-btn secondary-btn download-cert-btn" data-img={photos[0].src} data-name={item.name} style="font-size: 0.85rem; padding: 6px 12px; cursor: pointer;">
+							📄 <Bi en="Download PDF" id="Unduh PDF" lang={lang} />
+						</button>
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<script>
+		document.querySelectorAll('.download-cert-btn').forEach((btn) => {
+			btn.addEventListener('click', async (e) => {
+				e.stopPropagation();
+				const imgUrl = btn.getAttribute('data-img');
+				const certName = btn.getAttribute('data-name') || 'certificate';
+				if (!imgUrl) return;
+
+				try {
+					const { jsPDF } = (window as any).jspdf;
+					const doc = new jsPDF({
+						orientation: 'landscape',
+						unit: 'px',
+						format: 'a4'
+					});
+
+					const img = new Image();
+					img.crossOrigin = 'Anonymous';
+					img.src = imgUrl;
+					await new Promise((resolve, reject) => {
+						img.onload = resolve;
+						img.onerror = reject;
+					});
+
+					const pageWidth = doc.internal.pageSize.getWidth();
+					const pageHeight = doc.internal.pageSize.getHeight();
+					
+					// Calculate aspect ratio
+					const imgRatio = img.width / img.height;
+					let w = pageWidth - 40;
+					let h = w / imgRatio;
+					if (h > pageHeight - 40) {
+						h = pageHeight - 40;
+						w = h * imgRatio;
+					}
+
+					const x = (pageWidth - w) / 2;
+					const y = (pageHeight - h) / 2;
+
+					doc.addImage(img, 'JPEG', x, y, w, h);
+					doc.save(`${certName.toLowerCase().replace(/\s+/g, '-')}.pdf`);
+				} catch (err) {
+					console.error('Failed to generate PDF', err);
+					alert('Gagal mendownload PDF sertifikat.');
+				}
+			});
+		});
+	</script>
