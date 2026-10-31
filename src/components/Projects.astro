@@ -28,9 +28,9 @@ const { lang = 'en' } = Astro.props;
 					{item.img && (
 						<div class="project-image-wrapper" data-title={lang === 'id' ? item.titleId : item.title}>
 							<Image src={item.img} alt={lang === 'id' ? item.titleId : item.title} class="project-image" />
-							<div class="image-overlay">
-								<span class="zoom-icon">🔍 <Bi en="View Screenshot" id="Lihat Tangkapan Layar" lang={lang} /></span>
-							</div>
+								<div class="image-overlay">
+									<span class="zoom-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><Bi en="View Screenshot" id="Lihat Tangkapan Layar" lang={lang} /></span>
+								</div>
 						</div>
 					)}
 					<div class="project-info">

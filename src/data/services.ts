@@ -8,77 +8,77 @@ export const services: Service[] = [
 			'Company profile, online store, landing page, and personal website built with modern frameworks.',
 		descriptionId:
 			'Jasa pembuatan website company profile, toko online, landing page, dan website personal dengan framework modern.',
-		icon: '🌐',
+		icon: 'globe',
 		tags: ['Company Profile', 'Toko Online', 'Landing Page']
 	},
 	{
 		title: 'Web App Development',
 		titleId: 'Jasa Pembuatan Aplikasi Web & Webapp',
 		description:
-			'Point of Sale, inventory, library, and business management systems with clean architecture.',
+			'Custom web applications, SaaS platforms, dashboards, and internal management tools.',
 		descriptionId:
-			'Jasa pembuatan aplikasi web dan webapp: sistem POS, inventory, perpustakaan, dan manajemen bisnis dengan arsitektur bersih.',
-		icon: '💻',
-		tags: ['Web App', 'POS', 'Sistem Informasi']
+			'Aplikasi web kustom, platform SaaS, dashboard, dan alat manajemen internal.',
+		icon: 'code',
+		tags: ['Web App', 'SaaS', 'Dashboard']
 	},
 	{
 		title: 'Mobile App Development',
 		titleId: 'Jasa Pembuatan Aplikasi Mobile',
 		description:
-			'Native Android with Kotlin & Jetpack Compose, or cross-platform with Flutter.',
+			'Cross-platform mobile apps for Android and iOS built with Flutter or React Native.',
 		descriptionId:
-			'Jasa pembuatan aplikasi mobile Android native (Kotlin & Jetpack Compose) dan cross-platform (Flutter).',
-		icon: '📱',
-		tags: ['Android', 'Kotlin', 'Flutter']
+			'Aplikasi mobile lintas platform untuk Android dan iOS menggunakan Flutter atau React Native.',
+		icon: 'smartphone',
+		tags: ['Android', 'iOS', 'Flutter']
 	},
 	{
-		title: 'API & Backend Development',
-		titleId: 'Jasa Pembuatan Backend & API',
+		title: 'DevOps & Cloud Deployment',
+		titleId: 'DevOps & Deployment Cloud',
 		description:
-			'Scalable REST APIs, authentication, and database design with Express.js or Spring Boot.',
+			'Server setup, VPS configuration, Docker containerization, CI/CD pipelines, and cloud hosting.',
 		descriptionId:
-			'Jasa pembuatan backend dan REST API yang scalable, autentikasi, dan desain database dengan Express.js atau Spring Boot.',
-		icon: '⚙️',
-		tags: ['REST API', 'Node.js', 'Spring Boot']
+			'Pengaturan server, konfigurasi VPS, kontainerisasi Docker, pipeline CI/CD, dan hosting cloud.',
+		icon: 'settings',
+		tags: ['VPS', 'Docker', 'CI/CD']
 	},
 	{
-		title: 'IT & Network Support',
-		titleId: 'Jasa IT & Jaringan',
+		title: 'Bug Fixing & Optimization',
+		titleId: 'Perbaikan Bug & Optimasi',
 		description:
-			'Network configuration with MikroTik, IT maintenance, and technical training.',
+			'Debugging errors, security hardening, performance optimization, and refactoring legacy code.',
 		descriptionId:
-			'Jasa IT dan jaringan: konfigurasi MikroTik, maintenance perangkat, dan pelatihan teknis.',
-		icon: '🛠️',
-		tags: ['MikroTik', 'Maintenance', 'Training']
+			'Debugging error, penguatan keamanan, optimasi performa, dan refactoring kode lama.',
+		icon: 'tool',
+		tags: ['Debugging', 'Performance', 'Security']
 	},
 	{
-		title: 'Freelance & Consulting',
-		titleId: 'Freelancer & Konsultasi IT',
+		title: 'IT Consultation & Mentoring',
+		titleId: 'Konsultasi & Mentoring IT',
 		description:
-			'QA testing, tech consultation, and custom software solutions for your business.',
+			'Technical consultation, architecture design, code review, and 1-on-1 programming mentoring.',
 		descriptionId:
-			'Freelancer IT dan konsultasi: QA testing, konsultasi teknologi, dan solusi software custom untuk bisnis Anda.',
-		icon: '🤝',
-		tags: ['QA', 'Konsultasi', 'Custom Solution']
+			'Konsultasi teknis, desain arsitektur, code review, dan mentoring pemrograman 1-on-1.',
+		icon: 'users',
+		tags: ['Mentoring', 'Architecture', 'Review']
 	},
 	{
-		title: 'Joki Tugas IT',
-		titleId: 'Joki Tugas IT',
+		title: 'IT Assignment & Thesis Help',
+		titleId: 'Joki Tugas & Skripsi IT',
 		description:
-			'IT assignment help for college students — networking, database, programming, and system design tasks handled by experienced developers.',
+			'IT assignment assistance for students — networking, database, programming, and system design done by experienced developers.',
 		descriptionId:
 			'Joki tugas IT untuk mahasiswa — tugas jaringan, database, pemrograman, dan desain sistem dikerjakan oleh developer berpengalaman.',
-		icon: '🎓',
+		icon: 'graduation-cap',
 		tags: ['Tugas IT', 'Networking', 'Database', 'Pemrograman']
 	},
 	{
-		title: 'Joki Coding',
+		title: 'Coding Assistance',
 		titleId: 'Joki Coding',
 		description:
 			'Coding assistance for students and professionals — web development, app development, API integration, and bug fixing by expert developers.',
 		descriptionId:
 			'Joki coding untuk mahasiswa dan profesional — pengembangan web, aplikasi, integrasi API, dan perbaikan bug dikerjakan oleh developer ahli.',
-		icon: '💻',
+		icon: 'code',
 		tags: ['Joki Coding', 'Web Dev', 'API', 'Bug Fix']
 	}
 ];
